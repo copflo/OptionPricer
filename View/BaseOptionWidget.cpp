@@ -47,11 +47,11 @@ QWidget* BaseOptionWidget::buildOptionNatureWidget()
 
 QLayout* BaseOptionWidget::buildMaturityWidget()
 {
-    _maturity->setRange(0, 1000);
+    _maturity->setRange(1, 1000);
     _maturity->setValue(90);
 
     QBoxLayout* layout = new QHBoxLayout(this);
     layout->addWidget(_maturity);
-    layout->addWidget(new QLabel("days"));
+    layout->addWidget(new QLabel("day(s)"));
     return layout;
 }

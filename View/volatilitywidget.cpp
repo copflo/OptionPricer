@@ -35,7 +35,7 @@ QLayout* VolatilityWidget::buildPeriod()
     _period->setValue(252);
     QBoxLayout* layout = new QHBoxLayout;
     layout->addWidget(_period);
-    layout->addWidget(new QLabel("days"));
+    layout->addWidget(new QLabel("day(s)"));
 
     return layout;
 }
