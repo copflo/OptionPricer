@@ -5,11 +5,11 @@
 
 typedef std::chrono::duration<double> seconds;
 
-class RunningSimulation
+class RunningStats
 {
 public:
-    RunningSimulation ();
-    ~RunningSimulation();
+    RunningStats ();
+    ~RunningStats();
 
     void    update           (double value);
     double  mean             ()             const;

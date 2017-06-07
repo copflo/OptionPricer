@@ -10,7 +10,7 @@ public:
             TimeLimit (double calculusTime);
     virtual ~TimeLimit();
 
-    virtual bool stop(const RunningSimulation& simulation) const;
+    virtual bool stop(const RunningStats& stats) const;
 
 private:
     const seconds _calculusTime;

@@ -23,7 +23,7 @@ public:
     void                      print(std::ostream& os)                   const;
 
 private:
-    bool stop(const RunningSimulation& simulation) const;
+    bool stop(const RunningStats& simulation) const;
 
 private:
     mutable std::mutex                                   _mutex;

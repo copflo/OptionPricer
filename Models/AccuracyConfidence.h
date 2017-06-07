@@ -10,7 +10,7 @@ public:
             AccuracyConfidence (double accuracy, double confidence);
     virtual ~AccuracyConfidence();
 
-    virtual bool stop(const RunningSimulation& simulation) const;
+    virtual bool stop(const RunningStats& stats) const;
 
 private:
     const double _ratio;

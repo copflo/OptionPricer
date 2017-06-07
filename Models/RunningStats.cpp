@@ -1,6 +1,6 @@
-#include "RunningSimulation.h"
+#include "RunningStats.h"
 
-RunningSimulation::RunningSimulation()
+RunningStats::RunningStats()
     : _nbIter(0)
     , _mean(0.0)
     , _squareSumOfDiff(0.0)
@@ -8,11 +8,11 @@ RunningSimulation::RunningSimulation()
 {
 }
 
-RunningSimulation::~RunningSimulation()
+RunningStats::~RunningStats()
 {
 }
 
-void RunningSimulation::update(double value)
+void RunningStats::update(double value)
 {
     const double bufferMean = _mean;
     _mean = _mean + (value - _mean) / (++_nbIter);
@@ -22,27 +22,27 @@ void RunningSimulation::update(double value)
     }
 }
 
-double RunningSimulation::mean() const
+double RunningStats::mean() const
 {
     return _mean;
 }
 
-double RunningSimulation::variance() const
+double RunningStats::variance() const
 {
     return _squareSumOfDiff / (_nbIter - 1);
 }
 
-double RunningSimulation::stdDeviation() const
+double RunningStats::stdDeviation() const
 {
     return sqrt(variance());
 }
 
-size_t RunningSimulation::nbObservations() const
+size_t RunningStats::nbObservations() const
 {
     return _nbIter;
 }
 
-seconds RunningSimulation::timeOfComputation() const
+seconds RunningStats::timeOfComputation() const
 {
     return (std::chrono::system_clock::now() - _begin);
 }

@@ -9,7 +9,7 @@ NbObs::~NbObs()
 {
 }
 
-bool NbObs::stop(const RunningSimulation& simulation) const
+bool NbObs::stop(const RunningStats& stats) const
 {
-    return simulation.nbObservations() >= _nbObs;
+    return stats.nbObservations() >= _nbObs;
 }

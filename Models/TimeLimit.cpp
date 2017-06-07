@@ -9,7 +9,7 @@ TimeLimit::~TimeLimit()
 {
 }
 
-bool TimeLimit::stop(const RunningSimulation& simulation) const
+bool TimeLimit::stop(const RunningStats& stats) const
 {
-    return simulation.timeOfComputation() >= _calculusTime;
+    return stats.timeOfComputation() >= _calculusTime;
 }

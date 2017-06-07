@@ -10,7 +10,7 @@ public:
             NbObs (size_t nbObs);
     virtual ~NbObs();
 
-    virtual bool stop(const RunningSimulation& simulation) const;
+    virtual bool stop(const RunningStats& stats) const;
 
 private:
     const size_t _nbObs;

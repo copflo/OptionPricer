@@ -7,7 +7,7 @@
 
 struct MonteCarloSimulation::Runner
 {
-    Runner(const MonteCarloSimulation& simulation, RunningSimulation& statistics, std::function<double()>& random)
+    Runner(const MonteCarloSimulation& simulation, RunningStats& statistics, std::function<double()>& random)
         : _simulation(simulation)
         , _statistics(statistics)
         , _random(random)
@@ -23,7 +23,7 @@ struct MonteCarloSimulation::Runner
     }
 
     const MonteCarloSimulation& _simulation;
-    RunningSimulation&          _statistics;
+    RunningStats&          _statistics;
     std::function<double()>&    _random;
 };
 
@@ -49,7 +49,7 @@ MonteCarloSimulation::~MonteCarloSimulation()
 
 std::pair<double, double> MonteCarloSimulation::run(std::function<double(void)> random) const
 {
-    RunningSimulation simulation;
+    RunningStats simulation;
     //for (; stop(simulation) == false; simulation.update(random()));
 
     std::thread threads[7];
@@ -69,7 +69,7 @@ void MonteCarloSimulation::print(std::ostream& os) const
     os << "Monte Carlo simulation";
 }
 
-bool MonteCarloSimulation::stop(const RunningSimulation& simulation) const
+bool MonteCarloSimulation::stop(const RunningStats& simulation) const
 {
     return std::any_of(_stopConditions.begin(), _stopConditions.end(), 
         [&simulation](const auto& condition) { return condition->stop(simulation); });
