@@ -17,6 +17,7 @@ OptionWindow::OptionWindow(QWidget*parent)
     layout->addWidget(_model, 1, 2);
 
     QLCDNumber* priceDisplayer = new QLCDNumber;
+    priceDisplayer->setSegmentStyle(QLCDNumber::Flat);
     layout->addWidget(priceDisplayer, 2, 1);
 
     QPushButton* btn = new QPushButton("Price");
@@ -37,7 +38,7 @@ void OptionWindow::priceOption()
         emit(optionPriced(price()));
     }
     catch (const std::exception& ex) {
-        QMessageBox::warning(this, "Error", ex.what());
+        QMessageBox::critical(this, "Error", ex.what());
     }
 }
 
