@@ -5,7 +5,6 @@
 #include <initializer_list>
 #include <iostream>
 #include <memory>
-#include <mutex>
 #include <vector>
 
 #include "StopSimulation.h"
@@ -19,18 +18,11 @@ public:
     MonteCarloSimulation (std::vector<StopSimulation*>& stopConditions);
     ~MonteCarloSimulation();
 
-    std::pair<double, double> run  (std::function<double(void)> random) const;
-    void                      print(std::ostream& os)                   const;
+    std::pair<double, double> run  (std::function<double()> random) const;
+    void                      print(std::ostream& os)               const;
 
 private:
-    bool stop(const RunningStats& simulation) const;
-
-private:
-    mutable std::mutex                                   _mutex;
-            std::vector<std::unique_ptr<StopSimulation>> _stopConditions;
-
-private:
-    struct Runner;
+     std::vector<std::unique_ptr<StopSimulation>> _stopConditions;
 };
 
 template<typename... StopConditions>
