@@ -17,10 +17,12 @@ BlackScholesMonteCarloFactory::BlackScholesMonteCarloFactory(QWidget* parent)
     layout->addRow("Volatility", _volatility);
 
     _numberOfObs->setRange(50000, 2000000);
+    _numberOfObs->setValue(500000);
     _numberOfObs->setSingleStep(100000);
     layout->addRow(_nbObs, _numberOfObs);
 
     _calculusTime->setRange(0.3, 60.);
+    _calculusTime->setValue(1.);
     layout->addRow(_timeLimit, _calculusTime);
 }
 
