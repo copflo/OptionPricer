@@ -7,10 +7,10 @@
 typedef std::vector<std::unique_ptr<StopSimulation>> StopConditions;
 struct Runner
 {
-    Runner(const StopConditions&    stopConditions, 
-           RunningStats&            statistics, 
-           std::function<double()>& random,
-           std::mutex&              mutex)
+    Runner(const StopConditions&   stopConditions, 
+           RunningStats&           statistics, 
+           std::function<double()> random,
+           std::mutex&             mutex)
         : _stopConditions(stopConditions)
         , _statistics(statistics)
         , _random(random)
@@ -24,7 +24,6 @@ struct Runner
             _statistics.update(_random());
             _mutex.unlock();
         }
-
         _mutex.unlock();
     }
 
@@ -35,10 +34,10 @@ struct Runner
             [this](const auto& condition) { return condition->stop(_statistics); });
     }
 
-    const StopConditions&    _stopConditions;
-    RunningStats&            _statistics;
-    std::function<double()>& _random;
-    std::mutex&              _mutex;
+    const StopConditions&   _stopConditions;
+    RunningStats&           _statistics;
+    std::function<double()> _random;
+    std::mutex&             _mutex;
 };
 
 MonteCarloSimulation::MonteCarloSimulation(std::initializer_list<StopSimulation*>& stopConditions)
