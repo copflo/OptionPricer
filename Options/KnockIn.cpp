@@ -1,19 +1,12 @@
 #include "KnockIn.h"
 
-KnockIn::KnockIn()
-{
-}
 
-KnockIn::~KnockIn()
-{
-}
-
-bool KnockIn::activated(bool barrierCrossed) const
+bool KnockIn::activated(bool barrierCrossed)
 {
     return barrierCrossed;
 }
 
-std::string KnockIn::toString() const
+std::string KnockIn::toString()
 {
     return "In";
 }

@@ -1,19 +1,12 @@
 #include "KnockOut.h"
 
-KnockOut::KnockOut()
-{
-}
 
-KnockOut::~KnockOut()
-{
-}
-
-bool KnockOut::activated(bool barrierCrossed) const
+bool KnockOut::activated(bool barrierCrossed)
 {
     return (barrierCrossed == false);
 }
 
-std::string KnockOut::toString() const
+std::string KnockOut::toString()
 {
     return "Out";
 }

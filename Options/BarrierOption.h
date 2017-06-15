@@ -19,21 +19,17 @@ public:
 
     virtual double payoff(const std::vector<double>& spot_path) const
     {
-        return _knock.activated(_direction(_barrier, spot_path))? 
+        return Knock::activated(Direction::barrierIsCrossed(_barrier, spot_path))? 
             Option::payoff(spot_path.back(), _strike) : 0.0;
     }
 
     virtual void print(std::ostream& os) const
     {
         Option::print(os);
-        os << _direction.toString() << " and " << _knock.toString() << std::endl;
+        os << Direction::toString() << " and " << Knock::toString() << std::endl;
         os << "Strike: " << _strike << std::endl;
         os << "Barrier: " << _barrier << std::endl;
     }
-
-private:
-    Direction  _direction;
-    Knock      _knock;
 };
 
 typedef BarrierOption<Up, KnockIn> UpInBarrierOption;

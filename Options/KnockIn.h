@@ -6,11 +6,8 @@
 class KnockIn 
 {
 public:
-    KnockIn ();
-    ~KnockIn();
-
-    bool        activated(bool barrierCrossed) const;
-    std::string toString()                     const;
+    static bool        activated(bool barrierCrossed);
+    static std::string toString();
 };
 
 #endif /* KnockIn_h */

@@ -6,11 +6,8 @@
 class KnockOut 
 {
 public:
-    KnockOut ();
-    ~KnockOut();
-
-    bool        activated(bool barrierCrossed) const;
-    std::string toString()                     const;
+    static bool        activated(bool barrierCrossed);
+    static std::string toString();
 };
 
 #endif /* KnockOut_h */

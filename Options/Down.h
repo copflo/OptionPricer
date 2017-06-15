@@ -7,11 +7,8 @@
 class Down
 {
 public:
-    Down ();
-    ~Down();
-
-    bool        operator()(double barrier, const std::vector<double>& spot_path) const;
-    std::string toString  ()                                                     const;
+    static bool        barrierIsCrossed(double barrier, const std::vector<double>& spot_path);
+    static std::string toString();
 };
 
 #endif /* CrossedBarrierDownwards_h */
