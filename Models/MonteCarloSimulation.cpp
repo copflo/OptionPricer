@@ -1,44 +1,8 @@
 #include <algorithm>
-#include <mutex>
 #include <thread>
 
 #include "MonteCarloSimulation.h"
 
-typedef std::vector<std::unique_ptr<StopSimulation>> StopConditions;
-struct Runner
-{
-    Runner(const StopConditions&   stopConditions, 
-           RunningStats&           statistics, 
-           std::function<double()> random,
-           std::mutex&             mutex)
-        : _stopConditions(stopConditions)
-        , _statistics(statistics)
-        , _random(random)
-        , _mutex(mutex)
-    {
-    }
-
-    void operator()()
-    {
-        while (!stop()) {
-            _statistics.update(_random());
-            _mutex.unlock();
-        }
-        _mutex.unlock();
-    }
-
-    bool stop() const
-    {
-        _mutex.lock();
-        return std::any_of(_stopConditions.begin(), _stopConditions.end(), 
-            [this](const auto& condition) { return condition->stop(_statistics); });
-    }
-
-    const StopConditions&   _stopConditions;
-    RunningStats&           _statistics;
-    std::function<double()> _random;
-    std::mutex&             _mutex;
-};
 
 MonteCarloSimulation::MonteCarloSimulation(std::initializer_list<StopSimulation*>& stopConditions)
     : _stopConditions(stopConditions.begin(), stopConditions.end())
@@ -63,11 +27,15 @@ MonteCarloSimulation::~MonteCarloSimulation()
 std::pair<double, double> MonteCarloSimulation::run(std::function<double()> random) const
 {
     RunningStats stats;
-    std::thread threads[7];
     std::mutex mutex;
 
-    for (auto& thread : threads) {
-        thread = std::thread(Runner(_stopConditions, stats, random, mutex));
+    const size_t nbThreads = 8;
+    std::vector<std::thread> threads;
+    threads.reserve(nbThreads);
+    auto task = std::bind(&MonteCarloSimulation::runSimulation, this, std::ref(stats), random, std::ref(mutex));
+    
+    for (int count = 0; count < nbThreads; ++count) {
+        threads.emplace_back(task);
     }
 
     for (auto& thread : threads) {
@@ -80,6 +48,22 @@ std::pair<double, double> MonteCarloSimulation::run(std::function<double()> rand
 void MonteCarloSimulation::print(std::ostream& os) const
 {
     os << "Monte Carlo simulation";
+}
+
+void MonteCarloSimulation::runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& mtx) const
+{
+    while (!stop(stats, mtx)) {
+        stats.update(random());
+        mtx.unlock();
+    }
+    mtx.unlock();
+}
+
+bool MonteCarloSimulation::stop(const RunningStats& stats, std::mutex& mtx) const
+{
+    mtx.lock();
+    return std::any_of(_stopConditions.begin(), _stopConditions.end(),
+        [&stats](const auto& condition) { return condition->stop(stats); });
 }
 
 std::ostream& operator<<(std::ostream& os, const MonteCarloSimulation& montecarlo)
