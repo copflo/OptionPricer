@@ -287,6 +287,8 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
-#Additional files
+##### Additional files #####
 Pricer.sln
 *.vcxproj*
+
+
