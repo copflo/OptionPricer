@@ -24,7 +24,7 @@ public:
 
 private:
     void runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& mtx) const;
-    bool stop         (const RunningStats& stats, std::mutex& mtx)                           const;
+    bool stop         (const RunningStats& stats)                                            const;
 
 private:
      std::vector<std::unique_ptr<StopSimulation>> _stopConditions;
@@ -32,7 +32,7 @@ private:
 
 template<typename... StopConditions>
 MonteCarloSimulation::MonteCarloSimulation(StopSimulation* condition, StopConditions... conditions)
-    : MonteCarloSimulation(std::initializer_list<StopSimulation*>{ condition, conditions... })
+    : MonteCarloSimulation(std::vector<StopSimulation*>{ condition, conditions... })
 {
 }
 

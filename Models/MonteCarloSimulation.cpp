@@ -52,16 +52,17 @@ void MonteCarloSimulation::print(std::ostream& os) const
 
 void MonteCarloSimulation::runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& mtx) const
 {
-    while (!stop(stats, mtx)) {
-        stats.update(random());
-        mtx.unlock();
-    }
-    mtx.unlock();
+    bool keepRunning = true;
+    do {
+        std::lock_guard<std::mutex> lock(mtx);
+        if ((keepRunning = !stop(stats))) {
+            stats.update(random());
+        }
+    } while(keepRunning);
 }
 
-bool MonteCarloSimulation::stop(const RunningStats& stats, std::mutex& mtx) const
+bool MonteCarloSimulation::stop(const RunningStats& stats) const
 {
-    mtx.lock();
     return std::any_of(_stopConditions.begin(), _stopConditions.end(),
         [&stats](const auto& condition) { return condition->stop(stats); });
 }
