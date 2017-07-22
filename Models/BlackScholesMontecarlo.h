@@ -20,9 +20,6 @@ public:
     BlackScholesMonteCarlo(const Volatility& vol,
                            std::vector<StopSimulation*>& stopConditions);
 
-    BlackScholesMonteCarlo(const Volatility& vol,
-                           std::vector<StopSimulation*>&& stopConditions);
-
     virtual ~BlackScholesMonteCarlo();
 
     double price(double risklessRate, double currentSpot, const PathIndependentOption& option) const;

@@ -15,12 +15,6 @@ BlackScholesMonteCarlo::BlackScholesMonteCarlo(const Volatility& vol, std::vecto
 {
 }
 
-BlackScholesMonteCarlo::BlackScholesMonteCarlo(const Volatility& vol, std::vector<StopSimulation*>&& stopConditions)
-    : _vol(vol)
-    , _simulation(stopConditions)
-{
-}
-
 BlackScholesMonteCarlo::~BlackScholesMonteCarlo()
 {
 }
