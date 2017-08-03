@@ -1,8 +1,9 @@
 #include "CoxRossRubinstein.h"
 
-double CoxRossRubinstein::binomialValue(double riskfreeRate, double p, double upSpot, double downSpot)
+
+double CoxRossRubinstein::binomialValue(double r, double p, double upSpot, double downSpot)
 {
-    return (p * upSpot + (1. - p) * downSpot) / (1. + riskfreeRate);
+    return (p * upSpot + (1. - p) * downSpot) / (1. + r);
 }
 
 CoxRossRubinstein::CoxRossRubinstein(double up, double down, size_t nbSteps)
