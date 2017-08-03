@@ -6,7 +6,7 @@
 class CoxRossRubinstein
 {
 private:
-    static double binomialValue(double riskfreeRate, double p, double upSpot, double downSpot);
+    static double binomialValue(double r, double p, double upSpot, double downSpot);
 
 public:
             CoxRossRubinstein (double up, double down, size_t nbSteps);
