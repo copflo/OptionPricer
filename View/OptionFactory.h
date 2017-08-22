@@ -1,14 +1,16 @@
 #ifndef OptionFactory_h
 #define OptionFactory_h
 
+#include <QComboBox>
+
 #include "AmericanOptionFactory.h"
 #include "AssetOrNothingOptionFactory.h"
 #include "CashOrNothingOptionFactory.h"
-#include "ComboBoxStackedWidget.h"
 #include "EuropeanOptionFactory.h"
 #include "IAsianOptionFactory.h"
 #include "IBarrierOptionFactory.h"
 #include "LookbackOptionFactory.h"
+
 
 class OptionFactory 
     : public QWidget
@@ -28,26 +30,23 @@ public:
             OptionFactory (QWidget* parent = nullptr);
     virtual ~OptionFactory();
 
-    QString getCurrentSelection() const;
+    QString currentStyle() const;
 
     template<typename T>
     T* buildOption() const;
 
-public slots:
-    void changeCurrentOptionStyle(const QString& text);
-
 signals:
-    void currentOptionStyleChanged(const QString&);
+    void currentStyleChanged(const QString&);
 
 private:
-    AmericanOptionFactory* _american;
+    QComboBox* _comboBox;
+    AmericanOptionFactory*       _american;
     AssetOrNothingOptionFactory* _assetOrNothing;
-    CashOrNothingOptionFactory* _cashOrNothing;
-    EuropeanOptionFactory* _european;
-    IAsianOptionFactory* _asian;
-    IBarrierOptionFactory* _barrier;
-    LookbackOptionFactory* _lookback;
-    ComboBoxStackedWidget* _content;
+    CashOrNothingOptionFactory*  _cashOrNothing;
+    EuropeanOptionFactory*       _european;
+    IAsianOptionFactory*         _asian;
+    IBarrierOptionFactory*       _barrier;
+    LookbackOptionFactory*       _lookback;
 };
 
 #endif /* OptionFactory_h */

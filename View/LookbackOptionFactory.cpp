@@ -1,5 +1,4 @@
-#include "../Options/FixedStrikeLookbackOption.h"
-#include "../Options/FloatingStrikeLookbackOption.h"
+#include "../Options/LookbackOption.h"
 #include "LookbackOptionFactory.h"
 
 LookbackOptionFactory::LookbackOptionFactory(QWidget* parent)
@@ -13,11 +12,11 @@ LookbackOptionFactory::~LookbackOptionFactory()
 {
 }
 
-LookbackOption* LookbackOptionFactory::buildOption() const
+ILookbackOption* LookbackOptionFactory::buildOption() const
 {
     if (_strike->isFloating()) {
-        return new FloatingStrikeLookbackOption(optionNature(), maturity(), observationFrequency());
+        return new LookbackOption<FloatingStrike>(optionNature(), maturity(), observationFrequency());
     }
 
-    return new FixedStrikeLookbackOption(optionNature(), maturity(), observationFrequency(), _strike->getStrike());
+    return new LookbackOption<FixedStrike>(optionNature(), maturity(), observationFrequency(), _strike->getStrike());
 }

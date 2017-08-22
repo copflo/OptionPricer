@@ -3,10 +3,9 @@
 
 #include <QDoubleSpinBox>
 
-#include "FrameContainer.h"
 
 class MarketWidget
-    : public FrameContainer
+    : public QWidget
 {
 public:
     MarketWidget(QWidget* parent = nullptr);

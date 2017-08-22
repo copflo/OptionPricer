@@ -3,8 +3,9 @@
 
 #include "marketwidget.h"
 
+
 MarketWidget::MarketWidget(QWidget *parent)
-    : FrameContainer(parent)
+    : QWidget(parent)
     , _riskfreeRate(new QDoubleSpinBox)
     , _currentSpot(new QDoubleSpinBox)
 {

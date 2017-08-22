@@ -32,16 +32,12 @@ int BaseOptionWidget::maturity() const
 QWidget* BaseOptionWidget::buildOptionNatureWidget()
 {
     QGroupBox* nature = new QGroupBox("Nature");
-
     QBoxLayout* natureLayout = new QHBoxLayout(nature);
-
     _call->setChecked(true);
+
     natureLayout->addWidget(_call);
-
     natureLayout->addWidget(_put);
-
     nature->setLayout(natureLayout);
-
     return nature;
 }
 

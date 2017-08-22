@@ -9,10 +9,12 @@ OptionWindow::OptionWindow(QWidget*parent)
     , _market(new MarketWidget)
     , _option(new OptionFactory)
     , _model(new ModelFactory)
+    , _underlying(new UnderlyingWidget)
 {
     QGridLayout* layout = new QGridLayout(this);
-
-    layout->addWidget(_market, 0, 0);
+    
+    layout->addWidget(_underlying, 0, 0);
+    layout->addWidget(_market, 1, 0);
     layout->addWidget(_option, 1, 1);
     layout->addWidget(_model, 1, 2);
 
@@ -20,13 +22,13 @@ OptionWindow::OptionWindow(QWidget*parent)
     priceDisplayer->setSegmentStyle(QLCDNumber::Flat);
     layout->addWidget(priceDisplayer, 2, 1);
 
-    QPushButton* btn = new QPushButton("Price");
+    QPushButton* btn = new QPushButton(QIcon("icons/price.jpg"), "Price");
     layout->addWidget(btn, 2, 2);
 
-    connect(_option, SIGNAL(currentOptionStyleChanged(const QString&)),
+    connect(_option, SIGNAL(currentStyleChanged(const QString&)),
             _model, SLOT(update(const QString&)));
 
-    _model->update(_option->getCurrentSelection());
+    _model->update(_option->currentStyle());
 
     connect(btn, SIGNAL(clicked(bool)), this, SLOT(priceOption()));
     connect(this, SIGNAL(optionPriced(double)), priceDisplayer, SLOT(display(double)));
@@ -44,8 +46,8 @@ void OptionWindow::priceOption()
 
 double OptionWindow::price() const 
 {
-    const QString optionType = _option->getCurrentSelection();
-    const QString model = _model->getCurrentSelection();
+    const QString optionType = _option->currentStyle();
+    const QString model = _model->currentModel();
 
     if (optionType == OptionFactory::AMERICAN) {
         if (model == ModelFactory::COX_ROSS_RUBINSTEIN) {
@@ -102,7 +104,7 @@ double OptionWindow::price() const
 
     if (optionType == OptionFactory::LOOKBACK) {
         if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<LookbackOption, BlackScholesMonteCarlo>();
+            return price<ILookbackOption, BlackScholesMonteCarlo>();
         }
     }
 

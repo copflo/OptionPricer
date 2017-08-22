@@ -1,7 +1,7 @@
 #ifndef LookbackOptionFactory_h
 #define LookbackOptionFactory_h
 
-#include "../Options/LookbackOption.h"
+#include "../Options/ILookbackOption.h"
 
 #include "optionalstrikewidget.h"
 #include "pathdependentoptionwidget.h"
@@ -13,7 +13,7 @@ public:
             LookbackOptionFactory(QWidget* parent = nullptr);
     virtual ~LookbackOptionFactory();
 
-    LookbackOption* buildOption() const;
+    ILookbackOption* buildOption() const;
 
 private:
     OptionalStrikeWidget* _strike;

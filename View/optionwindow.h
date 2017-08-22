@@ -4,6 +4,8 @@
 #include "OptionFactory.h"
 #include "ModelFactory.h"
 #include "marketwidget.h"
+#include "UnderlyingWidget.h"
+
 
 class OptionWindow
     : public QWidget
@@ -13,7 +15,7 @@ class OptionWindow
 public:
     OptionWindow(QWidget* parent = nullptr);
 
-public slots:
+private slots:
     void priceOption();
 
 signals:
@@ -27,6 +29,7 @@ private:
     MarketWidget*  _market;
     OptionFactory* _option;
     ModelFactory*  _model;
+    UnderlyingWidget* _underlying;
 };
 
 
