@@ -2,7 +2,6 @@
 #define MonteCarlo_h
 
 #include <functional>
-#include <initializer_list>
 #include <iostream>
 #include <memory>
 #include <mutex>
@@ -10,13 +9,14 @@
 
 #include "StopSimulation.h"
 
+
 class MonteCarloSimulation
 {
 public:
     template<typename... StopConditions>
-    MonteCarloSimulation (StopSimulation* condition, StopConditions... conditions);
-    MonteCarloSimulation (std::initializer_list<StopSimulation*>& stopConditions);
-    MonteCarloSimulation (std::vector<StopSimulation*>& stopConditions);
+    MonteCarloSimulation(StopSimulation* condition, StopConditions... conditions);
+    MonteCarloSimulation(std::vector<StopSimulation*>& stopConditions);
+
     ~MonteCarloSimulation();
 
     std::pair<double, double> run  (std::function<double()> random) const;
@@ -32,7 +32,7 @@ private:
 
 template<typename... StopConditions>
 MonteCarloSimulation::MonteCarloSimulation(StopSimulation* condition, StopConditions... conditions)
-    : MonteCarloSimulation(std::vector<StopSimulation*>{ condition, conditions... })
+    : MonteCarloSimulation{ condition, conditions... }
 {
 }
 

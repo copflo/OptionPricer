@@ -4,14 +4,6 @@
 #include "MonteCarloSimulation.h"
 
 
-MonteCarloSimulation::MonteCarloSimulation(std::initializer_list<StopSimulation*>& stopConditions)
-    : _stopConditions(stopConditions.begin(), stopConditions.end())
-{
-    if (_stopConditions.empty()) {
-        throw std::runtime_error("No stop condition has been defined for the simulation");
-    }
-}
-
 MonteCarloSimulation::MonteCarloSimulation(std::vector<StopSimulation*>& stopConditions)
     : _stopConditions(stopConditions.begin(), stopConditions.end())
 {
@@ -42,7 +34,7 @@ std::pair<double, double> MonteCarloSimulation::run(std::function<double()> rand
         thread.join();
     }
 
-    return std::pair<double, double>(stats.mean(), stats.stdDeviation());
+    return { stats.mean(), stats.stdDeviation() };
 }
 
 void MonteCarloSimulation::print(std::ostream& os) const

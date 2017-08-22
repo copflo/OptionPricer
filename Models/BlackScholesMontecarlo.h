@@ -1,24 +1,19 @@
 #ifndef BlackScholesMonteCarlo_h
 #define BlackScholesMonteCarlo_h
 
-#include "MonteCarloSimulation.h"
 #include "../Options/PathDependentOption.h"
 #include "../Options/PathIndependentOption.h"
+
+#include "MonteCarloSimulation.h"
 #include "Volatility.h"
+
 
 class BlackScholesMonteCarlo
 {
 public:
     template<typename... StopConditions>
-    BlackScholesMonteCarlo(const Volatility& vol, 
-                           StopSimulation*   condition, 
-                           StopConditions... conditions);
-
-    BlackScholesMonteCarlo(const Volatility& vol, 
-                           std::initializer_list<StopSimulation*>& stopConditions);
-
-    BlackScholesMonteCarlo(const Volatility& vol,
-                           std::vector<StopSimulation*>& stopConditions);
+    BlackScholesMonteCarlo(const Volatility& vol, StopSimulation* condition, StopConditions... conditions);
+    BlackScholesMonteCarlo(const Volatility& vol, std::vector<StopSimulation*>& stopConditions);
 
     virtual ~BlackScholesMonteCarlo();
 
