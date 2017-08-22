@@ -117,8 +117,7 @@ double BlackScholes::d2(double r, double spot, double K, double T) const
 std::pair<double, double> BlackScholes::d1_d2(double r, double spot, double K, double T) const
 {
     const double volOnMaturity = _vol.value() * sqrt(T);
-
     const double d1 = (1. / volOnMaturity) * (log(spot / K) + (r + (pow(_vol.value(), 2) / 2)) * T);
     const double d2 = d1 - volOnMaturity;
-    return std::pair<double, double>(d1, d2);
+    return { d1, d2 };
 }
