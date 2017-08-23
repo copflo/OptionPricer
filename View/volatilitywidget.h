@@ -9,15 +9,27 @@
 
 #include "../Models/Volatility.h"
 
+
 class VolatilityWidget
     : public QWidget
 {
     Q_OBJECT
-        
+
+private:
+    static double bufferValue;
+    static int    bufferPeriod;
+
 public:
     explicit VolatilityWidget(QWidget* parent = nullptr);
 
-    Volatility getVolatility() const;
+    Volatility volatility() const;
+
+protected:
+    virtual void showEvent(QShowEvent* event);
+
+private slots:
+    void updateBufferValue (double val);
+    void updateBufferPeriod(int period);
 
 private:
     QLayout* buildFirstLine   ();

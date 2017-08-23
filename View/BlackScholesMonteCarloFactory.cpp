@@ -42,5 +42,5 @@ BlackScholesMonteCarlo* BlackScholesMonteCarloFactory::buildModel() const
         stopConditions.push_back(new TimeLimit(_calculusTime->value()));
     }
 
-    return new BlackScholesMonteCarlo(_volatility->getVolatility(), stopConditions);
+    return new BlackScholesMonteCarlo(_volatility->volatility(), stopConditions);
 }

@@ -15,6 +15,6 @@ BlackScholesFactory::~BlackScholesFactory()
 
 BlackScholes* BlackScholesFactory::buildModel() const
 {
-    return new BlackScholes(_volatility->getVolatility());
+    return new BlackScholes(_volatility->volatility());
 }
 

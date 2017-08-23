@@ -8,6 +8,10 @@
 #include "volatilitywidget.h"
 
 
+double VolatilityWidget::bufferValue = 10.;
+int    VolatilityWidget::bufferPeriod = 252;
+
+
 VolatilityWidget::VolatilityWidget(QWidget* parent)
     : QWidget(parent)
     , _value(new QDoubleSpinBox)
@@ -16,20 +20,36 @@ VolatilityWidget::VolatilityWidget(QWidget* parent)
     , _from(new QDateEdit)
     , _to(new QDateEdit)
 {
-    QGridLayout* layout = new QGridLayout(this);
-    
+    QGridLayout* layout = new QGridLayout(this);  
     layout->addLayout(buildFirstLine(), 0, 0);
-    
     _type->addItems({ "Standard", "Trading", "Parkinson" });
     layout->addWidget(_type, 1, 0);
-
     layout->addLayout(buildDateBoundary("From", _from, QDate(2017, 4, 22)), 2, 0);
     layout->addLayout(buildDateBoundary("To", _to, QDate(2017, 6, 22)), 2, 1);
+
+    connect(_value, SIGNAL(valueChanged(double)), this, SLOT(updateBufferValue(double)));
+    connect(_period, SIGNAL(valueChanged(int)), this, SLOT(updateBufferPeriod(int)));
 }
 
-Volatility VolatilityWidget::getVolatility() const
+Volatility VolatilityWidget::volatility() const
 {
     return Volatility(_value->value() / 100., _period->value());
+}
+
+void VolatilityWidget::showEvent(QShowEvent* event)
+{
+    _value->setValue(bufferValue);
+    _period->setValue(bufferPeriod);
+}
+
+void VolatilityWidget::updateBufferValue(double val)
+{
+    bufferValue = val;
+}
+
+void VolatilityWidget::updateBufferPeriod(int period)
+{
+    bufferPeriod = period;
 }
 
 QLayout* VolatilityWidget::buildFirstLine()
@@ -37,7 +57,6 @@ QLayout* VolatilityWidget::buildFirstLine()
     QBoxLayout* layout = new QHBoxLayout;
 
     _value->setRange(0.0, 150);
-    _value->setValue(30.0);
     layout->addWidget(_value);
     layout->addWidget(new QLabel("%"));
 
@@ -45,7 +64,6 @@ QLayout* VolatilityWidget::buildFirstLine()
 
     layout->addWidget(new QLabel("on"));
     _period->setRange(1, 1000);
-    _period->setValue(252);
     layout->addWidget(_period);
     layout->addWidget(new QLabel("day(s)"));
 
