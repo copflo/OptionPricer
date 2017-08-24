@@ -4,6 +4,7 @@
 
 #include "optionwindow.h"
 
+
 OptionWindow::OptionWindow(QWidget*parent)
     : QWidget(parent)
     , _market(new MarketWidget)
@@ -27,7 +28,6 @@ OptionWindow::OptionWindow(QWidget*parent)
 
     connect(_option, SIGNAL(currentStyleChanged(const QString&)),
             _model, SLOT(update(const QString&)));
-
     _model->update(_option->currentStyle());
 
     connect(btn, SIGNAL(clicked(bool)), this, SLOT(priceOption()));
@@ -37,76 +37,10 @@ OptionWindow::OptionWindow(QWidget*parent)
 void OptionWindow::priceOption()
 {
     try {
-        emit(optionPriced(price()));
+        const double p = _price.at({ _option->currentStyle(), _model->currentModel() })();
+        emit(optionPriced(p));
     }
     catch (const std::exception& ex) {
         QMessageBox::critical(this, "Error", ex.what());
     }
-}
-
-double OptionWindow::price() const 
-{
-    const QString optionType = _option->currentStyle();
-    const QString model = _model->currentModel();
-
-    if (optionType == OptionFactory::AMERICAN) {
-        if (model == ModelFactory::COX_ROSS_RUBINSTEIN) {
-            return price<AmericanOption, CoxRossRubinstein>();
-        }
-    }
-
-    if (optionType == OptionFactory::ASIAN) {
-        if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<IAsianOption, BlackScholesMonteCarlo>();
-        }
-    }
-
-    if (optionType == OptionFactory::ASSET_OR_NOTHING) {
-        if (model == ModelFactory::BLACK_SCHOLES) {
-            return price<AssetOrNothingOption, BlackScholes>();
-        }
-
-        if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<AssetOrNothingOption, BlackScholesMonteCarlo>();
-        }
-    }
-
-    if (optionType == OptionFactory::BARRIER) {
-        if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<IBarrierOption, BlackScholesMonteCarlo>();
-        }
-    }
-
-    if (optionType == OptionFactory::CASH_OR_NOTHING) {
-        if (model == ModelFactory::BLACK_SCHOLES) {
-            return price<CashOrNothingOption, BlackScholes>();
-        }
-
-        if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<CashOrNothingOption, BlackScholesMonteCarlo>();
-        }
-    }
-
-    if (optionType == OptionFactory::EUROPEAN) {
-
-        if (model == ModelFactory::BLACK_SCHOLES) {
-            return price<EuropeanOption, BlackScholes>();
-        }
-
-        if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<EuropeanOption, BlackScholesMonteCarlo>();
-        }
-
-        if (model == ModelFactory::COX_ROSS_RUBINSTEIN) {
-            return price<EuropeanOption, CoxRossRubinstein>();
-        }
-    }
-
-    if (optionType == OptionFactory::LOOKBACK) {
-        if (model == ModelFactory::BLACK_SCHOLES_MC) {
-            return price<ILookbackOption, BlackScholesMonteCarlo>();
-        }
-    }
-
-    throw std::runtime_error("OptionWindow::price(): Unexpected fallback");
 }

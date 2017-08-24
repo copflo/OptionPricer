@@ -34,9 +34,7 @@ private:
     QDoubleSpinBox* _barrier;                                                                 
 
 private:
-    typedef std::pair<std::string, std::string> key;
-    typedef std::function<IBarrierOption*()> value;
-    const std::map<key, value> _build {
+    const std::map<std::pair<std::string, std::string>, std::function<IBarrierOption*()>> _build {
         { { "up", "in" },    std::bind(&IBarrierOptionFactory::buildOptionStyle<UpInBarrierOption>, this) },
         { { "down", "in" },  std::bind(&IBarrierOptionFactory::buildOptionStyle<DownInBarrierOption>, this) },
         { { "up", "out" },   std::bind(&IBarrierOptionFactory::buildOptionStyle<UpOutBarrierOption>, this) },
@@ -47,11 +45,7 @@ private:
 template<typename T>
 IBarrierOption* IBarrierOptionFactory::buildOptionStyle() const
 {
-    return new T(optionNature(),
-                 maturity(),
-                 observationFrequency(),
-                 _strike->value(),
-                 _barrier->value());
+    return new T(optionNature(), maturity(), observationFrequency(), _strike->value(), _barrier->value());
 }
 
 #endif /* IBarrierOptionFactory_h */
