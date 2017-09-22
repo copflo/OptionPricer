@@ -8,7 +8,7 @@ lib/*
 bin/*
 
 # Qt files
-view/build-pricer* 
+view/build-pricer*/ 
 
 ildcard
 
