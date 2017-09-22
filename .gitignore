@@ -8,7 +8,7 @@ lib/*
 bin/*
 
 # Qt files
-view/build-pricer*/ 
+view/build-pricer-Desktop_Qt_5_9_1_GCC_64bit-Release/
 
 ildcard
 
