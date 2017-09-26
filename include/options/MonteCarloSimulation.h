@@ -14,7 +14,7 @@ class MonteCarloSimulation
 {
 public:
     template<typename... StopConditions> MonteCarloSimulation(StopSimulation* condition, StopConditions... conditions);
-    					 MonteCarloSimulation(std::vector<StopSimulation*>& stopConditions);
+    MonteCarloSimulation (std::vector<StopSimulation*>& stopConditions);
     ~MonteCarloSimulation();
 
     std::pair<double, double> run  (std::function<double()> random) const;

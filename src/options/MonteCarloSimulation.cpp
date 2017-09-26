@@ -61,7 +61,7 @@ void MonteCarloSimulation::runSimulation(RunningStats& stats, std::function<doub
 bool MonteCarloSimulation::stop(const RunningStats& stats) const
 {
     return std::any_of(_stopConditions.begin(), _stopConditions.end(), [&stats](const std::unique_ptr<StopSimulation>& condition) { 
-	return condition->stop(stats); 
+		return condition->stop(stats); 
     });
 }
 

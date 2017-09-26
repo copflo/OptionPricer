@@ -22,4 +22,5 @@ double ArithmeticAverage::average(InputIterator first, InputIterator last)
     return std::accumulate(first, last, 0.0) / (last - first);
 }
 
-#endif /* ArithmeticAverage_h */
+
+#endif // ArithmeticAverage_h

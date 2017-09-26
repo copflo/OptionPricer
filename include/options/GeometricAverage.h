@@ -23,4 +23,5 @@ double GeometricAverage::average(InputIterator first, InputIterator last)
     return pow(product, 1.0 / (last - first));
 }
 
-#endif /* GeometricAverage_h */
+
+#endif // GeometricAverage_h

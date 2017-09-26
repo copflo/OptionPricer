@@ -18,4 +18,4 @@ private:
 };
 
 
-#endif /* GaussianRandomVariable_h */
+#endif // GaussianRandomVariable_h
