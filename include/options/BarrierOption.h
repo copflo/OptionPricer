@@ -56,5 +56,4 @@ typedef BarrierOption<Up, KnockOut> UpOutBarrierOption;
 typedef BarrierOption<Down, KnockOut> DownOutBarrierOption;
 
 
-#endif /* BarrierOption_h */
-
+#endif // BarrierOption_h
