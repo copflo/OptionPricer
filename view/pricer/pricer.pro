@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -76,7 +76,10 @@ HEADERS += \
     ../options/UnderlyingWidget.h \
     ../options/volatilitywidget.h
 
-unix:!macx: LIBS += -L../../lib/ -lOptions
+unix:macx: LIBS += -L../../lib/ -lOptions
+windows: LIBS += -L../../bin -lOptions
 
 INCLUDEPATH += ../../include
 DEPENDPATH += ../../include
+
+QMAKE_CXXFLAGS += -std=c++11

@@ -20,7 +20,7 @@ endif
 
 
 # définition des variables
-CXX := g++ 
+CXX := g++
 CXXFLAGS := -std=c++11 -Wall
 
 INC_PATH := ../../include/options
@@ -34,16 +34,16 @@ LIB := $(LIBDIR)/libOptions$(DLLEXT)
 # règles
 all: $(LIB)
 
-$(LIB): $(HEADERS) $(OBJ) 
+$(LIB): $(HEADERS) $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ -shared -fPIC -pthread
-	
-obj/%.o: obj %.cpp 
-	$(CXX) $(CXXFLAGS) -c $< -o $@ -fPIC -I $(INC_PATH) 
 
-obj: 
+obj/%.o: %.cpp obj
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -fPIC -I $(INC_PATH)
+
+obj:
 	mkdir obj
-	
-clean: 
+
+clean:
 	rm -Rf obj/*.o
 
 mrproper: clean

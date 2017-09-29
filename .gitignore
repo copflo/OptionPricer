@@ -1,15 +1,19 @@
 # Object files
 **/obj/*
 
-# Lib files
-lib/*
 
-# Apps files
-bin/*
+# Apps and Lib directories
+lib/
+bin/
+
+# Images
+icons/
+
 
 # Qt files
 view/build-pricer-Desktop_Qt_5_9_1_GCC_64bit-Release/
 view/build-pricer-Desktop_Qt_5_9_1_GCC_64bit-Debug/
+view/build-pricer-Desktop_Qt_5_9_1_MinGW_32bit-Debug/
+view/pricer/pricer.pro.user
 
 ildcard
-
