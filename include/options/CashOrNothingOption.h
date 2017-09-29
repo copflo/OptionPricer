@@ -3,14 +3,12 @@
 
 #include "DigitalOption.h"
 
-class CashOrNothingOption 
+
+class CashOrNothingOption
     : public DigitalOption
 {
 public:
-            CashOrNothingOption (Option::Nature nature,
-                                 int            maturity,
-                                 double         strike, 
-                                 double         rebate);
+            CashOrNothingOption (Option::Nature nature, int maturity, double strike, double rebate);
     virtual ~CashOrNothingOption();
 
             double      rebate()                 const;
@@ -22,4 +20,5 @@ private:
     double _rebate;
 };
 
-#endif /* CashOrNothingOption_h */
+
+#endif // CashOrNothingOption_h

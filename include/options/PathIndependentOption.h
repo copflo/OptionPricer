@@ -4,7 +4,8 @@
 #include "FixedStrike.h"
 #include "Option.h"
 
-class PathIndependentOption 
+
+class PathIndependentOption
     : public Option
     , public FixedStrike
 {
@@ -16,4 +17,5 @@ public:
     virtual double payoff(double spot)     const = 0;
 };
 
-#endif /* PathIndependentOption_h */
+
+#endif // PathIndependentOption_h

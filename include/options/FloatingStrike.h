@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 class FloatingStrike
 {
 public:
@@ -12,4 +13,4 @@ public:
     virtual double strike(const std::vector<double>& spot_path) const = 0;
 };
 
-#endif /* FloatingStrike_h */
+#endif // FloatingStrike_h

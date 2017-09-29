@@ -24,4 +24,4 @@ private:
 };
 
 
-#endif /* SpotRandomVariable_h */
+#endif // SpotRandomVariable_h

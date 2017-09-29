@@ -3,7 +3,8 @@
 
 #include "DigitalOption.h"
 
-class AssetOrNothingOption 
+
+class AssetOrNothingOption
     : public DigitalOption
 {
 public:
@@ -14,4 +15,5 @@ public:
     virtual double      payoff(double spot) const;
 };
 
-#endif /* AssetOrNothingOption_h */
+
+#endif // AssetOrNothingOption_h

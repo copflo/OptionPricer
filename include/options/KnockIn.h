@@ -3,11 +3,13 @@
 
 #include <string>
 
-class KnockIn 
+
+class KnockIn
 {
 public:
     static bool        activated(bool barrierCrossed);
     static std::string toString();
 };
 
-#endif /* KnockIn_h */
+
+#endif // KnockIn_h

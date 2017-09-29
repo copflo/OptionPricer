@@ -3,7 +3,8 @@
 
 #include "PathIndependentOption.h"
 
-class VanillaOption 
+
+class VanillaOption
     : public PathIndependentOption
 {
 public:
@@ -13,4 +14,5 @@ public:
     virtual double payoff(double spot) const;
 };
 
-#endif /* VanillaOption_h */
+
+#endif // VanillaOption_h

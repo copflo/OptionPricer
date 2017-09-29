@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+
 class Option
 {
 public:
@@ -33,4 +34,5 @@ protected:
 
 std::ostream& operator<<(std::ostream& os, const Option& option);
 
-#endif /* Option_h */
+
+#endif // Option_h

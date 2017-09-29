@@ -3,14 +3,16 @@
 
 #include "PathIndependentOption.h"
 
-class DigitalOption 
+
+class DigitalOption
     : public PathIndependentOption
 {
 public:
             DigitalOption (Nature nature, int maturity, double strike);
     virtual ~DigitalOption();
-    
+
     bool successfulBet(double spot) const;
 };
 
-#endif /* DigitalOption_h */
+
+#endif // DigitalOption_h

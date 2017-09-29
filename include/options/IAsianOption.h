@@ -2,9 +2,11 @@
 #define IAsianOption_h
 
 #include <memory>
+
 #include "PathDependentOption.h"
 
-class IAsianOption 
+
+class IAsianOption
     : public PathDependentOption
 {
 public:
@@ -14,4 +16,5 @@ public:
     virtual std::string style() const;
 };
 
-#endif /* IAsianOption_h */
+
+#endif // IAsianOption_h

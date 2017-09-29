@@ -2,9 +2,11 @@
 #define PathDependentOption_h
 
 #include <vector>
+
 #include "Option.h"
 
-class PathDependentOption 
+
+class PathDependentOption
     : public Option
 {
 public:
@@ -18,4 +20,4 @@ protected:
     int _obsFreq;
 };
 
-#endif /* PathDependentOption_h */
+#endif // PathDependentOption_h

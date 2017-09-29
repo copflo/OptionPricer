@@ -3,7 +3,8 @@
 
 #include "PathDependentOption.h"
 
-class ILookbackOption 
+
+class ILookbackOption
     : public PathDependentOption
 {
 public:
@@ -13,4 +14,4 @@ public:
     virtual std::string style() const;
 };
 
-#endif /* ILookbackOption_h */
+#endif // ILookbackOption_h

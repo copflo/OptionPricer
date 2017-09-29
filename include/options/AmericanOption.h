@@ -3,7 +3,8 @@
 
 #include "VanillaOption.h"
 
-class AmericanOption 
+
+class AmericanOption
     : public VanillaOption
 {
 public:
@@ -13,4 +14,5 @@ public:
     virtual std::string style() const;
 };
 
-#endif /* AmericanOption_h */
+
+#endif // AmericanOption_h
