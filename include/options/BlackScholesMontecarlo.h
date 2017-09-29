@@ -1,9 +1,10 @@
 #ifndef BlackScholesMonteCarlo_h
 #define BlackScholesMonteCarlo_h
 
+#include <cmath>
+
 #include "PathDependentOption.h"
 #include "PathIndependentOption.h"
-
 #include "MonteCarloSimulation.h"
 #include "Volatility.h"
 
@@ -22,9 +23,14 @@ public:
     void   print(std::ostream& os)                                                             const;
 
 private:
+    template <class Gen, class Opt> double runSimulation(Gen& generator, const Opt& option, double risklessRate, double currentSpot) const;
+
+private:
     Volatility _vol;
     MonteCarloSimulation _simulation;
 };
+
+std::ostream& operator<<(std::ostream& os, const BlackScholesMonteCarlo& bs_montecarlo);
 
 
 template<typename... StopConditions>
@@ -34,7 +40,13 @@ BlackScholesMonteCarlo::BlackScholesMonteCarlo(const Volatility& vol, StopSimula
 {
 }
 
-std::ostream& operator<<(std::ostream& os, const BlackScholesMonteCarlo& bs_montecarlo);
+template <class Gen, class Opt>
+double BlackScholesMonteCarlo::runSimulation(Gen& generator, const Opt& option, double risklessRate, double currentSpot) const
+{
+    auto payoff = [&generator, &option, currentSpot]() { return option.payoff(generator(currentSpot)); };
+    const double T = static_cast<double>(option.maturity()) / _vol.period();
+    return exp(-risklessRate * T) * _simulation.run(payoff).first;
+}
 
 
 #endif // BlackScholesMonteCarlo_h
