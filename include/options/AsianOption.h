@@ -100,4 +100,5 @@ double AsianOption<Average, FloatingStrike>::strike(const std::vector<double>& s
     return Average::average(spot_path);
 }
 
-#endif /* AsianOption_h */
+
+#endif // AsianOption_h
