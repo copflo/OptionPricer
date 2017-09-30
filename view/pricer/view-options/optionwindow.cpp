@@ -23,7 +23,7 @@ OptionWindow::OptionWindow(QWidget*parent)
     priceDisplayer->setSegmentStyle(QLCDNumber::Flat);
     layout->addWidget(priceDisplayer, 2, 1);
 
-    QPushButton* btn = new QPushButton(QIcon("icons/price.jpg"), "Price");
+    QPushButton* btn = new QPushButton(QIcon("../icons/price.jpg"), "Price");
     layout->addWidget(btn, 2, 2);
 
     connect(_option, SIGNAL(currentStyleChanged(const QString&)),

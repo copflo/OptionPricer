@@ -1,6 +1,6 @@
 #include <QApplication>
 
-#include "../options/optionwindow.h"
+#include "view-options/optionwindow.h"
 
 
 int main(int argc, char *argv[])

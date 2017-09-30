@@ -4,14 +4,27 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = pricer
 TEMPLATE = app
 
-Release:DESTDIR = ../../bin
+CONFIG(debug, debug|release) {       # differencier les differents modes de compilation
+    DESTDIR = build/debug            # repertoire ou placer l'executable
+    TARGET = pricer-d                # nom du programme, je rajoute souvent -d pour distinguer le debug du release
+    OBJECTS_DIR = build/debug/.obj   # on place les .o ici en debug
+    MOC_DIR = build/debug/moc        # les.moc
+    RCC_DIR = build/debug/rcc        # les .rcc
+    UI_DIR = build/debug/ui          # les .ui
+} else {
+    DESTDIR = ../../bin              # repertoire ou placer l'executable
+    TARGET = pricer                  # ici c'est en release
+    OBJECTS_DIR = build/release/.obj # .o
+    MOC_DIR = build/release/moc      # .moc
+    RCC_DIR = build/release/rcc      # .rcc
+    UI_DIR = build/release/ui        # .ui
+}
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -26,55 +39,55 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-    ../options/AmericanOptionFactory.cpp \
-    ../options/AssetOrNothingOptionFactory.cpp \
-    ../options/BaseOptionWidget.cpp \
-    ../options/BlackScholesFactory.cpp \
-    ../options/BlackScholesMonteCarloFactory.cpp \
-    ../options/CashOrNothingOptionFactory.cpp \
-    ../options/CoxRossRubinsteinFactory.cpp \
-    ../options/EuropeanOptionFactory.cpp \
-    ../options/FrameContainer.cpp \
-    ../options/IAsianOptionFactory.cpp \
-    ../options/IBarrierOptionFactory.cpp \
-    ../options/LookbackOptionFactory.cpp \
-    ../options/marketwidget.cpp \
-    ../options/ModelFactory.cpp \
-    ../options/optionalstrikewidget.cpp \
-    ../options/OptionFactory.cpp \
-    ../options/optionwindow.cpp \
-    ../options/pathdependentoptionwidget.cpp \
-    ../options/pathindependentoptionwidget.cpp \
-    ../options/pricerview.cpp \
-    ../options/strikewidget.cpp \
-    ../options/UnderlyingWidget.cpp \
-    ../options/volatilitywidget.cpp
+    view-options/AmericanOptionFactory.cpp \
+    view-options/AssetOrNothingOptionFactory.cpp \
+    view-options/BaseOptionWidget.cpp \
+    view-options/BlackScholesFactory.cpp \
+    view-options/BlackScholesMonteCarloFactory.cpp \
+    view-options/CashOrNothingOptionFactory.cpp \
+    view-options/CoxRossRubinsteinFactory.cpp \
+    view-options/EuropeanOptionFactory.cpp \
+    view-options/FrameContainer.cpp \
+    view-options/IAsianOptionFactory.cpp \
+    view-options/IBarrierOptionFactory.cpp \
+    view-options/LookbackOptionFactory.cpp \
+    view-options/marketwidget.cpp \
+    view-options/ModelFactory.cpp \
+    view-options/optionalstrikewidget.cpp \
+    view-options/OptionFactory.cpp \
+    view-options/optionwindow.cpp \
+    view-options/pathdependentoptionwidget.cpp \
+    view-options/pathindependentoptionwidget.cpp \
+    view-options/pricerview.cpp \
+    view-options/strikewidget.cpp \
+    view-options/UnderlyingWidget.cpp \
+    view-options/volatilitywidget.cpp \
+    main.cpp
 
 HEADERS += \
-    ../options/AmericanOptionFactory.h \
-    ../options/AssetOrNothingOptionFactory.h \
-    ../options/BaseOptionWidget.h \
-    ../options/BlackScholesFactory.h \
-    ../options/BlackScholesMonteCarloFactory.h \
-    ../options/CashOrNothingOptionFactory.h \
-    ../options/CoxRossRubinsteinFactory.h \
-    ../options/EuropeanOptionFactory.h \
-    ../options/FrameContainer.h \
-    ../options/IAsianOptionFactory.h \
-    ../options/IBarrierOptionFactory.h \
-    ../options/LookbackOptionFactory.h \
-    ../options/marketwidget.h \
-    ../options/ModelFactory.h \
-    ../options/optionalstrikewidget.h \
-    ../options/OptionFactory.h \
-    ../options/optionwindow.h \
-    ../options/pathdependentoptionwidget.h \
-    ../options/pathindependentoptionwidget.h \
-    ../options/pricerview.h \
-    ../options/strikewidget.h \
-    ../options/UnderlyingWidget.h \
-    ../options/volatilitywidget.h
+    view-options/AmericanOptionFactory.h \
+    view-options/AssetOrNothingOptionFactory.h \
+    view-options/BaseOptionWidget.h \
+    view-options/BlackScholesFactory.h \
+    view-options/BlackScholesMonteCarloFactory.h \
+    view-options/CashOrNothingOptionFactory.h \
+    view-options/CoxRossRubinsteinFactory.h \
+    view-options/EuropeanOptionFactory.h \
+    view-options/FrameContainer.h \
+    view-options/IAsianOptionFactory.h \
+    view-options/IBarrierOptionFactory.h \
+    view-options/LookbackOptionFactory.h \
+    view-options/marketwidget.h \
+    view-options/ModelFactory.h \
+    view-options/optionalstrikewidget.h \
+    view-options/OptionFactory.h \
+    view-options/optionwindow.h \
+    view-options/pathdependentoptionwidget.h \
+    view-options/pathindependentoptionwidget.h \
+    view-options/pricerview.h \
+    view-options/strikewidget.h \
+    view-options/UnderlyingWidget.h \
+    view-options/volatilitywidget.h
 
 unix:macx: LIBS += -L../../lib/ -lOptions
 windows: LIBS += -L../../bin -lOptions

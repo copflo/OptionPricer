@@ -60,7 +60,7 @@ QLayout* VolatilityWidget::buildFirstLine()
     layout->addWidget(_value);
     layout->addWidget(new QLabel("%"));
 
-    layout->addWidget(new QPushButton(QIcon("icons/database.png"), ""));
+    layout->addWidget(new QPushButton(QIcon("../icons/database.png"), ""));
 
     layout->addWidget(new QLabel("on"));
     _period->setRange(1, 1000);

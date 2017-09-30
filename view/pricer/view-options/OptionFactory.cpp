@@ -25,12 +25,12 @@ OptionFactory::OptionFactory(QWidget* parent)
 {
     QBoxLayout* layout = new QVBoxLayout(this);
 
-    _comboBox->addItem(QIcon("icons/american.png"), AMERICAN);
-    _comboBox->addItem(QIcon("icons/asian.png"), ASIAN);
-    _comboBox->addItem(QIcon("icons/asset-or-nothing.jpg"), ASSET_OR_NOTHING);
-    _comboBox->addItem(QIcon("icons/barrier.jpg"), BARRIER);
-    _comboBox->addItem(QIcon("icons/cash-or-nothing.png"), CASH_OR_NOTHING);
-    _comboBox->addItem(QIcon("icons/european.png"), EUROPEAN);
+    _comboBox->addItem(QIcon("../icons/american.png"), AMERICAN);
+    _comboBox->addItem(QIcon("../icons/asian.png"), ASIAN);
+    _comboBox->addItem(QIcon("../icons/asset-or-nothing.jpg"), ASSET_OR_NOTHING);
+    _comboBox->addItem(QIcon("../icons/barrier.jpg"), BARRIER);
+    _comboBox->addItem(QIcon("../icons/cash-or-nothing.png"), CASH_OR_NOTHING);
+    _comboBox->addItem(QIcon("../icons/european.png"), EUROPEAN);
     _comboBox->addItem(LOOKBACK);
 
     QStackedWidget* stack = new QStackedWidget;
