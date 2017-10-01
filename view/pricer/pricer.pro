@@ -89,7 +89,7 @@ HEADERS += \
     view-options/UnderlyingWidget.h \
     view-options/volatilitywidget.h
 
-unix:macx: LIBS += -L../../lib/ -lOptions
+unix: LIBS += -L../../lib/ -lOptions
 windows: LIBS += -L../../bin -lOptions
 
 INCLUDEPATH += ../../include
