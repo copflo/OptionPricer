@@ -4,6 +4,13 @@
 #include "MonteCarloSimulation.h"
 
 
+double MonteCarloSimulation::randomValue(std::function<double()> random, std::mutex& randMtx)
+{
+    std::lock_guard<std::mutex> lock(randMtx);
+    return random();
+}
+
+
 MonteCarloSimulation::MonteCarloSimulation(std::vector<StopSimulation*>& stopConditions)
     : _stopConditions(stopConditions.begin(), stopConditions.end())
 {
@@ -19,13 +26,13 @@ MonteCarloSimulation::~MonteCarloSimulation()
 std::pair<double, double> MonteCarloSimulation::run(std::function<double()> random) const
 {
     RunningStats stats;
-    std::mutex mutex;
+    std::mutex statsMtx, randMtx;
 
     const size_t nbThreads = 8;
     std::vector<std::thread> threads;
     threads.reserve(nbThreads);
-    auto task = std::bind(&MonteCarloSimulation::runSimulation, this, std::ref(stats), random, std::ref(mutex));
-    
+    auto task = std::bind(&MonteCarloSimulation::runSimulation, this, std::ref(stats), random, std::ref(statsMtx), std::ref(randMtx));
+
     for (size_t count = 0; count < nbThreads; ++count) {
         threads.emplace_back(task);
     }
@@ -44,24 +51,28 @@ void MonteCarloSimulation::print(std::ostream& os) const
 
 MonteCarloSimulation::MonteCarloSimulation(std::initializer_list<StopSimulation*> stopConditions)
     : _stopConditions(stopConditions.begin(), stopConditions.end())
-{	
+{
 }
 
-void MonteCarloSimulation::runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& mtx) const
+void MonteCarloSimulation::runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& statsMtx, std::mutex& randMtx) const
 {
-    bool keepRunning = true;
-    do {
-        std::lock_guard<std::mutex> lock(mtx);
-        if ((keepRunning = !stop(stats))) {
-            stats.update(random());
-        }
-    } while(keepRunning);
+    while(updateStats(stats, randomValue(random, randMtx), statsMtx));
+}
+
+bool MonteCarloSimulation::updateStats(RunningStats& stats, double value, std::mutex& statsMtx) const
+{
+    std::lock_guard<std::mutex> lock(statsMtx);
+    if(!stop(stats)) {
+        stats.update(value);
+        return true;
+    }
+    return false;
 }
 
 bool MonteCarloSimulation::stop(const RunningStats& stats) const
 {
-    return std::any_of(_stopConditions.begin(), _stopConditions.end(), [&stats](const std::unique_ptr<StopSimulation>& condition) { 
-		return condition->stop(stats); 
+    return std::any_of(_stopConditions.begin(), _stopConditions.end(), [&stats](const std::unique_ptr<StopSimulation>& condition) {
+		    return condition->stop(stats);
     });
 }
 

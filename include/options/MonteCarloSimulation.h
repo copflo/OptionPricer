@@ -12,6 +12,9 @@
 
 class MonteCarloSimulation
 {
+private:
+  static double randomValue(std::function<double()> random, std::mutex& randMtx);
+
 public:
     template<typename... StopConditions> MonteCarloSimulation(StopSimulation* condition, StopConditions... conditions);
     MonteCarloSimulation (std::vector<StopSimulation*>& stopConditions);
@@ -22,9 +25,10 @@ public:
 
 private:
     MonteCarloSimulation(std::initializer_list<StopSimulation*> stopConditions);
-    
-    void runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& mtx) const;
-    bool stop         (const RunningStats& stats)                                            const;
+
+    void runSimulation(RunningStats& stats, std::function<double()> random, std::mutex& statsMtx, std::mutex& randMtx) const;
+    bool updateStats  (RunningStats& stats, double value, std::mutex& statsMtx)                                        const;
+    bool stop         (const RunningStats& stats)                                                                      const;
 
 private:
      std::vector<std::unique_ptr<StopSimulation>> _stopConditions;
