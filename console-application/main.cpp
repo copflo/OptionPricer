@@ -1,6 +1,5 @@
-#include "BlackScholes.h"
-#include "BlackScholesMontecarlo.h"
-#include "NbObs.h"
+#include "options/BlackScholes.h"
+#include "options/BlackScholesMontecarlo.h"
 
 
 int main(int argc, char** argv)

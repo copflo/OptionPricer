@@ -7,7 +7,9 @@
 #include <mutex>
 #include <vector>
 
-#include "StopSimulation.h"
+#include "AccuracyConfidence.h"
+#include "NbObs.h"
+#include "TimeLimit.h"
 
 
 class MonteCarloSimulation

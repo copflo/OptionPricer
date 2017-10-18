@@ -1,4 +1,4 @@
-# définition des extensions 
+# définition des extensions
 ifeq ($(OS),Windows_NT)
     DLLEXT := .dll
 else
@@ -8,7 +8,7 @@ endif
 ifeq ($(OS),Windows_NT)
     EXEEXT := .exe
 else
-    EXEEXT := 
+    EXEEXT :=
 endif
 
 
@@ -28,20 +28,20 @@ LIBOPTIONS := $(LIBDIR)/libOptions$(DLLEXT)
 
 
 # définition des variables
-CXX := g++ 
+CXX := g++
 CXXFLAGS := -std=c++11 -Wall
 
-INC_PATH := ../include/options
+INC_PATH := ../include
 
 
 #règles
 all: $(EXE)
 
 $(EXE): main.cpp $(LIBOPTIONS) $(TARGETDIR)
-	$(CXX) $(CXXFLAGS) $< -o $@ -I $(INC_PATH) -L$(LIBDIR) -lOptions -pthread 
-	
-$(LIBOPTIONS) : 
+	$(CXX) $(CXXFLAGS) $< -o $@ -I $(INC_PATH) -L$(LIBDIR) -lOptions -pthread
+
+$(LIBOPTIONS) :
 	make -C ../src/options
-	
+
 $(TARGETDIR) :
 	mkdir ../bin
