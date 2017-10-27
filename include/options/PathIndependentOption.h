@@ -10,7 +10,7 @@ class PathIndependentOption
     , public FixedStrike
 {
 public:
-            PathIndependentOption (Nature nature, int maturity, double strike);
+            PathIndependentOption (OptionNature* nature, int maturity, double strike);
     virtual ~PathIndependentOption();
 
     virtual void   print(std::ostream& os) const;

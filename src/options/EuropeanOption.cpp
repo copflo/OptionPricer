@@ -1,7 +1,7 @@
 #include "EuropeanOption.h"
 
 
-EuropeanOption::EuropeanOption(Nature nature, int maturity, double strike)
+EuropeanOption::EuropeanOption(OptionNature* nature, int maturity, double strike)
     : VanillaOption(nature, maturity, strike)
 {
 }

@@ -8,7 +8,7 @@ class AmericanOption
     : public VanillaOption
 {
 public:
-            AmericanOption (Nature nature, int maturity, double strike);
+            AmericanOption (OptionNature* nature, int maturity, double strike);
     virtual ~AmericanOption();
 
     virtual std::string style() const;

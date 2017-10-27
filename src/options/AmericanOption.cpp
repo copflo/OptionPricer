@@ -1,6 +1,6 @@
 #include "AmericanOption.h"
 
-AmericanOption::AmericanOption(Nature nature, int maturity, double strike)
+AmericanOption::AmericanOption(OptionNature* nature, int maturity, double strike)
     : VanillaOption(nature, maturity, strike)
 {
 }

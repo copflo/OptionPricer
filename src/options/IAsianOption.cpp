@@ -1,6 +1,6 @@
 #include "IAsianOption.h"
 
-IAsianOption::IAsianOption(Nature nature, int maturity, int obsFreq)
+IAsianOption::IAsianOption(OptionNature* nature, int maturity, int obsFreq)
     : PathDependentOption(nature, maturity, obsFreq)
 {
 }

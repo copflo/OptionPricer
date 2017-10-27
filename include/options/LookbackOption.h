@@ -16,7 +16,7 @@ class LookbackOption<FixedStrike>
     , public FixedStrike
 {
 public:
-            LookbackOption (Nature nature, int maturity, int obsFreq, double strike);
+            LookbackOption (OptionNature* nature, int maturity, int obsFreq, double strike);
     virtual ~LookbackOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;
@@ -33,7 +33,7 @@ class LookbackOption<FloatingStrike>
     , public FloatingStrike
 {
 public:
-            LookbackOption(Nature nature, int maturity, int obsFreq);
+            LookbackOption(OptionNature* nature, int maturity, int obsFreq);
     virtual ~LookbackOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;

@@ -18,7 +18,7 @@ class AsianOption<Average, FixedStrike>
     , public FixedStrike
 {
 public:
-            AsianOption (Option::Nature nature, int maturity, int obsFreq, double strike);
+            AsianOption (OptionNature* nature, int maturity, int obsFreq, double strike);
     virtual ~AsianOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;
@@ -32,7 +32,7 @@ class AsianOption<Average, FloatingStrike>
     , public FloatingStrike
 {
 public:
-            AsianOption (Option::Nature nature, int maturity, int obsFreq);
+            AsianOption (OptionNature* nature, int maturity, int obsFreq);
     virtual ~AsianOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;
@@ -44,7 +44,7 @@ protected:
 
 
 template<class Average>
-AsianOption<Average, FixedStrike>::AsianOption(Option::Nature nature, int maturity, int obsFreq, double strike)
+AsianOption<Average, FixedStrike>::AsianOption(OptionNature* nature, int maturity, int obsFreq, double strike)
     : IAsianOption(nature, maturity, obsFreq)
     , FixedStrike(strike)
 {
@@ -58,7 +58,7 @@ AsianOption<Average, FixedStrike>::~AsianOption()
 template<class Average>
 double AsianOption<Average, FixedStrike>::payoff(const std::vector<double>& spot_path) const
 {
-    return Option::payoff(Average::average(spot_path), _strike);
+    return _nature->payoff(Average::average(spot_path), _strike);
 }
 
 template<class Average>
@@ -71,7 +71,7 @@ void AsianOption<Average, FixedStrike>::print(std::ostream& os) const
 
 
 template<class Average>
-AsianOption<Average, FloatingStrike>::AsianOption(Option::Nature nature, int maturity, int obsFreq)
+AsianOption<Average, FloatingStrike>::AsianOption(OptionNature* nature, int maturity, int obsFreq)
     : IAsianOption(nature, maturity, obsFreq)
 {
 }
@@ -84,7 +84,7 @@ AsianOption<Average, FloatingStrike>::~AsianOption()
 template<class Average>
 double AsianOption<Average, FloatingStrike>::payoff(const std::vector<double>& spot_path) const
 {
-    return Option::payoff(spot_path.back(), strike(spot_path));
+    return _nature->payoff(spot_path.back(), strike(spot_path));
 }
 
 template<class Average>

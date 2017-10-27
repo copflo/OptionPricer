@@ -1,6 +1,6 @@
 #include "ILookbackOption.h"
 
-ILookbackOption::ILookbackOption(Nature nature, int maturity, int obsFreq)
+ILookbackOption::ILookbackOption(OptionNature* nature, int maturity, int obsFreq)
     : PathDependentOption(nature, maturity, obsFreq)
 {
 }

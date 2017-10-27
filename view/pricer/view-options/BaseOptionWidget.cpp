@@ -2,6 +2,9 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
+#include "options/Call.h"
+#include "options/Put.h"
+
 #include "BaseOptionWidget.h"
 
 
@@ -9,16 +12,19 @@ BaseOptionWidget::BaseOptionWidget(QWidget *parent)
     : QWidget(parent)
     , _layout  (new QFormLayout(this))
     , _call    (new QRadioButton("Call"))
-    , _put     (new QRadioButton("Put"))
     , _maturity(new QSpinBox)
 {
     _layout->addRow(buildOptionNatureWidget());
     _layout->addRow("Maturity", buildMaturityWidget());
 }
 
-Option::Nature BaseOptionWidget::optionNature() const
+OptionNature* BaseOptionWidget::optionNature() const
 {
-    return _call->isChecked() ? Option::CALL : Option::PUT;
+    if(_call->isChecked()) {
+        return new Call;
+    }
+    return new Put;
+    //return _call->isChecked()? new Call : new Put;
 }
 
 int BaseOptionWidget::maturity() const
@@ -33,7 +39,7 @@ QWidget* BaseOptionWidget::buildOptionNatureWidget()
     _call->setChecked(true);
 
     natureLayout->addWidget(_call);
-    natureLayout->addWidget(_put);
+    natureLayout->addWidget(new QRadioButton("Put"));
     nature->setLayout(natureLayout);
     return nature;
 }

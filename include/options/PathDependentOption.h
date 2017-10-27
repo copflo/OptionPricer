@@ -10,7 +10,7 @@ class PathDependentOption
     : public Option
 {
 public:
-            PathDependentOption (Nature nature, int maturity, int obsFreq);
+            PathDependentOption (OptionNature* nature, int maturity, int obsFreq);
     virtual ~PathDependentOption();
 
             int    observationFrequency()                                     const;

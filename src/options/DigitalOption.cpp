@@ -1,6 +1,6 @@
 #include "DigitalOption.h"
 
-DigitalOption::DigitalOption(Nature nature, int maturity, double strike)
+DigitalOption::DigitalOption(OptionNature* nature, int maturity, double strike)
     : PathIndependentOption(nature, maturity, strike)
 {
 }

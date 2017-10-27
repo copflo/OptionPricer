@@ -12,7 +12,7 @@ class IBarrierOption
     , public FixedStrike
 {
 public:
-            IBarrierOption(Nature nature, int maturity, int obsFreq, double strike, double barrier);
+            IBarrierOption(OptionNature* nature, int maturity, int obsFreq, double strike, double barrier);
     virtual ~IBarrierOption();
 
             double      getBarrier() const;

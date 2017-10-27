@@ -1,9 +1,7 @@
 #include "CashOrNothingOption.h"
 
-CashOrNothingOption::CashOrNothingOption(Option::Nature nature, 
-                                         int            maturity, 
-                                         double         strike, 
-                                         double         rebate)
+
+CashOrNothingOption::CashOrNothingOption(OptionNature* nature, int maturity, double strike, double rebate)
     : DigitalOption(nature, maturity, strike)
     , _rebate(rebate)
 {

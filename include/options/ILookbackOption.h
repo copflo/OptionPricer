@@ -8,7 +8,7 @@ class ILookbackOption
     : public PathDependentOption
 {
 public:
-            ILookbackOption(Nature nature, int maturity, int obsFreq);
+            ILookbackOption(OptionNature* nature, int maturity, int obsFreq);
     virtual ~ILookbackOption();
 
     virtual std::string style() const;

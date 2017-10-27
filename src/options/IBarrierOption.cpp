@@ -1,10 +1,6 @@
 #include "BarrierOption.h"
 
-IBarrierOption::IBarrierOption(Nature nature, 
-                               int    maturity,
-                               int    obsFreq,
-                               double strike,  
-                               double barrier)
+IBarrierOption::IBarrierOption(OptionNature* nature, int maturity, int obsFreq, double strike, double barrier)
     : PathDependentOption(nature, maturity, obsFreq)
     , FixedStrike(strike)
     , _barrier(barrier)

@@ -1,6 +1,7 @@
 #include "AssetOrNothingOption.h"
 
-AssetOrNothingOption::AssetOrNothingOption(Option::Nature nature, int maturity, double strike)
+
+AssetOrNothingOption::AssetOrNothingOption(OptionNature* nature, int maturity, double strike)
     : DigitalOption(nature, maturity, strike)
 {
 }

@@ -5,7 +5,7 @@
 #include <QRadioButton>
 #include <QSpinBox>
 
-#include "options/Option.h"
+#include "options/OptionNature.h"
 
 
 class BaseOptionWidget
@@ -14,8 +14,8 @@ class BaseOptionWidget
 public:
     BaseOptionWidget(QWidget* parent = nullptr);
 
-    Option::Nature optionNature() const;
-    int            maturity    () const;
+    OptionNature* optionNature() const;
+    int           maturity    () const;
 
 private:
     QWidget* buildOptionNatureWidget();
@@ -26,7 +26,6 @@ protected:
 
 private:
     QRadioButton* _call;
-    QRadioButton* _put;
     QSpinBox*     _maturity;
 };
 

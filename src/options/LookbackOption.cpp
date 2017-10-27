@@ -3,7 +3,7 @@
 #include "LookbackOption.h"
 
 
-LookbackOption<FixedStrike>::LookbackOption(Option::Nature nature, int maturity, int obsFreq, double strike)
+LookbackOption<FixedStrike>::LookbackOption(OptionNature* nature, int maturity, int obsFreq, double strike)
     : ILookbackOption(nature, maturity, obsFreq)
     , FixedStrike(strike)
 {
@@ -15,7 +15,7 @@ LookbackOption<FixedStrike>::~LookbackOption()
 
 double LookbackOption<FixedStrike>::payoff(const std::vector<double>& spot_path) const
 {
-    return Option::payoff(optimalSpot(spot_path), _strike);
+    return _nature->payoff(optimalSpot(spot_path), _strike);
 }
 
 void LookbackOption<FixedStrike>::print(std::ostream& os) const
@@ -35,7 +35,7 @@ double LookbackOption<FixedStrike>::optimalSpot(const std::vector<double>& spot_
 }
 
 
-LookbackOption<FloatingStrike>::LookbackOption(Nature nature, int maturity, int obsFreq)
+LookbackOption<FloatingStrike>::LookbackOption(OptionNature* nature, int maturity, int obsFreq)
     : ILookbackOption(nature, maturity, obsFreq)
 {
 }
@@ -46,7 +46,7 @@ LookbackOption<FloatingStrike>::~LookbackOption()
 
 double LookbackOption<FloatingStrike>::payoff(const std::vector<double>& spot_path) const
 {
-    return Option::payoff(spot_path.back(), strike(spot_path));
+    return _nature->payoff(spot_path.back(), strike(spot_path));
 }
 
 double LookbackOption<FloatingStrike>::strike(const std::vector<double>& spot_path) const

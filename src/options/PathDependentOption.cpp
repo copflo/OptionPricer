@@ -3,7 +3,7 @@
 #include "PathDependentOption.h"
 
 
-PathDependentOption::PathDependentOption(Nature nature, int maturity, int obsFreq)
+PathDependentOption::PathDependentOption(OptionNature* nature, int maturity, int obsFreq)
     : Option(nature, maturity)
     , _obsFreq(obsFreq)
 {

@@ -1,7 +1,6 @@
 #include "options/BlackScholes.h"
 #include "options/BlackScholesMontecarlo.h"
 
-
 int main(int argc, char** argv)
 {
     const double risklessRate = 0.05;
@@ -13,7 +12,7 @@ int main(int argc, char** argv)
     std::cout << "Volatility of asset: " << vol << std::endl;
     std::cout << std::endl;
 
-    EuropeanOption eu_call(Option::CALL, 90, 105.0);
+    EuropeanOption eu_call(new Call, 90, 105.0);
     std::cout << eu_call << std::endl;
 
     BlackScholes bs(vol);
