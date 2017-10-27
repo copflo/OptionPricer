@@ -9,6 +9,7 @@ double CoxRossRubinstein::binomialValue(double r, double p, double upSpot, doubl
     return (p * upSpot + (1. - p) * downSpot) / (1. + r);
 }
 
+
 CoxRossRubinstein::CoxRossRubinstein(double up, double down, size_t nbSteps)
     : _up(up)
     , _down(-down)
@@ -23,13 +24,14 @@ CoxRossRubinstein::~CoxRossRubinstein()
 {
 }
 
-double CoxRossRubinstein::price(double risklessRate, double currentSpot, const VanillaOption& option) const
+double CoxRossRubinstein::price(double risklessRate, double currentSpot, const AmericanOption& option) const
 {
-    if ((_down < risklessRate) == false || (risklessRate < _up) == false) {
-        throw std::runtime_error("Error in modelization: down < r < up is not respected");
-    }
+    return priceOption(risklessRate, currentSpot, option);
+}
 
-    return optionValue(option, risklessRate, neutralProba(risklessRate), currentSpot, 0);
+double CoxRossRubinstein::price(double risklessRate, double currentSpot, const EuropeanOption& option) const
+{
+    return priceOption(risklessRate, currentSpot, option);
 }
 
 double CoxRossRubinstein::neutralProba(double risklessRate) const
@@ -37,7 +39,7 @@ double CoxRossRubinstein::neutralProba(double risklessRate) const
     return (risklessRate - _down) / (_up - _down);
 }
 
-double CoxRossRubinstein::optionValue(const VanillaOption& option, double risklessRate, double p, double currentSpot, size_t stepNo) const
+double CoxRossRubinstein::optionValue(const AmericanOption& option, double risklessRate, double p, double currentSpot, size_t stepNo) const
 {
     if (stepNo == _nbSteps) {
         return option.payoff(currentSpot);
@@ -45,11 +47,16 @@ double CoxRossRubinstein::optionValue(const VanillaOption& option, double riskle
 
     const double upValue = optionValue(option, risklessRate, p, currentSpot * (1. + _up), stepNo + 1);
     const double downValue = optionValue(option, risklessRate, p, currentSpot * (1. + _down), stepNo + 1);
+    return fmax(binomialValue(risklessRate, p, upValue, downValue), option.payoff(currentSpot));
+}
 
-    const double binomial = binomialValue(risklessRate, p, upValue, downValue);
-    if (option.style() == "European") {
-        return binomial;
+double CoxRossRubinstein::optionValue(const EuropeanOption& option, double risklessRate, double p, double currentSpot, size_t stepNo) const
+{
+    if (stepNo == _nbSteps) {
+        return option.payoff(currentSpot);
     }
 
-    return fmax(binomial, option.payoff(currentSpot));
+    const double upValue = optionValue(option, risklessRate, p, currentSpot * (1. + _up), stepNo + 1);
+    const double downValue = optionValue(option, risklessRate, p, currentSpot * (1. + _down), stepNo + 1);
+    return binomialValue(risklessRate, p, upValue, downValue);
 }
