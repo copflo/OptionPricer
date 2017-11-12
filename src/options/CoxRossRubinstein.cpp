@@ -24,16 +24,6 @@ CoxRossRubinstein::~CoxRossRubinstein()
 {
 }
 
-double CoxRossRubinstein::price(double risklessRate, double currentSpot, const AmericanOption& option) const
-{
-    return priceOption(risklessRate, currentSpot, option);
-}
-
-double CoxRossRubinstein::price(double risklessRate, double currentSpot, const EuropeanOption& option) const
-{
-    return priceOption(risklessRate, currentSpot, option);
-}
-
 double CoxRossRubinstein::neutralProba(double risklessRate) const
 {
     return (risklessRate - _down) / (_up - _down);
