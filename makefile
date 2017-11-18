@@ -1,3 +1,11 @@
+# shell commands
+ifeq ($(OS),Windows_NT)
+    RM := del
+else
+    RM := rm -Rf
+endif
+
+
 # définition des cibles particulières
 .PHONY: clean, mrproper
 .SUFFIXES:
@@ -12,9 +20,19 @@ endif
 
 ifeq ($(OS),Windows_NT)
     EXEEXT := .exe
-else
-    EXEEXT := 
 endif
+
+
+# définition des variables
+CXX := g++
+CXXFLAGS := -std=c++11 -Wall
+
+
+# export variables
+export DLLEXT
+export EXEEXT
+export CXX
+export CXXFLAGS
 
 
 # définition des répertoires
@@ -25,22 +43,26 @@ else
 endif
 
 
-# définition des variables
+# cibles
 CONSOLEAPP := bin/consoleapp$(EXEEXT)
-LIBOPTIONS := $(LIBDIR)/libOptions$(DLLEXT)
+TEST_OPTIONS := bin/test-options$(EXEEXT)
+LIB_OPTIONS := $(LIBDIR)/libOptions$(DLLEXT)
 
 
 # règles
-all: $(CONSOLEAPP) $(LIBOPTIONS)
+all: $(CONSOLEAPP) $(TEST_OPTIONS)
 
-$(CONSOLEAPP): 
-	make -C console-application 
-	
-$(LIBOPTIONS): 
-	make -C src/options 
+$(CONSOLEAPP): $(LIB_OPTIONS)
+	make -C console-application all
 
-clean: 
-	rm -Rf **/obj/*.o
+$(TEST_OPTIONS): $(LIB_OPTIONS)
+	make -C test/test-options all
+
+$(LIB_OPTIONS):
+	make -C src/options all
+
+clean:
+	$(RM) **/obj/*.o
 
 mrproper: clean
-	rm -f $(CONSOLEAPP) $(LIBOPTIONS)
+	$(RM) $(CONSOLEAPP) $(LIB_OPTIONS)
