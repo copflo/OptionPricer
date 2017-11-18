@@ -1,14 +1,19 @@
-# Object files
+# object files
 **/obj/*
 
 
-# Apps and Lib directories
+# bin and lib directories
 lib/
 bin/
 
-# Images
+# images
 icons/
 
+# third libraries
+gmock/
+gtest/
+mysql/
+market-data/
 
 # Qt files
 view/build-pricer-Desktop_Qt_5_9_1_GCC_64bit-Release/
