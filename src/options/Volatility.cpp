@@ -5,7 +5,7 @@
 #include "Volatility.h"
 
 
-Volatility::Volatility(double value, int period)
+Volatility::Volatility(double value, size_t period)
     : _value(value)
     , _period(period)
 {

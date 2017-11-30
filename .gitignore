@@ -13,6 +13,7 @@ icons/
 gmock/
 gtest/
 mysql/
+boost/
 market-data/
 
 # Qt files

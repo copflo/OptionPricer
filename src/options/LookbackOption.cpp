@@ -3,7 +3,7 @@
 #include "LookbackOption.h"
 
 
-LookbackOption<FixedStrike>::LookbackOption(OptionNature* nature, int maturity, int obsFreq, double strike)
+LookbackOption<FixedStrike>::LookbackOption(OptionNature* nature, size_t maturity, size_t obsFreq, double strike)
     : ILookbackOption(nature, maturity, obsFreq)
     , FixedStrike(strike)
 {
@@ -35,7 +35,7 @@ double LookbackOption<FixedStrike>::optimalSpot(const std::vector<double>& spot_
 }
 
 
-LookbackOption<FloatingStrike>::LookbackOption(OptionNature* nature, int maturity, int obsFreq)
+LookbackOption<FloatingStrike>::LookbackOption(OptionNature* nature, size_t maturity, size_t obsFreq)
     : ILookbackOption(nature, maturity, obsFreq)
 {
 }

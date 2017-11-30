@@ -13,7 +13,7 @@ class BarrierOption
     : public IBarrierOption
 {
 public:
-            BarrierOption (OptionNature* nature, int maturity, int obsFreq, double strike, double barrier);
+            BarrierOption (OptionNature* nature, size_t maturity, size_t obsFreq, double strike, double barrier);
     virtual ~BarrierOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;
@@ -22,7 +22,7 @@ public:
 
 
 template<class Direction, class Knock>
-BarrierOption<Direction, Knock>::BarrierOption(OptionNature* nature, int maturity, int obsFreq, double strike, double barrier)
+BarrierOption<Direction, Knock>::BarrierOption(OptionNature* nature, size_t maturity, size_t obsFreq, double strike, double barrier)
     : IBarrierOption(nature, maturity, obsFreq, strike, barrier)
 {
 }

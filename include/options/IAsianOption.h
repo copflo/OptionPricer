@@ -10,7 +10,7 @@ class IAsianOption
     : public PathDependentOption
 {
 public:
-            IAsianOption (OptionNature* nature, int maturity, int obsFreq);
+            IAsianOption (OptionNature* nature, size_t maturity, size_t obsFreq);
     virtual ~IAsianOption();
 
     virtual std::string style() const;

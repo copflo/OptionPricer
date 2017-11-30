@@ -18,7 +18,7 @@ class AsianOption<Average, FixedStrike>
     , public FixedStrike
 {
 public:
-            AsianOption (OptionNature* nature, int maturity, int obsFreq, double strike);
+            AsianOption (OptionNature* nature, size_t maturity, size_t obsFreq, double strike);
     virtual ~AsianOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;
@@ -32,7 +32,7 @@ class AsianOption<Average, FloatingStrike>
     , public FloatingStrike
 {
 public:
-            AsianOption (OptionNature* nature, int maturity, int obsFreq);
+            AsianOption (OptionNature* nature, size_t maturity, size_t obsFreq);
     virtual ~AsianOption();
 
     virtual double payoff(const std::vector<double>& spot_path) const;
@@ -71,7 +71,7 @@ void AsianOption<Average, FixedStrike>::print(std::ostream& os) const
 
 
 template<class Average>
-AsianOption<Average, FloatingStrike>::AsianOption(OptionNature* nature, int maturity, int obsFreq)
+AsianOption<Average, FloatingStrike>::AsianOption(OptionNature* nature, size_t maturity, size_t obsFreq)
     : IAsianOption(nature, maturity, obsFreq)
 {
 }

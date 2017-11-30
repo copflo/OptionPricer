@@ -8,7 +8,7 @@ class AssetOrNothingOption
     : public DigitalOption
 {
 public:
-            AssetOrNothingOption (OptionNature* nature, int maturity, double strike);
+            AssetOrNothingOption (OptionNature* nature, size_t maturity, double strike);
     virtual ~AssetOrNothingOption();
 
     virtual std::string style()             const;

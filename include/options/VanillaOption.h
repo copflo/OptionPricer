@@ -8,7 +8,7 @@ class VanillaOption
     : public PathIndependentOption
 {
 public:
-            VanillaOption (OptionNature* nature, int maturity, double strike);
+            VanillaOption (OptionNature* nature, size_t maturity, double strike);
     virtual ~VanillaOption();
 
     virtual double payoff(double spot) const;

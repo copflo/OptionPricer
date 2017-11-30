@@ -8,7 +8,7 @@ class EuropeanOption
     : public VanillaOption
 {
 public:
-            EuropeanOption(OptionNature* nature, int maturity, double strike);
+            EuropeanOption(OptionNature* nature, size_t maturity, double strike);
     virtual ~EuropeanOption();
 
     virtual std::string style() const;

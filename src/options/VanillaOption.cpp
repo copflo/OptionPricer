@@ -1,6 +1,6 @@
 #include "VanillaOption.h"
 
-VanillaOption::VanillaOption(OptionNature* nature, int maturity, double strike)
+VanillaOption::VanillaOption(OptionNature* nature, size_t maturity, double strike)
     : PathIndependentOption(nature, maturity, strike)
 {
 }

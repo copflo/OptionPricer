@@ -8,7 +8,7 @@ class DigitalOption
     : public PathIndependentOption
 {
 public:
-            DigitalOption (OptionNature* nature, int maturity, double strike);
+            DigitalOption (OptionNature* nature, size_t maturity, double strike);
     virtual ~DigitalOption();
 
     bool successfulBet(double spot) const;

@@ -12,19 +12,19 @@
 class Option
 {
 public:
-            Option (OptionNature* nature, int maturity);
+            Option (OptionNature* nature, size_t maturity);
     virtual ~Option();
 
-    bool isCall  () const;
-    bool isPut   () const;
-    int  maturity() const;
+    bool    isCall  () const;
+    bool    isPut   () const;
+    size_t  maturity() const;
 
     virtual void        print(std::ostream& os) const;
     virtual std::string style()                 const = 0;
 
 protected:
     std::unique_ptr<OptionNature> _nature;
-    int                           _maturity;
+    size_t                        _maturity;
 };
 
 std::ostream& operator<<(std::ostream& os, const Option& option);

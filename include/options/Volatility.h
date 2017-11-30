@@ -7,7 +7,7 @@
 class Volatility
 {
 public:
-    Volatility (double value, int = 252);
+    Volatility (double value, size_t = 252);
     ~Volatility();
 
     double     value     ()           const;

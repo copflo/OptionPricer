@@ -8,7 +8,7 @@ class CashOrNothingOption
     : public DigitalOption
 {
 public:
-            CashOrNothingOption (OptionNature* nature, int maturity, double strike, double rebate);
+            CashOrNothingOption (OptionNature* nature, size_t maturity, double strike, double rebate);
     virtual ~CashOrNothingOption();
 
             double      rebate()                 const;

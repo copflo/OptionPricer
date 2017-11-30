@@ -1,7 +1,7 @@
 #include "PathIndependentOption.h"
 
 
-PathIndependentOption::PathIndependentOption(OptionNature* nature, int maturity, double strike)
+PathIndependentOption::PathIndependentOption(OptionNature* nature, size_t maturity, double strike)
     : Option(nature, maturity)
     , FixedStrike(strike)
 {

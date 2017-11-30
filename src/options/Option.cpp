@@ -3,7 +3,7 @@
 #include "Option.h"
 
 
-Option::Option(OptionNature* nature, int maturity)
+Option::Option(OptionNature* nature, size_t maturity)
     : _nature(nature)
     , _maturity(maturity)
 {
@@ -23,7 +23,7 @@ bool Option::isPut() const
     return _nature->isPut();
 }
 
-int Option::maturity() const
+size_t Option::maturity() const
 {
     return _maturity;
 }
