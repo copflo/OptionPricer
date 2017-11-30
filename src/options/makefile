@@ -11,7 +11,6 @@ INC_PATH := ../../include/options
 HEADERS := $(wildcard $(INC_PATH)/*.h)
 SOURCES := $(wildcard *.cpp)
 OBJ := $(addprefix obj/,$(SOURCES:.cpp=.o))
-
 LIB := $(LIBDIR)/libOptions$(DLLEXT)
 
 
@@ -21,8 +20,8 @@ all: $(LIB)
 $(LIB): $(HEADERS) $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ -shared -fPIC -pthread
 
-obj/%.o: %.cpp obj
+obj/%.o: %.cpp | obj
 	$(CXX) $(CXXFLAGS) -c $< -o $@ -fPIC -I$(INC_PATH)
 
 obj:
-	mkdir obj
+	mkdir -p $@

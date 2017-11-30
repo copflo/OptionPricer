@@ -53,16 +53,19 @@ LIB_OPTIONS := $(LIBDIR)/libOptions$(DLLEXT)
 all: $(CONSOLEAPP) $(TEST_OPTIONS)
 
 $(CONSOLEAPP): $(LIB_OPTIONS)
-	make -C console-application all
+	make -C console-application
 
 $(TEST_OPTIONS): $(LIB_OPTIONS)
-	make -C test/test-options all
+	make -C test/test-options
 
-$(LIB_OPTIONS):
-	make -C src/options all
+$(LIB_OPTIONS): bin
+	make -C src/options
+
+bin:
+	mkdir -p $@
 
 clean:
 	$(RM) **/obj/*.o
 
 mrproper: clean
-	$(RM) $(CONSOLEAPP) $(LIB_OPTIONS)
+	$(RM) $(CONSOLEAPP) $(TEST_OPTIONS) $(LIB_OPTIONS)
