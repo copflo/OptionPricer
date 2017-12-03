@@ -17,5 +17,5 @@ EXE := $(TARGETDIR)/consoleapp$(EXEEXT)
 #règles
 all: $(EXE)
 
-$(EXE): main.cpp $(TARGETDIR)
+$(EXE): main.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@ -I$(INC_PATH) -L$(LIBDIR) -lOptions -pthread
