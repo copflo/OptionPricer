@@ -31,7 +31,7 @@ OptionFactory::OptionFactory(QWidget* parent)
     _comboBox->addItem(QIcon("../icons/barrier.jpg"), BARRIER);
     _comboBox->addItem(QIcon("../icons/cash-or-nothing.png"), CASH_OR_NOTHING);
     _comboBox->addItem(QIcon("../icons/european.png"), EUROPEAN);
-    _comboBox->addItem(LOOKBACK);
+    _comboBox->addItem(QIcon("../icons/lookback.jpg"), LOOKBACK);
 
     QStackedWidget* stack = new QStackedWidget;
     stack->addWidget(_american);

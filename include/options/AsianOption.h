@@ -44,7 +44,7 @@ protected:
 
 
 template<class Average>
-AsianOption<Average, FixedStrike>::AsianOption(OptionNature* nature, int maturity, int obsFreq, double strike)
+AsianOption<Average, FixedStrike>::AsianOption(OptionNature* nature, size_t maturity, size_t obsFreq, double strike)
     : IAsianOption(nature, maturity, obsFreq)
     , FixedStrike(strike)
 {
