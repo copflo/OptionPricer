@@ -1,10 +1,10 @@
 #include <QFormLayout>
 #include <QLabel>
 
-#include "CoxRossRubinsteinFactory.h"
+#include "BinomialTreeFactory.h"
 
 
-CoxRossRubinsteinFactory::CoxRossRubinsteinFactory(QWidget* parent)
+BinomialTreeFactory::BinomialTreeFactory(QWidget* parent)
     : QWidget(parent)
     , _nbSteps(new QSpinBox)
     , _increase(new QDoubleSpinBox)
@@ -18,16 +18,16 @@ CoxRossRubinsteinFactory::CoxRossRubinsteinFactory(QWidget* parent)
     form->addRow("Decrease", buildParameterLayout(_decrease));
 }
 
-CoxRossRubinsteinFactory::~CoxRossRubinsteinFactory()
+BinomialTreeFactory::~BinomialTreeFactory()
 {
 }
 
-CoxRossRubinstein* CoxRossRubinsteinFactory::buildModel() const
+BinomialTree* BinomialTreeFactory::buildModel() const
 {
-    return new CoxRossRubinstein(_increase->value() / 100., _decrease->value() / 100., _nbSteps->value());
+    return new BinomialTree(_increase->value() / 100., _decrease->value() / 100., _nbSteps->value());
 }
 
-QLayout* CoxRossRubinsteinFactory::buildParameterLayout(QDoubleSpinBox* widget)
+QLayout* BinomialTreeFactory::buildParameterLayout(QDoubleSpinBox* widget)
 {
     QBoxLayout* layout = new QHBoxLayout;
     widget->setRange(0.0, 120.);

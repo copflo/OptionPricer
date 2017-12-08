@@ -6,7 +6,7 @@
 
 #include "BlackScholesFactory.h"
 #include "BlackScholesMonteCarloFactory.h"
-#include "CoxRossRubinsteinFactory.h"
+#include "BinomialTreeFactory.h"
 
 
 class ModelFactory 
@@ -17,7 +17,7 @@ class ModelFactory
 public:
     static const QString BLACK_SCHOLES;
     static const QString BLACK_SCHOLES_MC;
-    static const QString COX_ROSS_RUBINSTEIN;
+    static const QString BINOMIAL_TREE;
 
 public:
             ModelFactory (QWidget* parent = nullptr);
@@ -38,7 +38,7 @@ signals:
 
 private:
     BlackScholesFactory*           _bs;
-    CoxRossRubinsteinFactory*      _crr;
+    BinomialTreeFactory*      _crr;
     BlackScholesMonteCarloFactory* _bsMC;
     QComboBox*                     _comboBox;
     QStackedWidget*                 _stack;

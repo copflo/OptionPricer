@@ -26,15 +26,15 @@ private:
 
 private:
     MarketWidget*  _market;
-    OptionFactory* _option;
-    ModelFactory*  _model;
+    OptionFactory* _optionFactory;
+    ModelFactory*  _modelFactory;
     UnderlyingWidget* _underlying;
 
 private:
     const std::map<std::pair<QString, QString>, std::function<double()>> _price{
 
-        { { OptionFactory::AMERICAN, ModelFactory::COX_ROSS_RUBINSTEIN }, 
-            std::bind(&OptionWindow::price<AmericanOption, CoxRossRubinstein>, this) },
+        { { OptionFactory::AMERICAN, ModelFactory::BINOMIAL_TREE },
+            std::bind(&OptionWindow::price<AmericanOption, BinomialTree>, this) },
 
         { { OptionFactory::ASIAN, ModelFactory::ModelFactory::BLACK_SCHOLES_MC },
             std::bind(&OptionWindow::price<IAsianOption, BlackScholesMonteCarlo>, this) },
@@ -60,8 +60,8 @@ private:
         { { OptionFactory::EUROPEAN, ModelFactory::BLACK_SCHOLES_MC },
             std::bind(&OptionWindow::price<EuropeanOption, BlackScholesMonteCarlo>, this) },
 
-        { { OptionFactory::EUROPEAN, ModelFactory::COX_ROSS_RUBINSTEIN },
-            std::bind(&OptionWindow::price<EuropeanOption, CoxRossRubinstein>, this) },
+        { { OptionFactory::EUROPEAN, ModelFactory::BINOMIAL_TREE },
+            std::bind(&OptionWindow::price<EuropeanOption, BinomialTree>, this) },
 
         { { OptionFactory::LOOKBACK, ModelFactory::BLACK_SCHOLES_MC },
             std::bind(&OptionWindow::price<ILookbackOption, BlackScholesMonteCarlo>, this) }
@@ -72,8 +72,8 @@ private:
 template<typename OptionStyle, typename Model>
 double OptionWindow::price() const
 {
-    std::unique_ptr<OptionStyle> option(_option->buildOption<OptionStyle>());
-    std::unique_ptr<Model> model(_model->buildModel<Model>());
+    std::unique_ptr<OptionStyle> option(_optionFactory->buildOption<OptionStyle>());
+    std::unique_ptr<Model> model(_modelFactory->buildModel<Model>());
     return model->price(_market->riskfreeRate(), _market->currentSpot(), *option);
 }
 

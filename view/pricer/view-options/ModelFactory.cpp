@@ -6,29 +6,28 @@
 
 const QString ModelFactory::BLACK_SCHOLES = "Black Scholes";
 const QString ModelFactory::BLACK_SCHOLES_MC = "Black Scholes - Monte Carlo";
-const QString ModelFactory::COX_ROSS_RUBINSTEIN = "Cox Ross Rubinstein";
+const QString ModelFactory::BINOMIAL_TREE = "Binomial Tree";
 
 
 ModelFactory::ModelFactory(QWidget* parent)
     : QWidget(parent)
     , _bs(new BlackScholesFactory)
-    , _crr(new CoxRossRubinsteinFactory)
+    , _crr(new BinomialTreeFactory)
     , _bsMC(new BlackScholesMonteCarloFactory)
     , _comboBox(new QComboBox)
     , _stack(new QStackedWidget)
-
     , _modelMap{
-        { OptionFactory::AMERICAN,         { COX_ROSS_RUBINSTEIN } },
+        { OptionFactory::AMERICAN,         { BINOMIAL_TREE } },
         { OptionFactory::ASSET_OR_NOTHING, { BLACK_SCHOLES, BLACK_SCHOLES_MC } },
         { OptionFactory::CASH_OR_NOTHING,  { BLACK_SCHOLES, BLACK_SCHOLES_MC } },
-        { OptionFactory::EUROPEAN,         { BLACK_SCHOLES, BLACK_SCHOLES_MC, COX_ROSS_RUBINSTEIN } },
+        { OptionFactory::EUROPEAN,         { BLACK_SCHOLES, BLACK_SCHOLES_MC, BINOMIAL_TREE } },
         { OptionFactory::ASIAN,            { BLACK_SCHOLES_MC } },
         { OptionFactory::BARRIER,          { BLACK_SCHOLES_MC } },
         { OptionFactory::LOOKBACK,         { BLACK_SCHOLES_MC } }
       }
     , _widgetMap{
         { ModelFactory::BLACK_SCHOLES, _bs },
-        { ModelFactory::COX_ROSS_RUBINSTEIN, _crr },
+        { ModelFactory::BINOMIAL_TREE, _crr },
         { ModelFactory::BLACK_SCHOLES_MC, _bsMC }
       }
 {
@@ -64,7 +63,7 @@ BlackScholes* ModelFactory::buildModel<BlackScholes>() const
 }
 
 template<>
-CoxRossRubinstein* ModelFactory::buildModel<CoxRossRubinstein>() const
+BinomialTree* ModelFactory::buildModel<BinomialTree>() const
 {
     return _crr->buildModel();
 }

@@ -45,7 +45,6 @@ SOURCES += \
     view-options/BlackScholesFactory.cpp \
     view-options/BlackScholesMonteCarloFactory.cpp \
     view-options/CashOrNothingOptionFactory.cpp \
-    view-options/CoxRossRubinsteinFactory.cpp \
     view-options/EuropeanOptionFactory.cpp \
     view-options/FrameContainer.cpp \
     view-options/IAsianOptionFactory.cpp \
@@ -62,7 +61,8 @@ SOURCES += \
     view-options/strikewidget.cpp \
     view-options/UnderlyingWidget.cpp \
     view-options/volatilitywidget.cpp \
-    main.cpp
+    main.cpp \
+    view-options/BinomialTreeFactory.cpp
 
 HEADERS += \
     view-options/AmericanOptionFactory.h \
@@ -71,7 +71,6 @@ HEADERS += \
     view-options/BlackScholesFactory.h \
     view-options/BlackScholesMonteCarloFactory.h \
     view-options/CashOrNothingOptionFactory.h \
-    view-options/CoxRossRubinsteinFactory.h \
     view-options/EuropeanOptionFactory.h \
     view-options/FrameContainer.h \
     view-options/IAsianOptionFactory.h \
@@ -87,7 +86,8 @@ HEADERS += \
     view-options/pricerview.h \
     view-options/strikewidget.h \
     view-options/UnderlyingWidget.h \
-    view-options/volatilitywidget.h
+    view-options/volatilitywidget.h \
+    view-options/BinomialTreeFactory.h
 
 unix: LIBS += -L../../lib/ -lOptions
 windows: LIBS += -L../../bin -lOptions
