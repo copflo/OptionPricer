@@ -1,9 +1,8 @@
 #ifndef PATHINDEPENDENTOPTIONWIDGET_H
 #define PATHINDEPENDENTOPTIONWIDGET_H
 
-#include <QDoubleSpinBox>
-
 #include "BaseOptionWidget.h"
+#include "strikewidget.h"
 
 
 class PathIndependentOptionWidget
@@ -15,7 +14,7 @@ public:
     double getStrike() const;
 
 private:
-    QDoubleSpinBox* _strike;
+    StrikeWidget* _strike;
 };
 
 

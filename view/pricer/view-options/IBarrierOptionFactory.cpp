@@ -8,14 +8,12 @@ IBarrierOptionFactory::IBarrierOptionFactory(QWidget* parent)
     , _down   (new QRadioButton("Down"))
     , _in     (new QRadioButton("In"))
     , _out    (new QRadioButton("Out"))
-    , _strike (new QDoubleSpinBox)
+    , _strike (new StrikeWidget)
     , _barrier(new QDoubleSpinBox)
 {
     _layout->addRow(buildGroupBox("Direction", _up, _down));
     _layout->addRow(buildGroupBox("Knock", _in, _out));
 
-    _strike->setRange(0.0, 900.);
-    _strike->setValue(52.);
     _layout->addRow("Strike", _strike);
 
     _barrier->setRange(0.0, 900.);

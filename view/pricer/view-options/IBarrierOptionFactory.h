@@ -6,6 +6,7 @@
 
 #include "options/BarrierOption.h"
 
+#include "strikewidget.h"
 #include "pathdependentoptionwidget.h"
 
 
@@ -43,7 +44,7 @@ private:
     QRadioButton* _in;
     QRadioButton* _out;
 
-    QDoubleSpinBox* _strike;
+    StrikeWidget*   _strike;
     QDoubleSpinBox* _barrier;                                                                 
 
 private:
@@ -59,7 +60,7 @@ private:
 template<typename T>
 IBarrierOption* IBarrierOptionFactory::buildOptionStyle() const
 {
-    return new T(optionNature(), maturity(), observationFrequency(), _strike->value(), _barrier->value());
+    return new T(optionNature(), maturity(), observationFrequency(), _strike->strike(), _barrier->value());
 }
 
 

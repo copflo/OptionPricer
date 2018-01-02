@@ -7,8 +7,9 @@ endif
 
 
 # définition des variables
-INC_PATH := ../../include/options
-HEADERS := $(wildcard $(INC_PATH)/*.h)
+INCLUDE := ../../include
+INCLUDE_OPT := $(INCLUDE)/options
+HEADERS := $(wildcard $(INCLUDE_OPT)/*.h)
 SOURCES := $(wildcard *.cpp)
 OBJ := $(addprefix obj/,$(SOURCES:.cpp=.o))
 LIB := $(LIBDIR)/libOptions$(DLLEXT)
@@ -21,7 +22,7 @@ $(LIB): $(HEADERS) $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ -shared -fPIC -pthread
 
 obj/%.o: %.cpp | obj
-	$(CXX) $(CXXFLAGS) -c $< -o $@ -fPIC -I$(INC_PATH)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -fPIC -I$(INCLUDE) -I$(INCLUDE_OPT)
 
 obj:
 	mkdir -p $@

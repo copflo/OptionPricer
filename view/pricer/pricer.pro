@@ -10,13 +10,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
 
-CONFIG(debug, debug|release) {       # differencier les differents modes de compilation
-    DESTDIR = build/debug            # repertoire ou placer l'executable
-    TARGET = pricer-d                # nom du programme, je rajoute souvent -d pour distinguer le debug du release
+CONFIG(debug, debug|release) {       # différencier les differents modes de compilation
+    DESTDIR = build/debug            # répertoire où placer l'executable
+    TARGET = pricerd                 # nom du programme, d pour distinguer le debug du release
     OBJECTS_DIR = build/debug/.obj   # on place les .o ici en debug
-    MOC_DIR = build/debug/moc        # les.moc
-    RCC_DIR = build/debug/rcc        # les .rcc
-    UI_DIR = build/debug/ui          # les .ui
+    MOC_DIR = build/debug/moc        # .moc
+    RCC_DIR = build/debug/rcc        # .rcc
+    UI_DIR = build/debug/ui          # .ui
 } else {
     DESTDIR = ../../bin              # repertoire ou placer l'executable
     TARGET = pricer                  # ici c'est en release
@@ -61,8 +61,10 @@ SOURCES += \
     view-options/strikewidget.cpp \
     view-options/UnderlyingWidget.cpp \
     view-options/volatilitywidget.cpp \
+    view-options/BinomialTreeFactory.cpp \
+    view-options/optionnaturewidget.cpp \
     main.cpp \
-    view-options/BinomialTreeFactory.cpp
+    view-options/maturitywidget.cpp
 
 HEADERS += \
     view-options/AmericanOptionFactory.h \
@@ -87,9 +89,11 @@ HEADERS += \
     view-options/strikewidget.h \
     view-options/UnderlyingWidget.h \
     view-options/volatilitywidget.h \
-    view-options/BinomialTreeFactory.h
+    view-options/BinomialTreeFactory.h \
+    view-options/optionnaturewidget.h \
+    view-options/maturitywidget.h
 
-unix: LIBS += -L../../lib/ -lOptions
+unix: LIBS += -L../../lib -lOptions
 windows: LIBS += -L../../bin -lOptions
 
 INCLUDEPATH += ../../include

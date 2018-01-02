@@ -13,7 +13,7 @@ public:
     OptionalStrikeWidget(QWidget* parent = nullptr);
 
     bool isFloating() const;
-    virtual double getStrike() const;
+    virtual double strike() const;
 
 private:
     QCheckBox* _floating;

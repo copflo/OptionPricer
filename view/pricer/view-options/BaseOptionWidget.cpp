@@ -11,46 +11,19 @@
 BaseOptionWidget::BaseOptionWidget(QWidget *parent)
     : QWidget(parent)
     , _layout  (new QFormLayout(this))
-    , _call    (new QRadioButton("Call"))
-    , _maturity(new QSpinBox)
+    , _nature  (new OptionNatureWidget)
+    , _maturity(new MaturityWidget)
 {
-    _layout->addRow(buildOptionNatureWidget());
-    _layout->addRow("Maturity", buildMaturityWidget());
+    _layout->addRow(_nature);
+    _layout->addRow("Maturity", _maturity);
 }
 
 OptionNature* BaseOptionWidget::optionNature() const
 {
-    if(_call->isChecked()) {
-        return new Call;
-    }
-    return new Put;
-    //return _call->isChecked()? new Call : new Put;
+    return _nature->optionNature();
 }
 
-int BaseOptionWidget::maturity() const
+size_t BaseOptionWidget::maturity() const
 {
-    return _maturity->value();
-}
-
-QWidget* BaseOptionWidget::buildOptionNatureWidget()
-{
-    QGroupBox* nature = new QGroupBox("Nature");
-    QBoxLayout* natureLayout = new QHBoxLayout(nature);
-    _call->setChecked(true);
-
-    natureLayout->addWidget(_call);
-    natureLayout->addWidget(new QRadioButton("Put"));
-    nature->setLayout(natureLayout);
-    return nature;
-}
-
-QLayout* BaseOptionWidget::buildMaturityWidget()
-{
-    _maturity->setRange(1, 1000);
-    _maturity->setValue(90);
-
-    QBoxLayout* layout = new QHBoxLayout(this);
-    layout->addWidget(_maturity);
-    layout->addWidget(new QLabel("day(s)"));
-    return layout;
+    return _maturity->maturity();
 }

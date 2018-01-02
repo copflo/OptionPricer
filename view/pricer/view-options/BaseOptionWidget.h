@@ -2,10 +2,11 @@
 #define OPTIONWIDGET_H
 
 #include <QFormLayout>
-#include <QRadioButton>
-#include <QSpinBox>
 
 #include "options/OptionNature.h"
+
+#include "maturitywidget.h"
+#include "optionnaturewidget.h"
 
 
 class BaseOptionWidget
@@ -15,18 +16,14 @@ public:
     BaseOptionWidget(QWidget* parent = nullptr);
 
     OptionNature* optionNature() const;
-    int           maturity    () const;
-
-private:
-    QWidget* buildOptionNatureWidget();
-    QLayout* buildMaturityWidget();
+    size_t        maturity    () const;
 
 protected:
     QFormLayout* _layout;
 
 private:
-    QRadioButton* _call;
-    QSpinBox*     _maturity;
+    OptionNatureWidget* _nature;
+    MaturityWidget*     _maturity;
 };
 
 

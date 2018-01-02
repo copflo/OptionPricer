@@ -2,17 +2,30 @@
 #define STRIKEWIDGET_H
 
 #include <QDoubleSpinBox>
+#include <QHBoxLayout>
 
 
 class StrikeWidget
     : public QWidget
 {
-public:
-    StrikeWidget(QWidget *parent = 0);
+    Q_OBJECT
 
-    virtual double getStrike() const = 0;
+private:
+    static double _bufferValue;
+
+public:
+    StrikeWidget(QWidget* parent = nullptr);
+
+    virtual double strike() const;
 
 protected:
+    virtual void showEvent(QShowEvent* event);
+
+private slots:
+    void updateBufferValue(double value);
+
+protected:
+    QBoxLayout* _layout;
     QDoubleSpinBox* _strike;
 };
 

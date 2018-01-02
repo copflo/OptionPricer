@@ -20,5 +20,5 @@ ILookbackOption* LookbackOptionFactory::buildOption() const
         return new LookbackOption<FloatingStrike>(optionNature(), maturity(), observationFrequency());
     }
 
-    return new LookbackOption<FixedStrike>(optionNature(), maturity(), observationFrequency(), _strike->getStrike());
+    return new LookbackOption<FixedStrike>(optionNature(), maturity(), observationFrequency(), _strike->strike());
 }

@@ -38,7 +38,7 @@ IAsianOption* IAsianOptionFactory::buildOption() const
         return new AsianOption<ArithmeticAverage, FixedStrike>(optionNature(),
                                                                maturity(),
                                                                observationFrequency(),
-                                                               _strike->getStrike());
+                                                               _strike->strike());
     }
 
     if (_strike->isFloating()) {
@@ -50,5 +50,5 @@ IAsianOption* IAsianOptionFactory::buildOption() const
     return new AsianOption<GeometricAverage, FixedStrike>(optionNature(),
                                                           maturity(),
                                                           observationFrequency(),
-                                                          _strike->getStrike());
+                                                          _strike->strike());
 }
