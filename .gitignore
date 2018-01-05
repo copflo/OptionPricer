@@ -1,15 +1,11 @@
-# object files
-**/obj/*
-
-
-# bin and lib directories
-lib/
+# build files
 bin/
+build/
 
 # images
 icons/
 
-# third libraries
+# third-party libraries
 gmock/
 gtest/
 mysql/
