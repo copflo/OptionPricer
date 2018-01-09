@@ -7,4 +7,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 project(Hedger)
 add_subdirectory(src/options)
+add_subdirectory(test/test-options)
 add_subdirectory(console-application)
+add_subdirectory(view/pricer)

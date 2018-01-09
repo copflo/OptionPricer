@@ -1,6 +1,5 @@
 # build files
-bin/
-build/
+build*/
 
 # images
 icons/
@@ -14,10 +13,6 @@ market-data/
 Eigen/
 
 # Qt files
-view/build-pricer-Desktop_Qt_5_9_1_GCC_64bit-Release/
-view/build-pricer-Desktop_Qt_5_9_1_GCC_64bit-Debug/
-view/build-pricer-Desktop_Qt_5_9_3_MinGW_32bit-Debug/
-view/build-pricer-Desktop_Qt_5_9_3_MinGW_32bit-Release/
-view/pricer/pricer.pro.user
+view/pricer/CMakeLists.txt.user
 
 ildcard
