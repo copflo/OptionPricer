@@ -65,5 +65,5 @@ set(SRC view-options/AmericanOptionFactory.cpp
 # Tell CMake to create the executable
 add_executable(pricer WIN32 main.cpp ${SRC})
 include_directories(../../include)
-# Use the Widgets and Core modules from Qt5 with options lib.
+# Use the Widgets module from Qt5 with options lib.
 target_link_libraries(pricer Qt5::Widgets options)
