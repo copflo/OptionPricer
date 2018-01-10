@@ -5,12 +5,12 @@
 
 bool Put::isCall() const
 {
-    return true;
+    return false;
 }
 
 bool Put::isPut() const
 {
-    return false;
+    return true;
 }
 
 double Put::payoff(double spot, double strike) const
