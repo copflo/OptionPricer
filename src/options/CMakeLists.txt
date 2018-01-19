@@ -8,8 +8,10 @@ set(HEADERS ../../include/options/AccuracyConfidence.h
             ../../include/options/BarrierOption.h
             ../../include/options/BinomialTree.h
             ../../include/options/BlackScholes.h
+            ../../include/options/BlackScholesGen.h
             ../../include/options/BlackScholesMontecarlo.h
             ../../include/options/BlackScholesSpot.h
+            ../../include/options/BrownianMotionGen.h
             ../../include/options/Call.h
             ../../include/options/CashOrNothingOption.h
             ../../include/options/DigitalOption.h
@@ -51,8 +53,10 @@ set(SRC AccuracyConfidence.cpp
         AssetOrNothingOption.cpp
         BinomialTree.cpp
         BlackScholes.cpp
+        BlackScholesGen.cpp
         BlackScholesMontecarlo.cpp
         BlackScholesSpot.cpp
+        BrownianMotionGen.cpp
         Call.cpp
         CashOrNothingOption.cpp
         DigitalOption.cpp
