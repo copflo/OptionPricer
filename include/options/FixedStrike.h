@@ -8,7 +8,7 @@ public:
             FixedStrike(double strike);
     virtual ~FixedStrike();
 
-    double getStrike() const;
+    double strike() const;
 
 protected:
     double _strike;

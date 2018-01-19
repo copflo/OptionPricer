@@ -3,24 +3,23 @@
 
 #include <vector>
 
-#include "BlackScholesSpot.h"
+#include "BlackScholesGen.h"
+#include "BrownianMotionGen.h"
 
 
 class SpotPathGenerator
+    : public BlackScholesGen
 {
 public:
-    SpotPathGenerator(size_t            nbObs,
-                      double            risklessRate,
-                      const Volatility& vol, 
-                      int               obsPeriod);
-
+    SpotPathGenerator (double r, const Volatility& vol, size_t nbObs, size_t obsPeriod);
+    SpotPathGenerator (double r, const Volatility& vol, const std::vector<double>& indices);
+    SpotPathGenerator (double r, const Volatility& vol, std::vector<double>&& indices);
     ~SpotPathGenerator();
 
-    std::vector<double> operator()(double currentSpot);
+    std::vector<double> operator()(double s0);
 
 private:
-    size_t           _nbObs;
-    BlackScholesSpot _spot;
+    BrownianMotionGen _br;
 };
 
 

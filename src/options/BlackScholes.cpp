@@ -13,103 +13,98 @@ BlackScholes::~BlackScholes()
 {
 }
 
-double BlackScholes::price(double risklessRate, double spot, const EuropeanOption& option) const
+double BlackScholes::price(double r, double spot, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const auto ds = d1_d2(risklessRate, spot, option.getStrike(), T);
+    const auto ds = d1_d2(r, spot, option.strike(), T);
     const double d1 = ds.first;
     const double d2 = ds.second;
 
     if (option.isCall()) {
-        return (spot * std_normal_cdf(d1)) - (option.getStrike() * exp(-risklessRate * T) * std_normal_cdf(d2));
+        return (spot * std_normal_cdf(d1)) - (option.strike() * exp(-r * T) * std_normal_cdf(d2));
     }
-
-    return (option.getStrike() * exp(-risklessRate * T) * std_normal_cdf(-d2)) - (spot * std_normal_cdf(-d1));
+    return (option.strike() * exp(-r * T) * std_normal_cdf(-d2)) - (spot * std_normal_cdf(-d1));
 }
 
-double BlackScholes::price(double risklessRate, double currentSpot, const CashOrNothingOption& option) const
+double BlackScholes::price(double r, double s0, const CashOrNothingOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const auto d2 = BlackScholes::d2(risklessRate, currentSpot, option.getStrike(), T);
+    const auto d2 = BlackScholes::d2(r, s0, option.strike(), T);
 
     if (option.isCall()) {
-        return exp(-risklessRate * T) * std_normal_cdf(d2) * option.rebate();
+        return exp(-r * T) * std_normal_cdf(d2) * option.rebate();
     }
-
-    return exp(-risklessRate * T) * std_normal_cdf(-d2) * option.rebate();
+    return exp(-r * T) * std_normal_cdf(-d2) * option.rebate();
 }
 
-double BlackScholes::price(double risklessRate, double currentSpot, const AssetOrNothingOption& option) const
+double BlackScholes::price(double r, double s0, const AssetOrNothingOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const double d1 = BlackScholes::d1(risklessRate, currentSpot, option.getStrike(), T);
+    const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
 
     if (option.isCall()) {
-        return currentSpot * std_normal_cdf(d1);
+        return s0 * std_normal_cdf(d1);
     }
-
-    return currentSpot * std_normal_cdf(-d1);;
+    return s0 * std_normal_cdf(-d1);;
 }
 
-double BlackScholes::delta(double risklessRate, double currentSpot, const EuropeanOption& option) const
+double BlackScholes::delta(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const double d1 = BlackScholes::d1(risklessRate, currentSpot, option.getStrike(), T);
+    const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
 
     if (option.isCall()) {
         return std_normal_cdf(d1);
     }
-
     return std_normal_cdf(d1) - 1.;
 }
 
-double BlackScholes::vega(double risklessRate, double currentSpot, const EuropeanOption& option) const
+double BlackScholes::vega(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const double d1 = BlackScholes::d1(risklessRate, currentSpot, option.getStrike(), T);
+    const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
 
-    return currentSpot * std_normal_pdf(d1) * sqrt(T);
+    return s0 * std_normal_pdf(d1) * sqrt(T);
 }
 
-double BlackScholes::theta(double risklessRate, double currentSpot, const EuropeanOption& option) const
+double BlackScholes::theta(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
 
-    const auto ds = d1_d2(risklessRate, currentSpot, option.getStrike(), T);
+    const auto ds = d1_d2(r, s0, option.strike(), T);
     const double d1 = ds.first;
     const double d2 = ds.second;
 
-    const double firstTerm = (currentSpot * std_normal_cdf(d1) * _vol.value()) / (2. * sqrt(T));
+    const double firstTerm = (s0 * std_normal_cdf(d1) * _vol.value()) / (2. * sqrt(T));
 
     if (option.isCall()) {
-        return -firstTerm - risklessRate * option.getStrike() * exp(-risklessRate * T) * std_normal_cdf(d2);
+        return -firstTerm - r * option.strike() * exp(-r * T) * std_normal_cdf(d2);
     }
-
-    return -firstTerm + risklessRate * option.getStrike() * exp(-risklessRate * T) * std_normal_cdf(-d2);
+    return -firstTerm + r * option.strike() * exp(-r * T) * std_normal_cdf(-d2);
 }
 
-double BlackScholes::rho(double risklessRate, double currentSpot, const EuropeanOption& option) const
+double BlackScholes::rho(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const double d2 = BlackScholes::d2(risklessRate, currentSpot, option.getStrike(), T);
+    const double d2 = BlackScholes::d2(r, s0, option.strike(), T);
 
     if (option.isCall()) {
-        return option.getStrike() * T * exp(-risklessRate * T) * std_normal_cdf(d2);
+        return option.strike() * T * exp(-r * T) * std_normal_cdf(d2);
     }
-
-    return - option.getStrike() * T * exp(-risklessRate * T) * std_normal_cdf(-d2);
+    return - option.strike() * T * exp(-r * T) * std_normal_cdf(-d2);
 }
 
-double BlackScholes::gamma(double risklessRate, double currentSpot, const EuropeanOption& option) const
+double BlackScholes::gamma(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const double d1 = BlackScholes::d1(risklessRate, currentSpot, option.getStrike(), T);
-    return  std_normal_pdf(d1)/ (currentSpot * _vol.value(option.maturity()));
+    const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
+    return  std_normal_pdf(d1)/ (s0 * _vol.value(option.maturity()));
 }
 
 double BlackScholes::d1(double r, double spot, double K, double T) const
 {
-    return (1. / (_vol.value() * sqrt(T)) * (log(spot / K) + (r + (pow(_vol.value(), 2) / 2)) * T));
+    const double sigma = _vol.value();
+    return (1. / (_vol.value() * sqrt(T)) * (log(spot / K) + (r + sigma * sigma / 2) * T));
 }
 
 double BlackScholes::d2(double r, double spot, double K, double T) const
@@ -119,8 +114,9 @@ double BlackScholes::d2(double r, double spot, double K, double T) const
 
 std::pair<double, double> BlackScholes::d1_d2(double r, double spot, double K, double T) const
 {
-    const double volOnMaturity = _vol.value() * sqrt(T);
-    const double d1 = (1. / volOnMaturity) * (log(spot / K) + (r + (pow(_vol.value(), 2) / 2)) * T);
+    const double sigma = _vol.value();
+    const double volOnMaturity = sigma * sqrt(T);
+    const double d1 = (1. / volOnMaturity) * (log(spot / K) + (r + sigma * sigma / 2) * T);
     const double d2 = d1 - volOnMaturity;
     return { d1, d2 };
 }

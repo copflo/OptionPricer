@@ -1,26 +1,23 @@
 #ifndef SpotRandomVariable_h
 #define SpotRandomVariable_h
 
+#include "BlackScholesGen.h"
 #include "GaussianRandomVariable.h"
 #include "Volatility.h"
 
 
 class BlackScholesSpot
+    : public BlackScholesGen
 {
 public:
     BlackScholesSpot (double riskfreeRate, int period, const Volatility& vol);
     ~BlackScholesSpot();
 
-    double            riskfreeRate()                const;
-    int               period      ()                const;
-    const Volatility& volatility  ()                const;
-    double            operator()  (double initSpot);
+    double operator()(double s0);
 
 private:
-    double     _riskfreeRate;
-    int        _period;
-    Volatility _vol;
-    GaussianRV _brownian;
+    double     _T;
+    GaussianRV _Z;
 };
 
 

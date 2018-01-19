@@ -9,7 +9,7 @@ FixedStrike::~FixedStrike()
 {
 }
 
-double FixedStrike::getStrike() const
+double FixedStrike::strike() const
 {
     return _strike;
 }

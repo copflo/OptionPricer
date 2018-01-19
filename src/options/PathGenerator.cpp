@@ -1,12 +1,23 @@
+#include <algorithm>
+
 #include "PathGenerator.h"
 
 
-SpotPathGenerator::SpotPathGenerator(size_t            nbObs,
-                                     double            risklessRate,
-                                     const Volatility& vol, 
-                                     int               obsPeriod)
-    : _nbObs(nbObs)
-    , _spot(risklessRate, obsPeriod, vol)
+SpotPathGenerator::SpotPathGenerator(double r, const Volatility& vol, size_t nbObs, size_t obsPeriod)
+    : BlackScholesGen(r, vol)
+    , _br(nbObs + 1, static_cast<double>(obsPeriod) / vol.period())
+{
+}
+
+SpotPathGenerator::SpotPathGenerator(double r, const Volatility& vol, const std::vector<double>& indices)
+    : BlackScholesGen(r, vol)
+    , _br(indices)
+{
+}
+
+SpotPathGenerator::SpotPathGenerator(double r, const Volatility& vol, std::vector<double>&& indices)
+    : BlackScholesGen(r, vol)
+    , _br(indices)
 {
 }
 
@@ -14,14 +25,14 @@ SpotPathGenerator::~SpotPathGenerator()
 {
 }
 
-std::vector<double> SpotPathGenerator::operator()(double currentSpot)
+std::vector<double> SpotPathGenerator::operator()(double s0)
 {
-    std::vector<double> path(_nbObs + 1);
-    path[0] = currentSpot;
-
-    for (size_t count = 1; count < _nbObs + 1; ++count) {
-        path[count] = _spot(path[count - 1]);
+    auto B = _br();
+    std::vector<double> path(B.size());
+    path[0] = s0;
+    for(size_t idx = 1; idx < B.size(); ++idx) {
+        const double T = _br.indices()[idx] - _br.indices()[0];
+        path[idx] = spot(s0, T, B[idx]);
     }
-
     return path;
 }

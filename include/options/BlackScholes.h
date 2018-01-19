@@ -16,29 +16,29 @@ public:
     BlackScholes (const Volatility& vol);
     ~BlackScholes();
 
-    double price(double risklessRate, double currentSpot, const EuropeanOption& option)       const;
-    double price(double risklessRate, double currentSpot, const CashOrNothingOption& option)  const;
-    double price(double risklessRate, double currentSpot, const AssetOrNothingOption& option) const;
+    double price(double r, double s0, const EuropeanOption& option)       const;
+    double price(double r, double s0, const CashOrNothingOption& option)  const;
+    double price(double r, double s0, const AssetOrNothingOption& option) const;
 
     template<class OptionStyle>
-    OptionSensitivity sensitivity(double risklessRate, double currentSpot, const OptionStyle& option) const
+    OptionSensitivity sensitivity(double r, double s0, const OptionStyle& option) const
     {
-        return OptionSensitivity(delta(risklessRate, currentSpot, option),
-                                 vega(risklessRate, currentSpot, option),
-                                 theta(risklessRate, currentSpot, option),
-                                 rho(risklessRate, currentSpot, option),
-                                 gamma(risklessRate, currentSpot, option));
+        return OptionSensitivity(delta(r, s0, option),
+                                 vega (r, s0, option),
+                                 theta(r, s0, option),
+                                 rho  (r, s0, option),
+                                 gamma(r, s0, option));
     }
 
-    double delta(double risklessRate, double currentSpot, const EuropeanOption& option) const;
+    double delta(double r, double s0, const EuropeanOption& option) const;
 
-    double vega(double risklessRate, double currentSpot, const EuropeanOption& option) const;
+    double vega(double r, double s0, const EuropeanOption& option) const;
 
-    double theta(double risklessRate, double currentSpot, const EuropeanOption& option) const;
+    double theta(double r, double s0, const EuropeanOption& option) const;
 
-    double rho(double risklessRate, double currentSpot, const EuropeanOption& option) const;
+    double rho(double r, double s0, const EuropeanOption& option) const;
 
-    double gamma(double risklessRate, double currentSpot, const EuropeanOption& option) const;
+    double gamma(double r, double s0, const EuropeanOption& option) const;
 
 private:
     Volatility _vol;

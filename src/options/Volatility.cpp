@@ -9,7 +9,7 @@ Volatility::Volatility(double value, size_t period)
     : _value(value)
     , _period(period)
 {
-    if ((0.0 < _value) == false) {
+    if (!(0.0 < _value)) {
         throw std::runtime_error("Volatility with null value");
     }
 }

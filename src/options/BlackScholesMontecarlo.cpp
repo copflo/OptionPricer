@@ -23,7 +23,7 @@ double BlackScholesMonteCarlo::price(double risklessRate, double currentSpot, co
 {
     const int observationPeriod = option.observationFrequency();
     const size_t nbObs = option.maturity() / observationPeriod;
-    SpotPathGenerator path(nbObs, risklessRate, _vol, observationPeriod);
+    SpotPathGenerator path(risklessRate, _vol, nbObs, observationPeriod);
     return runSimulation(path, option, risklessRate, currentSpot);
 }
 
