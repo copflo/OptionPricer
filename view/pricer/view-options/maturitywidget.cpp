@@ -3,7 +3,7 @@
 #include "maturitywidget.h"
 
 
-int MaturityWidget::_bufferValue = 90;
+int MaturityWidget::_bufferValue = 30;
 
 
 MaturityWidget::MaturityWidget(QWidget *parent)
