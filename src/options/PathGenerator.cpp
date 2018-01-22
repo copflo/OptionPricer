@@ -27,7 +27,7 @@ SpotPathGenerator::~SpotPathGenerator()
 
 std::vector<double> SpotPathGenerator::operator()(double s0)
 {
-    auto B = _br();
+    const auto B = _br();
     std::vector<double> path(B.size());
     path[0] = s0;
     for(size_t idx = 1; idx < B.size(); ++idx) {
