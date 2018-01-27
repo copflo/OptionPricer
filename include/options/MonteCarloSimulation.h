@@ -18,12 +18,13 @@ private:
   static double randomValue(std::function<double()> random, std::mutex& randMtx);
 
 public:
-    template<typename... StopConditions> MonteCarloSimulation(StopSimulation* condition, StopConditions... conditions);
+    template<typename... StopConditions>
+    MonteCarloSimulation (StopSimulation* condition, StopConditions... conditions);
     MonteCarloSimulation (std::vector<StopSimulation*>& stopConditions);
     ~MonteCarloSimulation();
 
-    std::pair<double, double> run  (std::function<double()> random) const;
-    void                      print(std::ostream& os)               const;
+    RunningStats run  (std::function<double()> random) const;
+    void         print(std::ostream& os)               const;
 
 private:
     MonteCarloSimulation(std::initializer_list<StopSimulation*> stopConditions);

@@ -23,7 +23,7 @@ MonteCarloSimulation::~MonteCarloSimulation()
 {
 }
 
-std::pair<double, double> MonteCarloSimulation::run(std::function<double()> random) const
+RunningStats MonteCarloSimulation::run(std::function<double()> random) const
 {
     RunningStats stats;
     std::mutex statsMtx, randMtx;
@@ -36,12 +36,10 @@ std::pair<double, double> MonteCarloSimulation::run(std::function<double()> rand
     for (size_t count = 0; count < nbThreads; ++count) {
         threads.emplace_back(task);
     }
-
     for (auto& thread : threads) {
         thread.join();
     }
-
-    return { stats.mean(), stats.stdDeviation() };
+    return stats;
 }
 
 void MonteCarloSimulation::print(std::ostream& os) const

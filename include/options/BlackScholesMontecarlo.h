@@ -2,6 +2,7 @@
 #define BlackScholesMonteCarlo_h
 
 #include <cmath>
+#include <tuple>
 
 #include "PathDependentOption.h"
 #include "PathIndependentOption.h"
@@ -18,12 +19,21 @@ public:
 
     virtual ~BlackScholesMonteCarlo();
 
-    double price(double risklessRate, double currentSpot, const PathIndependentOption& option) const;
-    double price(double risklessRate, double currentSpot, const PathDependentOption& option)   const;
-    void   print(std::ostream& os)                                                             const;
+	/* Returns the price of the option with the delta and the gamma for a path independent option
+	 * @param r the riskless rate
+	 * @param s0 the initial spot
+	 * @param option the option to price
+	 * @return the price, the delta, the gamma
+	 */
+	std::tuple<double, double, double> hedge(double r, double s0, const PathIndependentOption& option) const;
+
+    double price(double r, double s0, const PathIndependentOption& option) const;
+    double price(double r, double s0, const PathDependentOption& option)   const;
+    void   print(std::ostream& os)                                         const;
 
 private:
-    template <class Gen, class Opt> double runSimulation(Gen& generator, const Opt& option, double risklessRate, double currentSpot) const;
+    template <class Gen, class Opt>
+    double runSimulation(Gen& gen, const Opt& option, double r, double s0) const;
 
 private:
     Volatility _vol;
@@ -41,11 +51,11 @@ BlackScholesMonteCarlo::BlackScholesMonteCarlo(const Volatility& vol, StopSimula
 }
 
 template <class Gen, class Opt>
-double BlackScholesMonteCarlo::runSimulation(Gen& generator, const Opt& option, double risklessRate, double currentSpot) const
+double BlackScholesMonteCarlo::runSimulation(Gen& gen, const Opt& option, double r, double s0) const
 {
-    auto payoff = [&generator, &option, currentSpot]() { return option.payoff(generator(currentSpot)); };
+    auto payoff = [&gen, &option, s0]() { return option.payoff(gen(s0)); };
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-    return exp(-risklessRate * T) * _simulation.run(payoff).first;
+    return exp(-r * T) * _simulation.run(payoff).mean();
 }
 
 
