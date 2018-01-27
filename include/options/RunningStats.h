@@ -13,11 +13,12 @@ public:
     ~RunningStats();
 
     void    update           (double value);
-    double  mean             ()             const;
-    double  variance         ()             const;
-    double  stdDeviation     ()             const;
-    size_t  nbObservations   ()             const;
-    seconds timeOfComputation()             const;
+	
+    double  mean             () const;
+    double  variance         () const;
+    double  stdDeviation     () const;
+    size_t  nbObservations   () const;
+    seconds timeOfComputation() const;
 
 private:
     size_t _nbIter;

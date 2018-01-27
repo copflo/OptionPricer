@@ -19,9 +19,8 @@ void RunningStats::update(double value)
 {
     const double bufferMean = _mean;
     _mean = _mean + (value - _mean) / (++_nbIter);
-
     if (_nbIter > 1) {
-        _squareSumOfDiff = _squareSumOfDiff + (value - bufferMean) * (value - _mean);
+        _squareSumOfDiff += (value - bufferMean) * (value - _mean);
     }
 }
 
