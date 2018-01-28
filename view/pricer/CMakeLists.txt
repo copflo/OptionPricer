@@ -8,7 +8,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 # Find the QtWidgets library
-#set(CMAKE_PREFIX_PATH C:/Qt/5.9.3/mingw53_32/lib/cmake)
 find_package(Qt5Widgets)
 
 set(SRC view-options/AmericanOptionFactory.cpp
