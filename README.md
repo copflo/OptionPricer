@@ -31,6 +31,6 @@ In the command line, type:
 
 #### Makefile
 Just type:
-`̀̀``
+```
 >cmake path/to/source
-`̀̀``
+```
