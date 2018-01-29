@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.4.1)
 
 set(HEADERS ../../include/options/AccuracyConfidence.h
             ../../include/options/AmericanOption.h
@@ -16,7 +16,6 @@ set(HEADERS ../../include/options/AccuracyConfidence.h
             ../../include/options/CashOrNothingOption.h
             ../../include/options/DigitalOption.h
             ../../include/options/Down.h
-            ../../include/options/EulerExplicit.h
             ../../include/options/EuropeanOption.h
             ../../include/options/FixedStrike.h
             ../../include/options/FloatingStrike.h
@@ -62,7 +61,6 @@ set(SRC AccuracyConfidence.cpp
         DigitalOption.cpp
         Down.cpp
         EuropeanOption.cpp
-        FDM.cpp
         FixedStrike.cpp
         FloatingStrike.cpp
         GaussianRandomVariable.cpp

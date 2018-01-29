@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.4.1)
 
 add_executable(consoleapp main.cpp)
 include_directories(../include)
