@@ -8,6 +8,6 @@ set(CMAKE_EXE_LINKER_FLAGS "-pthread")
 
 project(Hedger)
 add_subdirectory(src/options)
-#add_subdirectory(test/test-options)
-add_subdirectory(console-application)
+#add_subdirectory(test)
+add_subdirectory(consoleapp)
 add_subdirectory(view/pricer)
