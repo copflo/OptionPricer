@@ -28,7 +28,7 @@ RunningStats MonteCarloSimulation::run(std::function<double()> random) const
     RunningStats stats;
     std::mutex statsMtx, randMtx;
 
-    const size_t nbThreads = 8;
+    const size_t nbThreads = 2;
     std::vector<std::thread> threads;
     threads.reserve(nbThreads);
     auto task = std::bind(&MonteCarloSimulation::runSimulation, this, std::ref(stats), random, std::ref(statsMtx), std::ref(randMtx));
