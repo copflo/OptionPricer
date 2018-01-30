@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
+project(liboptions)
+
 set(HEADERS ../../include/options/AccuracyConfidence.h
             ../../include/options/AmericanOption.h
             ../../include/options/ArithmeticAverage.h
