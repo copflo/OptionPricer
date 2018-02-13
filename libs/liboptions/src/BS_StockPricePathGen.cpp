@@ -1,31 +1,31 @@
 #include <algorithm>
 
-#include "PathGenerator.h"
+#include "BS_StockPricePathGen.h"
 
 
-SpotPathGenerator::SpotPathGenerator(double r, const Volatility& vol, size_t nbObs, size_t obsPeriod)
+BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, size_t nbObs, size_t obsPeriod)
     : BlackScholesGen(r, vol)
     , _br(nbObs + 1, static_cast<double>(obsPeriod) / vol.period())
 {
 }
 
-SpotPathGenerator::SpotPathGenerator(double r, const Volatility& vol, const std::vector<double>& indices)
+BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, const std::vector<double>& indices)
     : BlackScholesGen(r, vol)
     , _br(indices)
 {
 }
 
-SpotPathGenerator::SpotPathGenerator(double r, const Volatility& vol, std::vector<double>&& indices)
+BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, std::vector<double>&& indices)
     : BlackScholesGen(r, vol)
     , _br(indices)
 {
 }
 
-SpotPathGenerator::~SpotPathGenerator()
+BS_StockPricePathGen::~BS_StockPricePathGen()
 {
 }
 
-std::vector<double> SpotPathGenerator::operator()(double s0)
+std::vector<double> BS_StockPricePathGen::operator()(double s0)
 {
     const auto B = _br();
     std::vector<double> path(B.size());

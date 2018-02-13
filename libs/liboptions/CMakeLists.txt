@@ -12,8 +12,9 @@ set(HEADERS options/AccuracyConfidence.h
             options/BlackScholes.h
             options/BlackScholesGen.h
             options/BlackScholesMontecarlo.h
-            options/BlackScholesSpot.h
-            options/BrownianMotionGen.h
+            options/BS_StockPriceGen.h
+            options/BS_StockPricePathGen.h
+			options/BrownianMotionGen.h
             options/Call.h
             options/CashOrNothingOption.h
             options/DigitalOption.h
@@ -37,7 +38,6 @@ set(HEADERS options/AccuracyConfidence.h
             options/OptionNature.h
             options/OptionSensitivity.h
             options/PathDependentOption.h
-            options/PathGenerator.h
             options/PathIndependentOption.h
             options/Put.h
             options/RunningStats.h
@@ -56,7 +56,8 @@ set(SRC src/AccuracyConfidence.cpp
         src/BlackScholes.cpp
         src/BlackScholesGen.cpp
         src/BlackScholesMontecarlo.cpp
-        src/BlackScholesSpot.cpp
+        src/BS_StockPriceGen.cpp
+        src/BS_StockPricePathGen.cpp
         src/BrownianMotionGen.cpp
         src/Call.cpp
         src/CashOrNothingOption.cpp
@@ -79,7 +80,6 @@ set(SRC src/AccuracyConfidence.cpp
         src/Option.cpp
         src/OptionSensitivity.cpp
         src/PathDependentOption.cpp
-        src/PathGenerator.cpp
         src/PathIndependentOption.cpp
         src/Put.cpp
         src/RunningStats.cpp

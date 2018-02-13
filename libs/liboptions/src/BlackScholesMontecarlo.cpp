@@ -1,6 +1,6 @@
 #include "BlackScholesMontecarlo.h"
-#include "PathGenerator.h"
-#include "BlackScholesSpot.h"
+#include "BS_StockPriceGen.h"
+#include "BS_StockPricePathGen.h"
 
 
 BlackScholesMonteCarlo::BlackScholesMonteCarlo(const Volatility& vol, std::vector<StopSimulation*>& stopConditions)
@@ -20,7 +20,7 @@ std::tuple<double, double, double> BlackScholesMonteCarlo::hedge(double r, doubl
 
 double BlackScholesMonteCarlo::price(double r, double s0, const PathIndependentOption& option) const
 {
-    BlackScholesSpot spot(r, option.maturity(), _vol);
+    BS_StockPriceGen spot(r, option.maturity(), _vol);
     return runSimulation(spot, option, r, s0);
 }
 
@@ -28,7 +28,7 @@ double BlackScholesMonteCarlo::price(double r, double s0, const PathDependentOpt
 {
     const size_t observationPeriod = option.observationFrequency();
     const size_t nbObs = option.maturity() / observationPeriod;
-    SpotPathGenerator path(r, _vol, nbObs, observationPeriod);
+    BS_StockPricePathGen path(r, _vol, nbObs, observationPeriod);
     return runSimulation(path, option, r, s0);
 }
 
