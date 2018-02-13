@@ -8,7 +8,7 @@ PathIndependentOptionWidget::PathIndependentOptionWidget(QWidget* parent)
     _layout->addRow("Strike", _strike);
 }
 
-double PathIndependentOptionWidget::getStrike() const
+double PathIndependentOptionWidget::strike() const
 {
     return _strike->strike();
 }

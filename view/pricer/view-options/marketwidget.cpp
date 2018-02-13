@@ -19,7 +19,7 @@ double MarketWidget::riskfreeRate() const
     return _riskfreeRate->value() / 100.;
 }
 
-double MarketWidget::currentSpot() const
+double MarketWidget::spot() const
 {
     return _currentSpot->value();
 }

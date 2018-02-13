@@ -18,9 +18,9 @@ BaseOptionWidget::BaseOptionWidget(QWidget *parent)
     _layout->addRow("Maturity", _maturity);
 }
 
-OptionNature* BaseOptionWidget::optionNature() const
+OptionNature* BaseOptionWidget::nature() const
 {
-    return _nature->optionNature();
+    return _nature->nature();
 }
 
 size_t BaseOptionWidget::maturity() const

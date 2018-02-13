@@ -11,7 +11,7 @@ class PathIndependentOptionWidget
 public:
     PathIndependentOptionWidget(QWidget* parent = nullptr);
 
-    double getStrike() const;
+    double strike() const;
 
 private:
     StrikeWidget* _strike;

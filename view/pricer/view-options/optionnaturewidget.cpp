@@ -21,7 +21,7 @@ OptionNatureWidget::OptionNatureWidget(QWidget *parent)
     connect(_call, SIGNAL(toggled(bool)), this, SLOT(setCurrentNature(bool)));
 }
 
-OptionNature* OptionNatureWidget::optionNature() const
+OptionNature* OptionNatureWidget::nature() const
 {
     if(_call->isChecked()) {
         return new Call;

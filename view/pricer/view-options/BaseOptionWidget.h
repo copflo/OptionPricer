@@ -15,7 +15,7 @@ class BaseOptionWidget
 public:
     BaseOptionWidget(QWidget* parent = nullptr);
 
-    OptionNature* optionNature() const;
+    OptionNature* nature() const;
     size_t        maturity    () const;
 
 protected:

@@ -18,7 +18,7 @@ private:
 public:
     explicit OptionNatureWidget(QWidget* parent = nullptr);
 
-    OptionNature* optionNature() const;
+    OptionNature* nature() const;
 
 protected:
     virtual void showEvent(QShowEvent* event);

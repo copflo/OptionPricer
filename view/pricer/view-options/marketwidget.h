@@ -11,7 +11,7 @@ public:
     MarketWidget(QWidget* parent = nullptr);
 
     double riskfreeRate() const;
-    double currentSpot () const;
+    double spot () const;
 
 private:
     QLayout* buildRiskfreeRate();

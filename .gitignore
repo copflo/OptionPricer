@@ -1,18 +1,14 @@
 # build files
-build*/
+build/
 
 # images
 icons/
 
 # third-party libraries
-gmock/
-gtest/
-mysql/
-boost/
-market-data/
-Eigen/
+third-party
 
-# Qt files
-view/pricer/CMakeLists.txt.user
+data/
+import-data/
+libs/libmarketdata
 
 ildcard
