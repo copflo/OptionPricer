@@ -52,17 +52,17 @@ std::string ModelFactoryWidget::choice() const
 
 const BinomialTreeWidget& ModelFactoryWidget::binomialTreeUI() const
 {
-	return *_bitree;
+    return *_bitree;
 }
 
 const BlackScholesWidget& ModelFactoryWidget::blackScholesUI() const
 {
-	return *_bs;
+    return *_bs;
 }
 
 const BlackScholesMonteCarloWidget& ModelFactoryWidget::blackScholesMcUI() const
 {
-	return *_bsMC;
+    return *_bsMC;
 }
 
 void ModelFactoryWidget::updateCurrentModel(const QString& modelName)

@@ -15,7 +15,7 @@ BlackScholesMonteCarlo::~BlackScholesMonteCarlo()
 
 std::tuple<double, double, double> BlackScholesMonteCarlo::hedge(double r, double s0, const PathIndependentOption& option) const
 {
-	throw std::runtime_error("Not implemented");
+    throw std::runtime_error("Not implemented");
 }
 
 double BlackScholesMonteCarlo::price(double r, double s0, const PathIndependentOption& option) const

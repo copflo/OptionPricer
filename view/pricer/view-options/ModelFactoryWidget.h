@@ -19,14 +19,14 @@ public:
     virtual ~ModelFactoryWidget();
 
     void setAvailableModels(const std::vector<std::string>& models);
-	std::string choice() const;
+    std::string choice() const;
 
-	const BinomialTreeWidget& binomialTreeUI() const;
-	const BlackScholesWidget& blackScholesUI() const;
-	const BlackScholesMonteCarloWidget& blackScholesMcUI() const;
+    const BinomialTreeWidget& binomialTreeUI() const;
+    const BlackScholesWidget& blackScholesUI() const;
+    const BlackScholesMonteCarloWidget& blackScholesMcUI() const;
 
 signals:
-	void currentModelChanged(const QString&);
+    void currentModelChanged(const QString&);
 
 private slots:
     void updateCurrentModel(const QString& modelName);

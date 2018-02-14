@@ -11,7 +11,7 @@ OptionWindow::OptionWindow(QWidget*parent)
     , _optionFactory(new OptionFactoryWidget)
     , _modelFactory(new ModelFactoryWidget)
     , _underlying(new UnderlyingWidget)
-	, _controller(*_market, *_optionFactory, *_modelFactory)
+    , _controller(*_market, *_optionFactory, *_modelFactory)
 {
     QGridLayout* layout = new QGridLayout(this);
 

@@ -10,13 +10,13 @@
 
 class OptController
     : public QObject
-	, public Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget>
+    , public Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget>
 {
     Q_OBJECT
 
 public:
     OptController(MarketWidget&        mktWdgt,
-				  OptionFactoryWidget& optFactWdgt,
+                  OptionFactoryWidget& optFactWdgt,
                   ModelFactoryWidget&  modlFactWdgt);
     virtual ~OptController();
 
@@ -27,7 +27,7 @@ public slots:
     void priceOption();
 
 private slots:
-	void setAvailableModels(const QString& optionType);
+    void setAvailableModels(const QString& optionType);
 };
 
 

@@ -19,13 +19,13 @@ public:
 
     virtual ~BlackScholesMonteCarlo();
 
-	/* Returns the price of the option with the delta and the gamma for a path independent option
-	 * @param r the riskless rate
-	 * @param s0 the initial spot
-	 * @param option the option to price
-	 * @return the price, the delta, the gamma
-	 */
-	std::tuple<double, double, double> hedge(double r, double s0, const PathIndependentOption& option) const;
+    /* Returns the price of the option with the delta and the gamma for a path independent option
+     * @param r the riskless rate
+     * @param s0 the initial spot
+     * @param option the option to price
+     * @return the price, the delta, the gamma
+     */
+    std::tuple<double, double, double> hedge(double r, double s0, const PathIndependentOption& option) const;
 
     double price(double r, double s0, const PathIndependentOption& option) const;
     double price(double r, double s0, const PathDependentOption& option)   const;

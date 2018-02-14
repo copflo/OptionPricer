@@ -22,8 +22,8 @@ protected:
 
 template<class MktUI, class OptFactUI, class ModlFactUI>
 Controller<MktUI, OptFactUI, ModlFactUI>::Controller(MktUI& mktUI,
-													 OptFactUI& optFactUI,
-													 ModlFactUI& modlFactUI)
+                                                     OptFactUI& optFactUI,
+                                                     ModlFactUI& modlFactUI)
     : AController(buildPricingMap(mktUI, optFactUI, modlFactUI))
     , _optFactUI(optFactUI)
     , _modlFactUI(modlFactUI)
