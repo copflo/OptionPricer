@@ -1,3 +1,6 @@
+#ifndef ASIANOPTIONFACTORY_H
+#define ASIANOPTIONFACTORY_H
+
 #include "options/AsianOption.h"
 
 #include "Factory.h"
@@ -34,3 +37,6 @@ IAsianOption* Factory<IAsianOption>::build(const UI& ui)
                                                           obsFreq,
                                                           strike);
 }
+
+
+#endif // ASIANOPTIONFACTORY_H

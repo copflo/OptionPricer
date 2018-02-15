@@ -1,3 +1,6 @@
+#ifndef CASHORNOTHINGOPTIONFACTORY_H
+#define CASHORNOTHINGOPTIONFACTORY_H
+
 #include "options/CashOrNothingOption.h"
 
 #include "Factory.h"
@@ -12,3 +15,6 @@ CashOrNothingOption* Factory<CashOrNothingOption>::build(const UI& ui)
                                    ui.strike(),
                                    ui.rebate());
 }
+
+
+#endif // CASHORNOTHINGOPTIONFACTORY_H

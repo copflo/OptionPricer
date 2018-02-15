@@ -1,3 +1,6 @@
+#ifndef LOOKBACKOPTIONFACTORY_H
+#define LOOKBACKOPTIONFACTORY_H
+
 #include "options/LookbackOption.h"
 
 #include "Factory.h"
@@ -16,3 +19,6 @@ ILookbackOption* Factory<ILookbackOption>::build(const UI& ui)
     }
     return new LookbackOption<FixedStrike>(nature, maturity, obsFreq, ui.strike());
 }
+
+
+#endif // LOOKBACKOPTIONFACTORY_H

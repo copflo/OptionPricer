@@ -1,3 +1,6 @@
+#ifndef BLACKSCHOLESMCFACTORY_H
+#define BLACKSCHOLESMCFACTORY_H
+
 #include "options/BlackScholesMonteCarlo.h"
 
 #include "Factory.h"
@@ -16,3 +19,6 @@ BlackScholesMonteCarlo* Factory<BlackScholesMonteCarlo>::build(const UI& ui)
     }
     return new BlackScholesMonteCarlo(ui.volatility(), stopCdts);
 }
+
+
+#endif // BLACKSCHOLESMCFACTORY_H

@@ -1,3 +1,6 @@
+#ifndef BLACKSCHOLESFACTORY_H
+#define BLACKSCHOLESFACTORY_H
+
 #include "options/BlackScholes.h"
 
 #include "Factory.h"
@@ -9,3 +12,6 @@ BlackScholes* Factory<BlackScholes>::build(const UI& ui)
 {
     return new BlackScholes(ui.volatility());
 }
+
+
+#endif // BLACKSCHOLESFACTORY_H

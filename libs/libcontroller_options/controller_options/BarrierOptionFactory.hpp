@@ -1,3 +1,6 @@
+#ifndef BARRIEROPTIONFACTORY_H
+#define BARRIEROPTIONFACTORY_H
+
 #include "options/BarrierOption.h"
 
 #include "Factory.h"
@@ -41,3 +44,6 @@ IBarrierOption* Factory<IBarrierOption>::build(const UI& ui)
                                              strike,
                                              barrier);
 }
+
+
+#endif // BARRIEROPTIONFACTORY_H

@@ -1,3 +1,6 @@
+#ifndef ACONTROLLER_H
+#define ACONTROLLER_H
+
 #include <functional>
 #include <map>
 #include <string>
@@ -18,7 +21,7 @@ protected:
     static const std::map<std::string, std::vector<std::string>>& availableModels();
 
     template<class MktUI, class OptFactUI, class ModlFactUI>
-    static std::map<key, pricingFunc> buildPricingMap(const MktUI& marketUI,
+    static std::map<key, pricingFunc> buildPricingMap(const MktUI& mktUI,
                                                       const OptFactUI& optFactUI,
                                                       const ModlFactUI& modlFactUI);
 
@@ -32,16 +35,15 @@ protected:
 
 
 template<class MktUI, class OptFactUI, class ModlFactUI>
-std::map<AController::key, AController::pricingFunc> AController::buildPricingMap(const MktUI& marketUI,
+std::map<AController::key, AController::pricingFunc> AController::buildPricingMap(const MktUI& mktUI,
                                                                                   const OptFactUI& optFactUI,
                                                                                   const ModlFactUI& modlFactUI)
 {
-    auto mktUI = std::ref(marketUI);
     return {
         {
             { Labels::Options::AMERICAN, Labels::Models::BINOMIAL_TREE },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<AmericanOption, BinomialTree>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<AmericanOption, BinomialTree>::price(mktUI,
                                                                    optFactUI.pathIndependentOptionUI(),
                                                                    modlFactUI.binomialTreeUI());
             }
@@ -49,8 +51,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::ASIAN, Labels::Models::BLACK_SCHOLES_MC },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<IAsianOption, BlackScholesMonteCarlo>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<IAsianOption, BlackScholesMonteCarlo>::price(mktUI,
                                                                            optFactUI.asianOptionUI(),
                                                                            modlFactUI.blackScholesMcUI());
             }
@@ -58,8 +60,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::ASSET_OR_NOTHING, Labels::Models::BLACK_SCHOLES },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<AssetOrNothingOption, BlackScholes>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<AssetOrNothingOption, BlackScholes>::price(mktUI,
                                                                          optFactUI.pathIndependentOptionUI(),
                                                                          modlFactUI.blackScholesUI());
             }
@@ -67,8 +69,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::ASSET_OR_NOTHING, Labels::Models::BLACK_SCHOLES_MC },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<AssetOrNothingOption, BlackScholesMonteCarlo>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<AssetOrNothingOption, BlackScholesMonteCarlo>::price(mktUI,
                                                                                    optFactUI.pathIndependentOptionUI(),
                                                                                    modlFactUI.blackScholesMcUI());
             }
@@ -76,8 +78,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::BARRIER, Labels::Models::BLACK_SCHOLES_MC },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<IBarrierOption, BlackScholesMonteCarlo>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<IBarrierOption, BlackScholesMonteCarlo>::price(mktUI,
                                                                              optFactUI.barrierOptionUI(),
                                                                              modlFactUI.blackScholesMcUI());
             }
@@ -85,8 +87,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::CASH_OR_NOTHING, Labels::Models::BLACK_SCHOLES },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<CashOrNothingOption, BlackScholes>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<CashOrNothingOption, BlackScholes>::price(mktUI,
                                                                         optFactUI.cashOrNothingOptionUI(),
                                                                         modlFactUI.blackScholesUI());
             }
@@ -94,8 +96,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::CASH_OR_NOTHING, Labels::Models::BLACK_SCHOLES_MC },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<CashOrNothingOption, BlackScholesMonteCarlo>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<CashOrNothingOption, BlackScholesMonteCarlo>::price(mktUI,
                                                                                   optFactUI.cashOrNothingOptionUI(),
                                                                                   modlFactUI.blackScholesMcUI());
             }
@@ -103,8 +105,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::EUROPEAN, Labels::Models::BLACK_SCHOLES },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<EuropeanOption, BlackScholes>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<EuropeanOption, BlackScholes>::price(mktUI,
                                                                    optFactUI.pathIndependentOptionUI(),
                                                                    modlFactUI.blackScholesUI());
             }
@@ -112,8 +114,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::EUROPEAN, Labels::Models::BLACK_SCHOLES_MC },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<EuropeanOption, BlackScholesMonteCarlo>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<EuropeanOption, BlackScholesMonteCarlo>::price(mktUI,
                                                                              optFactUI.pathIndependentOptionUI(),
                                                                              modlFactUI.blackScholesMcUI());
             }
@@ -121,8 +123,8 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::EUROPEAN, Labels::Models::BINOMIAL_TREE },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<EuropeanOption, BinomialTree>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<EuropeanOption, BinomialTree>::price(mktUI,
                                                                    optFactUI.pathIndependentOptionUI(),
                                                                    modlFactUI.binomialTreeUI());
             }
@@ -130,11 +132,14 @@ std::map<AController::key, AController::pricingFunc> AController::buildPricingMa
 
         {
             { Labels::Options::LOOKBACK, Labels::Models::BLACK_SCHOLES_MC },
-            [&marketUI, &optFactUI, &modlFactUI]() {
-                return Pricer<ILookbackOption, BlackScholesMonteCarlo>::price(marketUI,
+            [&mktUI, &optFactUI, &modlFactUI]() {
+                return Pricer<ILookbackOption, BlackScholesMonteCarlo>::price(mktUI,
                                                                               optFactUI.lookbackOptionUI(),
                                                                               modlFactUI.blackScholesMcUI());
             }
         }
     };
 }
+
+
+#endif // ACONTROLLER_H

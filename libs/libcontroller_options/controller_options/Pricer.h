@@ -1,3 +1,6 @@
+#ifndef PRICER_H
+#define PRICER_H
+
 #include <memory>
 
 #include "AsianOptionFactory.hpp"
@@ -27,3 +30,6 @@ double Pricer<Opt, Model>::price(const MktUI& mktUI, const OptUI& optUI, const M
     std::unique_ptr<Model> model(Factory<Model>::build(modlUI));
     return model->price(mktUI.riskfreeRate(), mktUI.spot(), *option);
 }
+
+
+#endif // PRICER_H

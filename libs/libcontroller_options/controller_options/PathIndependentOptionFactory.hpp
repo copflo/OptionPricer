@@ -1,3 +1,6 @@
+#ifndef PathIndependentOptionFactory_H
+#define PathIndependentOptionFactory_H
+
 #include "options/AmericanOption.h"
 #include "options/AssetOrNothingOption.h"
 #include "options/EuropeanOption.h"
@@ -41,3 +44,6 @@ EuropeanOption* Factory<EuropeanOption>::build(const UI& ui)
 {
     return PathIndependentOptionFactory<EuropeanOption>::build(ui);
 }
+
+
+#endif // PathIndependentOptionFactory_H

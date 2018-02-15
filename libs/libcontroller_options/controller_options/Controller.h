@@ -1,3 +1,6 @@
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
 #include <memory>
 
 #include "AController.h"
@@ -14,9 +17,9 @@ public:
     void setAvailableModels(const std::string& optionType);
 
 protected:
+    MktUI& _mktUI;
     OptFactUI& _optFactUI;
     ModlFactUI& _modlFactUI;
-    MktUI& _mktUI;
 };
 
 
@@ -25,9 +28,9 @@ Controller<MktUI, OptFactUI, ModlFactUI>::Controller(MktUI& mktUI,
                                                      OptFactUI& optFactUI,
                                                      ModlFactUI& modlFactUI)
     : AController(buildPricingMap(mktUI, optFactUI, modlFactUI))
+    , _mktUI(mktUI)
     , _optFactUI(optFactUI)
     , _modlFactUI(modlFactUI)
-    , _mktUI(mktUI)
 {
 }
 
@@ -44,3 +47,6 @@ void Controller<OptFactUI, ModlFactUI, MktUI>::setAvailableModels(const std::str
 {
     _modlFactUI.setAvailableModels(availableModels().at(optionType));
 }
+
+
+#endif // CONTROLLER_H
