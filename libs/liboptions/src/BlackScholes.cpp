@@ -63,18 +63,15 @@ double BlackScholes::vega(double r, double s0, const EuropeanOption& option) con
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
     const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
-
     return s0 * std_normal_pdf(d1) * sqrt(T);
 }
 
 double BlackScholes::theta(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
-
     const auto ds = d1_d2(r, s0, option.strike(), T);
     const double d1 = ds.first;
     const double d2 = ds.second;
-
     const double firstTerm = (s0 * std_normal_cdf(d1) * _vol.value()) / (2. * sqrt(T));
 
     if (option.isCall()) {

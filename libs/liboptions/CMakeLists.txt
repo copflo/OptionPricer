@@ -24,6 +24,7 @@ set(HEADERS options/AccuracyConfidence.h
             options/FloatingStrike.h
             options/GaussianRandomVariable.h
             options/GeometricAverage.h
+			options/greeks.h
             options/IAsianOption.h
             options/IBarrierOption.h
             options/ILookbackOption.h
@@ -36,7 +37,6 @@ set(HEADERS options/AccuracyConfidence.h
             options/NormalDistributionSimulator.h
             options/Option.h
             options/OptionNature.h
-            options/OptionSensitivity.h
             options/PathDependentOption.h
             options/PathIndependentOption.h
             options/Put.h
@@ -68,6 +68,7 @@ set(SRC src/AccuracyConfidence.cpp
         src/FloatingStrike.cpp
         src/GaussianRandomVariable.cpp
         src/GeometricAverage.cpp
+		src/greeks.cpp
         src/IAsianOption.cpp
         src/IBarrierOption.cpp
         src/ILookbackOption.cpp
@@ -78,7 +79,6 @@ set(SRC src/AccuracyConfidence.cpp
         src/MonteCarloSimulation.cpp
         src/NbObs.cpp
         src/Option.cpp
-        src/OptionSensitivity.cpp
         src/PathDependentOption.cpp
         src/PathIndependentOption.cpp
         src/Put.cpp
