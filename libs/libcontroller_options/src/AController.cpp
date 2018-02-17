@@ -1,6 +1,7 @@
 #include "AController.h"
 #include "Labels.h"
 
+
 AController::AController(std::map<AController::key, AController::pricingFunc>&& pricingMap)
     : _pricingMap(pricingMap)
 {

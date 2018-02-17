@@ -10,7 +10,7 @@ set(CMAKE_AUTOMOC ON)
 # Find the QtWidgets library
 find_package(Qt5Widgets)
 
-set(SRC pricer/view-options/AsianOptionFactoryWidget.cpp
+set(SRC pricer/view-options/AsianOptionWidget.cpp
 		pricer/view-options/AsianOptionWidget.h
 		pricer/view-options/BarrierOptionWidget.cpp
 		pricer/view-options/BarrierOptionWidget.h
