@@ -3,14 +3,14 @@
 #include "OptController.h"
 
 
-OptController::OptController(MarketWidget&        mktWdgt,
+OptController::OptController(MarketWidget& mktWdgt,
                              OptionFactoryWidget& optFactWdgt,
-                             ModelFactoryWidget&  modlFactWdgt)
-    : Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget>(mktWdgt, optFactWdgt, modlFactWdgt)
+                             ModelFactoryWidget& modlFactWdgt)
+    : Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget, QString>(mktWdgt, optFactWdgt, modlFactWdgt)
 {
     connect(&_optFactUI, SIGNAL(currentStyleChanged(const QString&)), 
             this,    	 SLOT(setAvailableModels(const QString&)));
-    Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget>::setAvailableModels(_optFactUI.choice());
+    setAvailableModels(_optFactUI.choice());
 }
 
 OptController::~OptController()
@@ -30,5 +30,5 @@ void OptController::priceOption()
 
 void OptController::setAvailableModels(const QString& optionType)
 {
-    Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget>::setAvailableModels(optionType.toStdString());
+    Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget, QString>::setAvailableModels(optionType);
 }

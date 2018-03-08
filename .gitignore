@@ -1,3 +1,7 @@
+#Visual Studio files
+.vs/
+.vscode/
+
 # build files
 build/
 

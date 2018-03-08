@@ -1,51 +1,50 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <memory>
+#include "ModelsCatalog.h"
+#include "PricingMapBuilder.h"
 
-#include "AController.h"
 
-
-template<class MktUI, class OptFactUI, class ModlFactUI>
+template<class MktUI, class OptFactUI, class ModlFactUI, class Str>
 class Controller
-    : public AController
 {
 public:
     Controller(MktUI& mktUI, OptFactUI& optFactUI, ModlFactUI& modlFactUI);
 
     double computePrice() const;
-    void setAvailableModels(const std::string& optionType);
+    void setAvailableModels(const Str& optionType);
 
 protected:
     MktUI& _mktUI;
     OptFactUI& _optFactUI;
     ModlFactUI& _modlFactUI;
+    std::map<std::pair<Str, Str>, std::function<double()>> _pricingMap;
 };
 
 
-template<class MktUI, class OptFactUI, class ModlFactUI>
-Controller<MktUI, OptFactUI, ModlFactUI>::Controller(MktUI& mktUI,
-                                                     OptFactUI& optFactUI,
-                                                     ModlFactUI& modlFactUI)
-    : AController(buildPricingMap(mktUI, optFactUI, modlFactUI))
-    , _mktUI(mktUI)
+template<class MktUI, class OptFactUI, class ModlFactUI, class Str>
+Controller<MktUI, OptFactUI, ModlFactUI, Str>::Controller(MktUI& mktUI,
+                                                          OptFactUI& optFactUI,
+                                                          ModlFactUI& modlFactUI)
+    : _mktUI(mktUI)
     , _optFactUI(optFactUI)
     , _modlFactUI(modlFactUI)
+    , _pricingMap(PricingMapBuilder<Str>::build(mktUI, optFactUI, modlFactUI))
 {
 }
 
-template<class OptFactUI, class ModlFactUI, class MktUI>
-double Controller<OptFactUI, ModlFactUI, MktUI>::computePrice() const
+template<class MktUI, class OptFactUI, class ModlFactUI, class Str>
+double Controller<MktUI, OptFactUI, ModlFactUI, Str>::computePrice() const
 {
-    const std::string optionChoice = _optFactUI.choice();
-    const std::string modelChoice = _modlFactUI.choice();
+    const Str optionChoice = _optFactUI.choice();
+    const Str modelChoice = _modlFactUI.choice();
     return _pricingMap.at({optionChoice, modelChoice})();
 }
 
-template<class OptFactUI, class ModlFactUI, class MktUI>
-void Controller<OptFactUI, ModlFactUI, MktUI>::setAvailableModels(const std::string& optionType)
+template<class MktUI, class OptFactUI, class ModlFactUI, class Str>
+void Controller<MktUI, OptFactUI, ModlFactUI, Str>::setAvailableModels(const Str& optionType)
 {
-    _modlFactUI.setAvailableModels(availableModels().at(optionType));
+    _modlFactUI.setAvailableModels(ModelsCatalog<Str>::modelsFor(optionType));
 }
 
 

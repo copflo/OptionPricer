@@ -13,24 +13,24 @@ OptionFactoryWidget::OptionFactoryWidget(QWidget* parent)
     , _barrier(new BarrierOptionWidget)
     , _lookback(new LookbackOptionWidget)
     , _widgetMap{
-        { Labels::Options::AMERICAN, _pathIndependent },
-        { Labels::Options::ASIAN, _asian },
-        { Labels::Options::ASSET_OR_NOTHING, _pathIndependent },
-        { Labels::Options::BARRIER, _barrier },
-        { Labels::Options::CASH_OR_NOTHING, _cashOrNothing },
-        { Labels::Options::EUROPEAN, _pathIndependent },
-        { Labels::Options::LOOKBACK, _lookback }
+        { Labels<QString>::Options::AMERICAN, _pathIndependent },
+        { Labels<QString>::Options::ASIAN, _asian },
+        { Labels<QString>::Options::ASSET_OR_NOTHING, _pathIndependent },
+        { Labels<QString>::Options::BARRIER, _barrier },
+        { Labels<QString>::Options::CASH_OR_NOTHING, _cashOrNothing },
+        { Labels<QString>::Options::EUROPEAN, _pathIndependent },
+        { Labels<QString>::Options::LOOKBACK, _lookback }
     }
 {
     QBoxLayout* layout = new QVBoxLayout(this);
 
-    _comboBox->addItem(QIcon("../icons/american.png"), QString::fromStdString(Labels::Options::AMERICAN));
-    _comboBox->addItem(QIcon("../icons/asian.png"), QString::fromStdString(Labels::Options::ASIAN));
-    _comboBox->addItem(QIcon("../icons/asset-or-nothing.jpg"), QString::fromStdString(Labels::Options::ASSET_OR_NOTHING));
-    _comboBox->addItem(QIcon("../icons/barrier.jpg"), QString::fromStdString(Labels::Options::BARRIER));
-    _comboBox->addItem(QIcon("../icons/cash-or-nothing.png"), QString::fromStdString(Labels::Options::CASH_OR_NOTHING));
-    _comboBox->addItem(QIcon("../icons/european.png"), QString::fromStdString(Labels::Options::EUROPEAN));
-    _comboBox->addItem(QIcon("../icons/lookback.jpg"), QString::fromStdString(Labels::Options::LOOKBACK));
+    _comboBox->addItem(QIcon("../icons/american.png"), Labels<QString>::Options::AMERICAN);
+    _comboBox->addItem(QIcon("../icons/asian.png"), Labels<QString>::Options::ASIAN);
+    _comboBox->addItem(QIcon("../icons/asset-or-nothing.jpg"), Labels<QString>::Options::ASSET_OR_NOTHING);
+    _comboBox->addItem(QIcon("../icons/barrier.jpg"), Labels<QString>::Options::BARRIER);
+    _comboBox->addItem(QIcon("../icons/cash-or-nothing.png"), Labels<QString>::Options::CASH_OR_NOTHING);
+    _comboBox->addItem(QIcon("../icons/european.png"), Labels<QString>::Options::EUROPEAN);
+    _comboBox->addItem(QIcon("../icons/lookback.jpg"), Labels<QString>::Options::LOOKBACK);
 
     _stack->addWidget(_pathIndependent);
     _stack->addWidget(_asian);
@@ -40,9 +40,6 @@ OptionFactoryWidget::OptionFactoryWidget(QWidget* parent)
 
     layout->addWidget(_comboBox);
     layout->addWidget(_stack);
-
-    connect(_comboBox, SIGNAL(currentTextChanged(const QString&)),
-            this,      SLOT(emitChoiceChanged(const QString&)));
 
     connect(_comboBox, SIGNAL(currentTextChanged(const QString&)),
             this,      SLOT(setOptionWidget(const QString&)));
@@ -55,9 +52,9 @@ OptionFactoryWidget::~OptionFactoryWidget()
 {
 }
 
-std::string OptionFactoryWidget::choice() const
+QString OptionFactoryWidget::choice() const
 {
-    return _comboBox->currentText().toStdString();
+    return _comboBox->currentText();
 }
 
 const PathIndependentOptionWidget& OptionFactoryWidget::pathIndependentOptionUI() const
@@ -85,12 +82,7 @@ const LookbackOptionWidget& OptionFactoryWidget::lookbackOptionUI() const
 	return *_lookback;
 }
 
-void OptionFactoryWidget::emitChoiceChanged(const QString& optionStyle)
-{
-    emit(currentStyleChanged(optionStyle.toStdString()));
-}
-
 void OptionFactoryWidget::setOptionWidget(const QString& optionStyle)
 {
-    _stack->setCurrentWidget(_widgetMap.at(optionStyle.toStdString()));
+    _stack->setCurrentWidget(_widgetMap.at(optionStyle));
 }

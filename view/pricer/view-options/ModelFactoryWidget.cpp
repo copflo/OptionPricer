@@ -13,9 +13,9 @@ ModelFactoryWidget::ModelFactoryWidget(QWidget* parent)
     , _bs(new BlackScholesWidget)
     , _bsMC(new BlackScholesMonteCarloWidget)
     , _widgetMap{
-        { Labels::Models::BINOMIAL_TREE, _bitree },
-        { Labels::Models::BLACK_SCHOLES, _bs },
-        { Labels::Models::BLACK_SCHOLES_MC, _bsMC }
+        { Labels<QString>::Models::BINOMIAL_TREE, _bitree },
+        { Labels<QString>::Models::BLACK_SCHOLES, _bs },
+        { Labels<QString>::Models::BLACK_SCHOLES_MC, _bsMC }
       }
 {
     _stack->addWidget(_bs);
@@ -37,17 +37,17 @@ ModelFactoryWidget::~ModelFactoryWidget()
 {
 }
 
-void ModelFactoryWidget::setAvailableModels(const std::vector<std::string>& models)
+void ModelFactoryWidget::setAvailableModels(const std::vector<QString>& models)
 {
     _comboBox->clear();
     for(auto& model : models) {
-        _comboBox->addItem(QString::fromStdString(model));
+        _comboBox->addItem(model);
     }
 }
 
-std::string ModelFactoryWidget::choice() const
+QString ModelFactoryWidget::choice() const
 {
-    return _comboBox->currentText().toStdString();
+    return _comboBox->currentText();
 }
 
 const BinomialTreeWidget& ModelFactoryWidget::binomialTreeUI() const
@@ -67,7 +67,7 @@ const BlackScholesMonteCarloWidget& ModelFactoryWidget::blackScholesMcUI() const
 
 void ModelFactoryWidget::updateCurrentModel(const QString& modelName)
 {
-    auto pair = _widgetMap.find(modelName.toStdString());
+    auto pair = _widgetMap.find(modelName);
     if (pair != _widgetMap.end()) {
         _stack->setCurrentWidget(pair->second);
     }

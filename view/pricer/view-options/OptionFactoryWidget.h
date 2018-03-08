@@ -22,7 +22,7 @@ public:
     OptionFactoryWidget(QWidget* parent = nullptr);
     virtual ~OptionFactoryWidget();
 
-    std::string choice() const;
+    QString choice() const;
 
 	const PathIndependentOptionWidget& pathIndependentOptionUI() const;
 	const CashOrNothingOptionWidget& cashOrNothingOptionUI() const;
@@ -31,11 +31,9 @@ public:
 	const LookbackOptionWidget& lookbackOptionUI() const;
 
 signals:
-    void currentStyleChanged(std::string);
     void currentStyleChanged(const QString&);
 
 private slots:
-    void emitChoiceChanged(const QString& optionStyle);
     void setOptionWidget(const QString& optionStyle);
 
 private:
@@ -46,7 +44,7 @@ private:
     AsianOptionWidget* _asian;
     BarrierOptionWidget* _barrier;
     LookbackOptionWidget* _lookback;
-    std::map<std::string, QWidget*> _widgetMap;
+    std::map<QString, QWidget*> _widgetMap;
 };
 
 

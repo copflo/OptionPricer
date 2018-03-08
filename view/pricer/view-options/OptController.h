@@ -10,14 +10,14 @@
 
 class OptController
     : public QObject
-    , public Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget>
+    , public Controller<MarketWidget, OptionFactoryWidget, ModelFactoryWidget, QString>
 {
     Q_OBJECT
 
 public:
-    OptController(MarketWidget&        mktWdgt,
+    OptController(MarketWidget& mktWdgt,
                   OptionFactoryWidget& optFactWdgt,
-                  ModelFactoryWidget&  modlFactWdgt);
+                  ModelFactoryWidget& modlFactWdgt);
     virtual ~OptController();
 
 signals:

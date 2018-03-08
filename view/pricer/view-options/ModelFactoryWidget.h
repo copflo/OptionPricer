@@ -15,11 +15,11 @@ class ModelFactoryWidget
     Q_OBJECT
 
 public:
-            ModelFactoryWidget (QWidget* parent = nullptr);
+    ModelFactoryWidget(QWidget* parent = nullptr);
     virtual ~ModelFactoryWidget();
 
-    void setAvailableModels(const std::vector<std::string>& models);
-    std::string choice() const;
+    void setAvailableModels(const std::vector<QString>& models);
+    QString choice() const;
 
     const BinomialTreeWidget& binomialTreeUI() const;
     const BlackScholesWidget& blackScholesUI() const;
@@ -32,12 +32,12 @@ private slots:
     void updateCurrentModel(const QString& modelName);
 
 private:
-    QComboBox*      _comboBox;
+    QComboBox* _comboBox;
     QStackedWidget* _stack;
     BinomialTreeWidget* _bitree;
     BlackScholesWidget* _bs;
     BlackScholesMonteCarloWidget* _bsMC;
-    std::map<std::string, QWidget*> _widgetMap;
+    std::map<QString, QWidget*> _widgetMap;
 };
 
 
