@@ -21,7 +21,7 @@ AccuracyConfidence::~AccuracyConfidence()
 {
 }
 
-bool AccuracyConfidence::stop(const RunningStats& stats) const
+bool AccuracyConfidence::stop(const MC_Simulation& stats) const
 {
     return (sqrt(stats.nbObservations()) / stats.stdDeviation()) >= _ratio;
 }

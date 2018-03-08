@@ -4,12 +4,26 @@
 #include <vector>
 
 
+/*!
+ * @brief Interface class for derivatives with a floating strike
+ */
 class FloatingStrike
 {
 public:
-            FloatingStrike();
+
+    /*!
+     * @brief Constructor for the FloatingStrike class
+     */
+    FloatingStrike();
+
     virtual ~FloatingStrike();
 
+    /*!
+     * @brief Pure virtual method that computes the strike from a given stock
+     * price path
+     *
+     * @param   spot_path   the path followed by the stock's price
+     */
     virtual double strike(const std::vector<double>& spot_path) const = 0;
 };
 

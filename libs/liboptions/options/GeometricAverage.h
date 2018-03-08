@@ -6,12 +6,38 @@
 #include <vector>
 
 
-class GeometricAverage 
+/*!
+ * @brief Class for computing the geometric average of an iterable or vector
+ */
+class GeometricAverage
 {
 public:
-    template<class InputIterator> static double average(InputIterator first, InputIterator last);
 
-    static double      average(const std::vector<double>& values);
+    /*!
+     * @brief Computes the geometric average of a range
+     *
+     * @tparam  InputIterator   the type of iterator
+     *
+     * @param   first   begin of the range
+     * @param   last    end of the range
+     * @return the geometric average
+     */
+    template<class InputIterator>
+    static double average(InputIterator first, InputIterator last);
+
+    /*!
+     * @brief Computes the geometric average of a std::vector
+     *
+     * @param   values   the vector of values whose average is wanted
+     * @return the geometric average
+     */
+    static double average(const std::vector<double>& values);
+
+    /*!
+     * @brief Returns a string representation of the class
+     *
+     * @return "Geometric average"
+     */
     static std::string toString();
 };
 

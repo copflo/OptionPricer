@@ -20,3 +20,8 @@ size_t PathDependentOption::observationFrequency() const
 {
     return _obsFreq;
 }
+
+size_t PathDependentOption::noOfObservations() const
+{
+    return _maturity / _obsFreq;
+}

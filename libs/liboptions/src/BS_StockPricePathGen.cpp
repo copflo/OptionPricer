@@ -3,21 +3,21 @@
 #include "BS_StockPricePathGen.h"
 
 
-BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, size_t nbObs, size_t obsPeriod)
+BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, double T, size_t N)
     : BlackScholesGen(r, vol)
-    , _br(nbObs + 1, static_cast<double>(obsPeriod) / vol.period())
+    , _br(T, N)
 {
 }
 
-BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, const std::vector<double>& indices)
+BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, const std::vector<double>& partition)
     : BlackScholesGen(r, vol)
-    , _br(indices)
+    , _br(partition)
 {
 }
 
-BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, std::vector<double>&& indices)
+BS_StockPricePathGen::BS_StockPricePathGen(double r, const Volatility& vol, std::vector<double>&& partition)
     : BlackScholesGen(r, vol)
-    , _br(indices)
+    , _br(partition)
 {
 }
 
@@ -31,7 +31,7 @@ std::vector<double> BS_StockPricePathGen::operator()(double s0)
     std::vector<double> path(B.size());
     path[0] = s0;
     for(size_t idx = 1; idx < B.size(); ++idx) {
-        const double T = _br.indices()[idx] - _br.indices()[0];
+        const double T = _br.partition()[idx] - _br.partition()[0];
         path[idx] = spot(s0, T, B[idx]);
     }
     return path;

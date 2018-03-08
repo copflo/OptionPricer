@@ -32,15 +32,14 @@ set(HEADERS options/AccuracyConfidence.h
             options/KnockOut.h
             options/LookbackOption.h
             options/math_functions.h
-            options/MonteCarloSimulation.h
+			options/MC_Simulation.h
             options/NbObs.h
-            options/NormalDistributionSimulator.h
             options/Option.h
             options/OptionNature.h
             options/PathDependentOption.h
             options/PathIndependentOption.h
             options/Put.h
-            options/RunningStats.h
+			options/SimulationRunner.h
             options/StopSimulation.h
             options/TimeLimit.h
             options/Up.h
@@ -76,13 +75,13 @@ set(SRC src/AccuracyConfidence.cpp
         src/KnockOut.cpp
         src/LookbackOption.cpp
         src/math_functions.cpp
-        src/MonteCarloSimulation.cpp
+		src/MC_Simulation.cpp
         src/NbObs.cpp
         src/Option.cpp
         src/PathDependentOption.cpp
         src/PathIndependentOption.cpp
         src/Put.cpp
-        src/RunningStats.cpp
+		src/SimulationRunner.cpp
         src/StopSimulation.cpp
         src/TimeLimit.cpp
         src/Up.cpp

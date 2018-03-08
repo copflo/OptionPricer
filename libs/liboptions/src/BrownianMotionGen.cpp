@@ -1,18 +1,18 @@
 #include "BrownianMotionGen.h"
 
 
-BrownianMotionGen::BrownianMotionGen(const std::vector<double>& indices)
-    : _indices(indices)
+BrownianMotionGen::BrownianMotionGen(const std::vector<double>& partition)
+    : _partition(partition)
 {
 }
 
-BrownianMotionGen::BrownianMotionGen(std::vector<double>&& indices)
-    : _indices(indices)
+BrownianMotionGen::BrownianMotionGen(std::vector<double>&& partition)
+    : _partition(partition)
 {
 }
 
-BrownianMotionGen::BrownianMotionGen(size_t nbObs, double obsPeriod)
-    : _indices(constIncrementVect(nbObs, obsPeriod))
+BrownianMotionGen::BrownianMotionGen(double T, size_t N)
+    : _partition(regularPartition(T, N))
 {
 }
 
@@ -20,26 +20,26 @@ BrownianMotionGen::~BrownianMotionGen()
 {
 }
 
-const std::vector<double>& BrownianMotionGen::indices() const
+const std::vector<double>& BrownianMotionGen::partition() const
 {
-    return _indices;
+    return _partition;
 }
 
 std::vector<double> BrownianMotionGen::operator()()
 {
-    std::vector<double> traj(_indices.size());
-    traj[0] = 0.;
-    for(size_t idx = 1; idx < traj.size(); ++idx) {
-        traj[idx] = sqrt(_indices[idx] - _indices[idx - 1]) * _Z() + traj[idx - 1];
+    std::vector<double> path(_partition.size());
+    for(size_t idx = 1; idx < path.size(); ++idx) {
+        path[idx] = sqrt(_partition[idx] - _partition[idx - 1]) * _Z() + path[idx - 1];
     }
-    return traj;
+    return path;
 }
 
-std::vector<double> constIncrementVect(size_t size, double increment)
+std::vector<double> regularPartition(double T, size_t N)
 {
-    std::vector<double> v(size);
-    for(size_t n = 1; n < size; ++n) {
-        v[n] = n * increment;
+    std::vector<double> v(N + 1);
+    v[N] = T;
+    for(size_t n = 1; n < N; ++n) {
+        v[n] = n * T/N;
     }
     return v;
 }

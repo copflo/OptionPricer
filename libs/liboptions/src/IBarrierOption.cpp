@@ -1,5 +1,6 @@
 #include "BarrierOption.h"
 
+
 IBarrierOption::IBarrierOption(OptionNature* nature, size_t maturity, size_t obsFreq, double strike, double barrier)
     : PathDependentOption(nature, maturity, obsFreq)
     , FixedStrike(strike)
@@ -11,7 +12,7 @@ IBarrierOption::~IBarrierOption()
 {
 }
 
-double IBarrierOption::getBarrier() const
+double IBarrierOption::barrier() const
 {
     return _barrier;
 }

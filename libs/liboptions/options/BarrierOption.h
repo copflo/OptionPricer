@@ -8,20 +8,50 @@
 #include "Up.h"
 
 
+/*!
+ * @brief template class for barrier options
+ *
+ * @tparam  Direction   Can be Up or Down
+ * @tparam  Knock       Can be Knockin or Knockout
+ */
 template<class Direction, class Knock>
 class BarrierOption
     : public IBarrierOption
 {
 public:
-            BarrierOption (OptionNature* nature,
-                           size_t maturity,
-                           size_t obsFreq,
-                           double strike,
-                           double barrier);
+
+    /*!
+     * @brief Contructor for the BarrierOption class
+     *
+     * @param   nature      the nature of the option. Can be Call* or Put*
+     * @param   maturity    the maturity of the option expressed in days
+     * @param   obsFreq     the observation frequency in days: every day,
+     *                      2 days, ...
+     * @param   strike      the strike of the option
+     * @param   barrier     the barrier of the option
+     */
+    BarrierOption(OptionNature* nature,
+                  size_t maturity,
+                  size_t obsFreq,
+                  double strike,
+                  double barrier);
+
     virtual ~BarrierOption();
 
+    /*!
+     * @brief Returns the payoff of the option for a given underlying price path
+     *
+     * @param   spot_path   the underlying price path
+     * @return the payoff of the option
+     */
     virtual double payoff(const std::vector<double>& spot_path) const;
-    virtual void   print (std::ostream& os)                     const;
+
+    /*!
+     * @brief Prints the option in the output stream
+     *
+     * @param   os  the output stream
+     */
+    virtual void print(std::ostream& os) const;
 };
 
 

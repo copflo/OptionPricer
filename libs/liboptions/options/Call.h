@@ -4,14 +4,41 @@
 #include "OptionNature.h"
 
 
+/*!
+ * @brief Class for call payoffs
+ */
 class Call
     : public OptionNature
 {
 public:
-    virtual bool        isCall  ()                           const;
-    virtual bool        isPut   ()                           const;
-    virtual double      payoff  (double spot, double strike) const;
-    virtual std::string toString()                           const;
+
+    /*!
+     * @brief Indicates if the type of payoff is a call
+     *
+     * @return true
+     */
+    virtual bool isCall() const;
+
+    /*!
+     * @brief Indicates if the type of payoff is a put
+     *
+     * @return false
+     */
+    virtual bool isPut() const;
+
+    /*!
+     * @brief Gives the payoff of a call for a given spot and a given strike
+     *
+     * @return max(spot - strike, 0.0)
+     */
+    virtual double payoff(double spot, double strike) const;
+
+    /*!
+     * @brief Gives the string representation of a call
+     *
+     * @return \"call\"
+     */
+    virtual std::string toString() const;
 };
 
 

@@ -4,13 +4,32 @@
 #include "PathIndependentOption.h"
 
 
+/*!
+ * @brief Base class for digital/binary options
+ */
 class DigitalOption
     : public PathIndependentOption
 {
 public:
-            DigitalOption (OptionNature* nature, size_t maturity, double strike);
+
+    /*!
+     * @brief Contructor for the DigitalOption class
+     *
+     * @param   nature      the nature of the option. Can be Call* or Put*
+     * @param   maturity    the maturity of the option expressed in days
+     * @param   strike      the strike of the option
+     */
+    DigitalOption(OptionNature* nature, size_t maturity, double strike);
+
     virtual ~DigitalOption();
 
+protected:
+
+    /*!
+     * @brief Indicates if the spot is beyond the strike or not
+     *
+     * @param   spot    the spot
+     */
     bool successfulBet(double spot) const;
 };
 

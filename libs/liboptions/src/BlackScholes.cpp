@@ -59,6 +59,13 @@ double BlackScholes::delta(double r, double s0, const EuropeanOption& option) co
     return std_normal_cdf(d1) - 1.;
 }
 
+double BlackScholes::gamma(double r, double s0, const EuropeanOption& option) const
+{
+    const double T = static_cast<double>(option.maturity()) / _vol.period();
+    const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
+    return  std_normal_pdf(d1)/ (s0 * _vol.value(option.maturity()));
+}
+
 double BlackScholes::vega(double r, double s0, const EuropeanOption& option) const
 {
     const double T = static_cast<double>(option.maturity()) / _vol.period();
@@ -89,13 +96,6 @@ double BlackScholes::rho(double r, double s0, const EuropeanOption& option) cons
         return option.strike() * T * exp(-r * T) * std_normal_cdf(d2);
     }
     return - option.strike() * T * exp(-r * T) * std_normal_cdf(-d2);
-}
-
-double BlackScholes::gamma(double r, double s0, const EuropeanOption& option) const
-{
-    const double T = static_cast<double>(option.maturity()) / _vol.period();
-    const double d1 = BlackScholes::d1(r, s0, option.strike(), T);
-    return  std_normal_pdf(d1)/ (s0 * _vol.value(option.maturity()));
 }
 
 double BlackScholes::d1(double r, double spot, double K, double T) const
