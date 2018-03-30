@@ -1,7 +1,7 @@
 #ifndef BLACKSCHOLESMCFACTORY_H
 #define BLACKSCHOLESMCFACTORY_H
 
-#include "options/BlackScholesMonteCarlo.h"
+#include "options/BlackScholesMontecarlo.h"
 
 #include "Factory.h"
 

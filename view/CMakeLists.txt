@@ -44,8 +44,8 @@ set(SRC pricer/view-options/AsianOptionWidget.cpp
 		pricer/view-options/optionwindow.h
 		pricer/view-options/pathdependentoptionwidget.cpp
 		pricer/view-options/pathdependentoptionwidget.h
-		pricer/view-options/pathindependentoptionwidget.cpp
-		pricer/view-options/pathindependentoptionwidget.h
+		pricer/view-options/PathIndependentOptionWidget.cpp
+		pricer/view-options/PathIndependentOptionWidget.h
 		pricer/view-options/strikewidget.cpp
 		pricer/view-options/strikewidget.h
 		pricer/view-options/UnderlyingWidget.cpp

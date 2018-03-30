@@ -1,4 +1,4 @@
-#include "pathindependentoptionwidget.h"
+#include "PathIndependentOptionWidget.h"
 
 
 PathIndependentOptionWidget::PathIndependentOptionWidget(QWidget* parent)

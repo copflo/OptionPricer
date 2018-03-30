@@ -1,7 +1,7 @@
 #ifndef CashOrNothingOptionWidget_h
 #define CashOrNothingOptionWidget_h
 
-#include "pathindependentoptionwidget.h"
+#include "PathIndependentOptionWidget.h"
 
 
 class CashOrNothingOptionWidget
