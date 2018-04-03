@@ -1,5 +1,6 @@
 #include "FixedStrike.h"
 
+
 FixedStrike::FixedStrike(double strike)
     : _strike(strike)
 {
