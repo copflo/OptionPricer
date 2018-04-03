@@ -16,6 +16,8 @@ BlackScholesMonteCarloWidget::BlackScholesMonteCarloWidget(QWidget* parent)
     _calculusTime->setRange(0.3, 60.);
     _calculusTime->setValue(1.);
     _layout->addRow(_timeLimit, _calculusTime);
+
+    _nbObs->setChecked(true);
 }
 
 BlackScholesMonteCarloWidget::~BlackScholesMonteCarloWidget()
