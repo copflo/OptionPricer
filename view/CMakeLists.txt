@@ -54,7 +54,7 @@ set(SRC pricer/view-options/AsianOptionWidget.cpp
 		pricer/view-options/volatilitywidget.h)
 
 # Tell CMake to create the executable
-add_executable(pricer WIN32 ./pricer/main.cpp ${SRC})
+add_executable(pricer ./pricer/main.cpp ${SRC})
 target_include_directories(pricer PRIVATE "../libs/liboptions" "../libraries/libcontroller_options")
 # Use the Widgets module from Qt5 with options lib.
 target_link_libraries(pricer Qt5::Widgets options controller_options)
