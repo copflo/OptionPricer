@@ -10,6 +10,7 @@ set(HEADERS options/AccuracyConfidence.h
             options/BarrierOption.h
             options/BinomialTree.h
             options/BlackScholes.h
+            options/BlackScholesFDM.h
             options/BlackScholesGen.h
             options/BlackScholesMontecarlo.h
             options/BS_StockPriceGen.h
@@ -53,6 +54,7 @@ set(SRC src/AccuracyConfidence.cpp
         src/AssetOrNothingOption.cpp
         src/BinomialTree.cpp
         src/BlackScholes.cpp
+        src/BlackScholesFDM.cpp
         src/BlackScholesGen.cpp
         src/BlackScholesMontecarlo.cpp
         src/BS_StockPriceGen.cpp

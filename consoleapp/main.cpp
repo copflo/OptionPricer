@@ -1,15 +1,18 @@
+#include <cstdio>
+
 #include "options/BlackScholes.h"
 #include "options/BlackScholesMontecarlo.h"
+#include "options/BlackScholesFDM.h"
 
 
 int main(int argc, char** argv)
 {
-    const double risklessRate = 0.05;
-    const double spot = 100.0;
+    const double r = 0.05;
+    const double s0 = 100.0;
     const Volatility vol(0.15, 365);
 
-    std::cout << "Riskless rate: " << risklessRate << std::endl;
-    std::cout << "Current stock price: " << spot << std::endl;
+    std::cout << "Riskless rate: " << r << std::endl;
+    std::cout << "Current stock price: " << s0 << std::endl;
     std::cout << "Volatility of asset: " << vol << std::endl;
     std::cout << std::endl;
 
@@ -17,12 +20,34 @@ int main(int argc, char** argv)
     std::cout << eu_call << std::endl;
 
     BlackScholes bs(vol);
-    std::cout << "Price by Black Scholes model: " << bs.price(risklessRate, spot, eu_call) << std::endl;
+    std::cout << "Price by Black Scholes model: " << bs.price(r, s0, eu_call) << std::endl;
 
     BlackScholesMonteCarlo bsMc(vol, new NbObs(1000000));
     std::cout << "Price by Monte Carlo simulation of Black Scholes model: ";
-    std::cout << bsMc.price(risklessRate, spot, eu_call) << std::endl;
+    std::cout << bsMc.price(r, s0, eu_call) << std::endl;
     std::cout << std::endl;
+
+    BlackScholesFDM bsFdm(vol, 20, 360);
+    std::cout << "Price surface by finite difference method for Black Scholes PDE:" << std::endl;
+    //bsFdm.writePriceSurface(r, eu_call, std::cout);
+    FILE* gnuplot = NULL;
+    const char* gnuplot_cmd = "gnuplot -persist";
+    #if defined _MSC_VER
+        gnuplot = _popen(gnuplot_cmd, "w");
+    #else
+        gnuplot = popen(gnuplot_cmd, "w");
+     #endif
+    fprintf(gnuplot, "set dgrid3d %d,%d\n", 30, 30);
+    fprintf(gnuplot, "set hidden3d\n");
+    fprintf(gnuplot, "splot '-' using 1:2:3 with lines\n");
+    bsFdm.writePriceSurface(r, eu_call, *gnuplot);
+    fprintf(gnuplot, "e\n");
+    #if defined _MSC_VER
+        _pclose(gnuplot);
+        system("pause");
+    #else
+        pclose(gnuplot);
+    #endif
 
     return EXIT_SUCCESS;
 }
