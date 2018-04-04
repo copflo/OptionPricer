@@ -37,9 +37,15 @@ int main(int argc, char** argv)
     #else
         gnuplot = popen(gnuplot_cmd, "w");
      #endif
-    fprintf(gnuplot, "set dgrid3d %d,%d\n", 30, 30);
     fprintf(gnuplot, "set hidden3d\n");
-    fprintf(gnuplot, "splot '-' using 1:2:3 with lines\n");
+    fprintf(gnuplot, "set pm3d\n");
+    fprintf(gnuplot, "set palette rgbformulae 33, 13, 10\n");
+    fprintf(gnuplot, "set ticslevel 0\n");
+    fprintf(gnuplot, "set title \"Price surface(t, S)\"\n");
+    fprintf(gnuplot, "set xlabel \"t\"\n");
+    fprintf(gnuplot, "set ylabel \"S\"\n");
+    fprintf(gnuplot, "set zlabel \"P(t, S)\"\n");
+    fprintf(gnuplot, "splot '-' u 1:2:3 with lines\n");
     bsFdm.writePriceSurface(r, eu_call, *gnuplot);
     fprintf(gnuplot, "e\n");
     #if defined _MSC_VER

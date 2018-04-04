@@ -89,6 +89,7 @@ void BlackScholesFDM::writeCoordinates(double t,
     for (size_t j = 0; j < _J + 1; ++j) {
         os << t << ' ' << s[j] << ' ' << v[j] << std::endl;
     }
+    os << std::endl;
 }
 
 template<>
@@ -100,6 +101,7 @@ void BlackScholesFDM::writeCoordinates(double t,
     for (size_t j = 0; j < _J + 1; ++j) {
         fprintf(&file, "%f %f %f\n", t, s[j], v[j]);
     }
+    fprintf(&file, "\n");
 }
 
 
