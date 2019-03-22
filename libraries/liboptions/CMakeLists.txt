@@ -15,7 +15,7 @@ set(HEADERS options/AccuracyConfidence.h
             options/BlackScholesMontecarlo.h
             options/BS_StockPriceGen.h
             options/BS_StockPricePathGen.h
-			options/BrownianMotionGen.h
+	    options/BrownianMotionGen.h
             options/Call.h
             options/CashOrNothingOption.h
             options/DigitalOption.h
@@ -25,7 +25,7 @@ set(HEADERS options/AccuracyConfidence.h
             options/FloatingStrike.h
             options/GaussianRandomVariable.h
             options/GeometricAverage.h
-			options/greeks.h
+	    options/greeks.h
             options/IAsianOption.h
             options/IBarrierOption.h
             options/ILookbackOption.h
@@ -33,14 +33,14 @@ set(HEADERS options/AccuracyConfidence.h
             options/KnockOut.h
             options/LookbackOption.h
             options/math_functions.h
-			options/MC_Simulation.h
+	    options/MC_Simulation.h
             options/NbObs.h
             options/Option.h
             options/OptionNature.h
             options/PathDependentOption.h
             options/PathIndependentOption.h
             options/Put.h
-			options/SimulationRunner.h
+	    options/SimulationRunner.h
             options/StopSimulation.h
             options/TimeLimit.h
             options/Up.h
@@ -69,7 +69,7 @@ set(SRC src/AccuracyConfidence.cpp
         src/FloatingStrike.cpp
         src/GaussianRandomVariable.cpp
         src/GeometricAverage.cpp
-		src/greeks.cpp
+	src/greeks.cpp
         src/IAsianOption.cpp
         src/IBarrierOption.cpp
         src/ILookbackOption.cpp
@@ -77,13 +77,13 @@ set(SRC src/AccuracyConfidence.cpp
         src/KnockOut.cpp
         src/LookbackOption.cpp
         src/math_functions.cpp
-		src/MC_Simulation.cpp
+	src/MC_Simulation.cpp
         src/NbObs.cpp
         src/Option.cpp
         src/PathDependentOption.cpp
         src/PathIndependentOption.cpp
         src/Put.cpp
-		src/SimulationRunner.cpp
+	src/SimulationRunner.cpp
         src/StopSimulation.cpp
         src/TimeLimit.cpp
         src/Up.cpp
